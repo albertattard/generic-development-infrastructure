@@ -107,9 +107,9 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    $ ./deploy
    ```
 
-   This will take about 10 minutes as it needs to upload all the JDKs and then
-   install them and will create several resources including an OCI instance with
-   different versions of Java installed.
+   This will take about 30 minutes as it needs to upload all the binaries and
+   then install them and will create several resources including an OCI instance
+   with different versions of Java installed.
 
    Once ready, it will print the public IP address of this instance and a
    command that can be used to ssh into this machine.
@@ -120,10 +120,11 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    ssh_command = "ssh -i ~/.ssh/ssh-key-oci-instance.key opc@###.###.###.###"
    ```
 
-5. Verify that it is working.
+5. (_Optionally_) Verify that it is working.
 
    ```shell
-   $ ssh -i ~/.ssh/ssh-key-oci-instance.key opc@###.###.###.###
+   $ ssh -i ~/.ssh/ssh-key-oci-instance.key \
+     "opc@$(terraform -chdir='./terraform' output -json | jq --raw-output '.instance_public_ip.value')"
    ```
 
    There is an alias for each JDK version that helps you to switch to this JDK
