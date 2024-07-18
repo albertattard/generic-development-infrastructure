@@ -193,7 +193,7 @@
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>graal21</version>
+            <version>graal22</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
