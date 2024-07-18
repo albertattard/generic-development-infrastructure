@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>1.8</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-1.8</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-1.8-perf</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-9</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-10</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-11</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-12</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-13</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-14</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-15</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-16</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-17</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-18</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-19</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-20</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-21</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-22</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-23</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-17</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-21</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-22</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>
