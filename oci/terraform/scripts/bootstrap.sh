@@ -110,8 +110,8 @@ dnf install -y git-all gcc glibc-devel zlib-devel libstdc++-static make
 # ------------------------------------------------------------------------------
 mkdir -p '/usr/local/sbin'
 curl \
-  --location \
   --silent \
+  --location \
   --output '/usr/local/sbin/hey' \
   'https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64'
 chmod +x '/usr/local/sbin/hey'
@@ -138,8 +138,8 @@ chmod 666 '/var/run/docker.sock'
 # ------------------------------------------------------------------------------
 DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
 curl \
-  --location \
   --silent \
+  --location \
   --output "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm" \
   "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.rpm"
 dnf install -y "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
@@ -149,15 +149,32 @@ rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
 
 # ------------------------------------------------------------------------------
 # Install the Markdown Executor (me)
+# https://github.com/albertattard/me
 # ------------------------------------------------------------------------------
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.local/bin'
 curl \
   --silent \
-  --location\
+  --location \
   --output '/home/opc/.local/bin/me' \
   'https://github.com/albertattard/me/releases/latest/download/me'
 chmod +x '/home/opc/.local/bin/me'
+EOF
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install the Sociable Weaver (sw)
+# https://github.com/albertattard/sociable-weaver
+# ------------------------------------------------------------------------------
+sudo -i -u opc bash << 'EOF'
+mkdir -p '/home/opc/.local/bin'
+curl \
+  --silent \
+  --location \
+  --output '/home/opc/.local/bin/sw' \
+  'https://github.com/albertattard/sociable-weaver/releases/latest/download/sw'
+chmod +x '/home/opc/.local/bin/sw'
 EOF
 # ------------------------------------------------------------------------------
 
@@ -176,7 +193,7 @@ EOF
 # Install SDKMAN
 # ------------------------------------------------------------------------------
 sudo -i -u opc bash << 'EOF'
-curl -s 'https://get.sdkman.io' | bash
+curl --silent 'https://get.sdkman.io' | bash
 source '/home/opc/.sdkman/bin/sdkman-init.sh'
 
 mkdir -p '/home/opc/.sdkman/candidates/java'
