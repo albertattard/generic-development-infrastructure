@@ -63,6 +63,27 @@ tar --extract --file '/tmp/jdk-23.tar.gz'       --directory '/usr/lib/jvm/jdk-23
 tar --extract --file '/tmp/graalvm-17.tar.gz'   --directory '/usr/lib/jvm/graalvm-17'   --strip-components 1
 tar --extract --file '/tmp/graalvm-21.tar.gz'   --directory '/usr/lib/jvm/graalvm-21'   --strip-components 1
 tar --extract --file '/tmp/graalvm-22.tar.gz'   --directory '/usr/lib/jvm/graalvm-22'   --strip-components 1
+
+rm -f '/tmp/jdk-1.8.tar.gz'
+rm -f '/tmp/jdk-1.8-perf.tar.gz'
+rm -f '/tmp/jdk-9.tar.gz'
+rm -f '/tmp/jdk-10.tar.gz'
+rm -f '/tmp/jdk-11.tar.gz'
+rm -f '/tmp/jdk-12.tar.gz'
+rm -f '/tmp/jdk-13.tar.gz'
+rm -f '/tmp/jdk-14.tar.gz'
+rm -f '/tmp/jdk-15.tar.gz'
+rm -f '/tmp/jdk-16.tar.gz'
+rm -f '/tmp/jdk-17.tar.gz'
+rm -f '/tmp/jdk-18.tar.gz'
+rm -f '/tmp/jdk-19.tar.gz'
+rm -f '/tmp/jdk-20.tar.gz'
+rm -f '/tmp/jdk-21.tar.gz'
+rm -f '/tmp/jdk-22.tar.gz'
+rm -f '/tmp/jdk-23.tar.gz'
+rm -f '/tmp/graalvm-17.tar.gz'
+rm -f '/tmp/graalvm-21.tar.gz'
+rm -f '/tmp/graalvm-22.tar.gz'
 # ------------------------------------------------------------------------------
 
 
@@ -72,6 +93,7 @@ tar --extract --file '/tmp/graalvm-22.tar.gz'   --directory '/usr/lib/jvm/graalv
 rm -rf '/usr/lib/kotlin/'
 mkdir -p '/usr/lib/kotlin/'
 unzip '/tmp/kotlin-compiler.zip' -d '/usr/lib/kotlin/'
+rm -f '/tmp/kotlin-compiler.zip'
 # ------------------------------------------------------------------------------
 
 
@@ -121,6 +143,7 @@ curl \
   --output "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm" \
   "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.rpm"
 dnf install -y "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
+rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
 # ------------------------------------------------------------------------------
 
 
@@ -234,6 +257,8 @@ export CC="${TOOLCHAIN_DIR}/bin/gcc"
 PATH="${PATH}:/usr/lib/musl/bin"
 B_EOF
 EOF
+
+rm -f '/tmp/x86_64-linux-musl-native.tgz'
 # ------------------------------------------------------------------------------
 
 
@@ -254,6 +279,8 @@ do
   mkdir -p "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
   cp '/tmp/zlib/libz.a' "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
 done
+
+rm -rf '/tmp/zlib'
 # ------------------------------------------------------------------------------
 
 

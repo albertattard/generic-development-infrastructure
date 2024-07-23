@@ -135,6 +135,7 @@ resource "oci_core_instance" "public" {
   source_details {
     source_id   = var.image_source_id
     source_type = "image"
+    boot_volume_size_in_gbs = "100"
   }
 
   defined_tags  = var.defined_tags
