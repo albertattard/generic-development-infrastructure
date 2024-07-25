@@ -39,6 +39,14 @@ y
 
 EOF
 
+# Copy the data to /tmp before mounting and the transfer this back, otherwise it
+# will be lost.  Mounting the /home directory for example, without copying the
+# files will prevent us to login as the ssh public key will be lost once
+# mounted.
+if test -d "${MOUNT_PATH}"; then
+  cp -R "${MOUNT_PATH}" "/tmp/${MOUNT_PATH}"
+fi
+
 # Mount the partition
 mkdir -p "${MOUNT_PATH}"
 mount "${PARTITION_PATH}" "${MOUNT_PATH}"
@@ -49,3 +57,9 @@ cat <<EOF >> /etc/fstab
 # Automatically mount the volume on instance boot
 ${PARTITION_PATH} ${MOUNT_PATH}    ext4   defaults,_netdev, nofail 0 2
 EOF
+
+# Copy the data back from /tmp after mounting to preserve the files
+if test -d "/tmp/${MOUNT_PATH}"; then
+  cp -R "/tmp/${MOUNT_PATH}" "${MOUNT_PATH}"
+  rm -rf "/tmp/${MOUNT_PATH}"
+fi
