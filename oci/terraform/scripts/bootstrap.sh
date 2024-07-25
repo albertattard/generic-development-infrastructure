@@ -11,6 +11,14 @@ set -e
 
 
 # ------------------------------------------------------------------------------
+# Fill the remain space.  Otherwise we will have unallocated space!!
+# Based on: https://learnoci.cloud/how-to-extend-a-boot-volume-in-oci-linux-instance-13effa0297b3
+# ------------------------------------------------------------------------------
+/usr/libexec/oci-growfs --yes
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Verify all uploaded binaries
 # ------------------------------------------------------------------------------
 sha256sum --check '/tmp/checksums.txt'
