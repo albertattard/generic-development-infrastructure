@@ -15,6 +15,10 @@ data "oci_identity_availability_domains" "available" {
   compartment_id = var.tenancy_id
 }
 
+locals {
+  availability_domain = lookup(data.oci_identity_availability_domains.available.availability_domains[0], "name")
+}
+
 resource "oci_core_vcn" "this" {
   display_name   = "${var.name_prefix} VCN"
   compartment_id = var.compartment_id
@@ -111,7 +115,7 @@ resource "oci_core_subnet" "public" {
 resource "oci_core_instance" "public" {
   display_name        = "${var.name_prefix} Public Instance"
   compartment_id      = var.compartment_id
-  availability_domain = lookup(data.oci_identity_availability_domains.available.availability_domains[0], "name")
+  availability_domain = local.availability_domain
 
   shape = "VM.Standard.E4.Flex"
   shape_config {
@@ -133,9 +137,8 @@ resource "oci_core_instance" "public" {
   }
 
   source_details {
-    source_id               = var.image_source_id
-    source_type             = "image"
-    boot_volume_size_in_gbs = "100"
+    source_id   = var.image_source_id
+    source_type = "image"
   }
 
   defined_tags  = var.defined_tags
@@ -146,8 +149,74 @@ resource "oci_core_instance" "public" {
   }
 }
 
+resource "oci_core_volume" "home" {
+  display_name        = "${var.name_prefix} Home Block Volume"
+  compartment_id      = var.compartment_id
+  availability_domain = local.availability_domain
+  size_in_gbs         = "1024"
+
+  defined_tags  = var.defined_tags
+  freeform_tags = var.freeform_tags
+
+  lifecycle {
+    ignore_changes = [defined_tags]
+  }
+}
+
+resource "oci_core_volume_attachment" "home" {
+  display_name    = "${var.name_prefix} Attached Home Block Volume"
+  attachment_type = "iscsi"
+  instance_id     = oci_core_instance.public.id
+  volume_id       = oci_core_volume.home.id
+  device          = "/dev/oracleoci/oraclevdb"
+  is_read_only    = false
+  is_shareable    = false
+}
+
+resource "time_sleep" "wait_for_volume_attachment" {
+  depends_on = [
+    oci_core_volume_attachment.home,
+  ]
+
+  create_duration = "30s"
+}
+
+resource "null_resource" "setup_iscsi" {
+  depends_on = [
+    time_sleep.wait_for_volume_attachment,
+  ]
+
+  provisioner "file" {
+    connection {
+      agent       = false
+      timeout     = "5m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    source      = "./scripts/bootstrap-iscsi.sh"
+    destination = "/tmp/bootstrap-iscsi.sh"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      agent       = false
+      timeout     = "10m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    inline = [
+      "sudo bash /tmp/bootstrap-iscsi.sh '${oci_core_volume_attachment.home.iqn}' '${oci_core_volume_attachment.home.ipv4}' '${oci_core_volume_attachment.home.port}' '${oci_core_volume_attachment.home.device}' '/home'"
+    ]
+  }
+}
+
 resource "null_resource" "upload_files" {
   depends_on = [
+    null_resource.setup_iscsi,
     oci_core_instance.public,
   ]
 
