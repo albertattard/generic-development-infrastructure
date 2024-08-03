@@ -2,3 +2,11 @@
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfvars
+
+# This file should be version controlled, but given that this repository is
+# shared as a git submodule and this infrastructure is short lived, we can
+# ignore this file. Again, it is NOT recommended to ignore this file and this is
+# an exception.  Please refer to
+# https://developer.hashicorp.com/terraform/language/files/dependency-lock for
+# more information about this.
+.terraform.lock.hcl
