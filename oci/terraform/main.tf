@@ -372,7 +372,7 @@ resource "null_resource" "upload_files" {
       private_key = file(var.ssh_private_key_file)
     }
 
-    source      = "./binaries/openjdk-23-ea+31_linux-x64_bin.tar.gz"
+    source      = "./binaries/openjdk-23-ea+35_linux-x64_bin.tar.gz"
     destination = "/tmp/jdk-23.tar.gz"
   }
 
