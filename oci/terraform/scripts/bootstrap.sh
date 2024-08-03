@@ -16,6 +16,7 @@ set -e
 # Fill the remain space. Otherwise we will have unallocated space!!
 # Based on: https://learnoci.cloud/how-to-extend-a-boot-volume-in-oci-linux-instance-13effa0297b3
 # ------------------------------------------------------------------------------
+echo 'Filling the remaining space'
 /usr/libexec/oci-growfs --yes
 # ------------------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ set -e
 # For more information or require additional help, please speak to Albert Attard
 # (albert.attard@oracle.com).
 # ------------------------------------------------------------------------------
+echo 'Downloading the binaries'
 curl --silent --location --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-linux-x64.tar.gz"
 curl --silent --location --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-perf-linux-x64.tar.gz"
 curl --silent --location --output '/tmp/jdk-9.tar.gz'                 "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
@@ -57,6 +59,7 @@ curl --silent --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIE
 # ------------------------------------------------------------------------------
 # Verify all the downloaded binaries
 # ------------------------------------------------------------------------------
+echo 'Verifying the downloaded binaries'
 echo '92bfdee599c334f641de2d4ae08a4a082b966cb19b88d13d48b8486f80727b58 /tmp/jdk-1.8.tar.gz'               | sha256sum --check
 echo '796666f8071202d85ad5d8013845d36045fd69b44135ebbeb76dffced3724c00 /tmp/jdk-1.8-perf.tar.gz'          | sha256sum --check
 echo '90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2 /tmp/jdk-9.tar.gz'                 | sha256sum --check
@@ -86,6 +89,7 @@ echo 'd587e1fadefaad60687dd1dcb9b278e7b587e12cb1dc48cae42a9f52bb8613a7 /tmp/x86_
 # ------------------------------------------------------------------------------
 # Install (extract) Oracle Java and Oracle GraalVM
 # ------------------------------------------------------------------------------
+echo 'Installing (extracting) Oracle Java and Oracle GraalVM'
 rm -rf '/usr/lib/jvm'
 
 mkdir -p '/usr/lib/jvm/jdk-1.8'
@@ -156,6 +160,7 @@ rm -f '/tmp/graalvm-22.tar.gz'
 # ------------------------------------------------------------------------------
 # Install (extract) Kotlin
 # ------------------------------------------------------------------------------
+echo 'Installing (extracting) Kotlin'
 rm -rf '/usr/lib/kotlin/'
 mkdir -p '/usr/lib/kotlin/'
 unzip '/tmp/kotlin-compiler.zip' -d '/usr/lib/kotlin/'
@@ -167,6 +172,7 @@ rm -f '/tmp/kotlin-compiler.zip'
 # Install the dependencies required to build the statically linked native
 # executable
 # ------------------------------------------------------------------------------
+echo 'Installing the dependencies required to build the statically linked native executable'
 dnf config-manager --set-enabled ol9_codeready_builder
 dnf install -y git-all gcc glibc-devel zlib-devel libstdc++-static make
 # ------------------------------------------------------------------------------
@@ -175,6 +181,7 @@ dnf install -y git-all gcc glibc-devel zlib-devel libstdc++-static make
 # ------------------------------------------------------------------------------
 # Install hey, an HTTP load generator and ApacheBench (ab) replacement
 # ------------------------------------------------------------------------------
+echo 'Installing hey'
 mkdir -p '/usr/local/sbin'
 curl \
   --silent \
@@ -190,6 +197,7 @@ chmod +x '/usr/local/sbin/hey'
 # - https://docs.docker.com/engine/install/fedora/
 # - https://stackoverflow.com/questions/70358656/rhel8-fedora-yum-dns-causes-cannot-download-repodata-repomd-xml-for-docker-ce
 # ------------------------------------------------------------------------------
+echo 'Installing Docker Engine'
 dnf install -y dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -203,6 +211,7 @@ chmod 666 '/var/run/docker.sock'
 # layers. Based on
 #  - https://github.com/wagoodman/dive?tab=readme-ov-file#installation
 # ------------------------------------------------------------------------------
+echo 'Installing dive'
 DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
 curl \
   --silent \
@@ -218,6 +227,7 @@ rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
 # Install the Markdown Executor (me)
 # https://github.com/albertattard/me
 # ------------------------------------------------------------------------------
+echo 'Installing Markdown Executor (me)'
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.local/bin'
 curl \
@@ -234,6 +244,7 @@ EOF
 # Install the Sociable Weaver (sw)
 # https://github.com/albertattard/sociable-weaver
 # ------------------------------------------------------------------------------
+echo 'Installing Sociable Weaver (sw)'
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.local/bin'
 curl \
@@ -247,8 +258,9 @@ EOF
 
 
 # ------------------------------------------------------------------------------
-# Setup Maven Toolchains
+# Set up Maven Toolchains
 # ------------------------------------------------------------------------------
+echo 'Setting up Maven toolchains'
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.m2'
 cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
@@ -463,6 +475,7 @@ EOF
 # ------------------------------------------------------------------------------
 # Install SDKMAN
 # ------------------------------------------------------------------------------
+echo 'Installing and configuring SDKMAN'
 sudo -i -u opc bash << 'EOF'
 curl --silent 'https://get.sdkman.io' | bash
 source '/home/opc/.sdkman/bin/sdkman-init.sh'
@@ -534,6 +547,7 @@ EOF
 # Install MUSL required to build the static native executables.
 # See: https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/StaticImages/#static-and-mostly-static-images
 # ------------------------------------------------------------------------------
+echo 'Installing MUSL'
 mkdir -p '/usr/lib/musl'
 tar --extract --file '/tmp/x86_64-linux-musl-native.tgz' --directory '/usr/lib/musl' --strip-components 1
 
@@ -554,6 +568,7 @@ rm -f '/tmp/x86_64-linux-musl-native.tgz'
 # Install zlib (https://zlib.net), a compression library that will be complied
 # and included into the GraalVM MUSL GCC toolchain.
 # ------------------------------------------------------------------------------
+echo 'Installing zlib'
 mkdir -p '/tmp/zlib'
 tar --extract --file '/tmp/zlib-1.3.1.tar.gz' --directory '/tmp/zlib' --strip-components 1
 
@@ -575,6 +590,7 @@ rm -rf '/tmp/zlib'
 # ------------------------------------------------------------------------------
 # Create the working directory
 # ------------------------------------------------------------------------------
+echo 'Creating the working directory'
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/workspace'
 EOF
