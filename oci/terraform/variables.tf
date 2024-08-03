@@ -28,16 +28,6 @@ variable "compartment_id" {
   description = "The compartment OCID where the resources will be placed"
 }
 
-variable "freeform_tags" {
-  type        = map(string)
-  description = "The freeform tags that will be applied to all resources"
-}
-
-variable "defined_tags" {
-  type        = map(string)
-  description = "The defined tags that will be applied to all resources"
-}
-
 variable "ssh_authorized_keys" {
   type        = list(string)
   description = "The list of public keys to be added to all compute instances"
@@ -55,4 +45,22 @@ EOF
 variable "image_source_id" {
   type        = string
   description = "The OCI image ID for the compute instances"
+}
+
+variable "binaries_pre_authenticated_link" {
+  type        = string
+  description = <<EOF
+The OCI Pre-Authenticated link used to download the binaries from the OCI
+bucket.
+EOF
+}
+
+variable "freeform_tags" {
+  type        = map(string)
+  description = "The freeform tags that will be applied to all resources"
+}
+
+variable "defined_tags" {
+  type        = map(string)
+  description = "The defined tags that will be applied to all resources"
 }

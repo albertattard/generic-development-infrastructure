@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BINARIES_PRE_AUTHENTICATED_LINK="$1"
+
 set -e
 
 # ------------------------------------------------------------------------------
@@ -11,7 +13,7 @@ set -e
 
 
 # ------------------------------------------------------------------------------
-# Fill the remain space.  Otherwise we will have unallocated space!!
+# Fill the remain space. Otherwise we will have unallocated space!!
 # Based on: https://learnoci.cloud/how-to-extend-a-boot-volume-in-oci-linux-instance-13effa0297b3
 # ------------------------------------------------------------------------------
 /usr/libexec/oci-growfs --yes
@@ -19,9 +21,65 @@ set -e
 
 
 # ------------------------------------------------------------------------------
-# Verify all uploaded binaries
+# Download the binaries using the provided Pre-Authenticated link. Kindly note
+# that while some of these binaries are freely available others are not. Do not
+# make the Per-Authenticated link publicly available.
+#
+# For more information or require additional help, please speak to Albert Attard
+# (albert.attard@oracle.com).
 # ------------------------------------------------------------------------------
-sha256sum --check '/tmp/checksums.txt'
+curl --silent --location --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-linux-x64.tar.gz"
+curl --silent --location --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-perf-linux-x64.tar.gz"
+curl --silent --location --output '/tmp/jdk-9.tar.gz'                 "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-10.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-10.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-11.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-11.0.24_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-12.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-12.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-13.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-13.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-14.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-14.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-15.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-15.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-16.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-16.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-17.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-17.0.12_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-18.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-18.0.2.1_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-19.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-19.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-20.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-21.0.4_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-23-ea+35_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-17.0.12_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-21.0.4_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/graalvm-22.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-22.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.0.0.zip"
+curl --silent --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
+curl --silent --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Verify all the downloaded binaries
+# ------------------------------------------------------------------------------
+echo '92bfdee599c334f641de2d4ae08a4a082b966cb19b88d13d48b8486f80727b58 /tmp/jdk-1.8.tar.gz'               | sha256sum --check
+echo '796666f8071202d85ad5d8013845d36045fd69b44135ebbeb76dffced3724c00 /tmp/jdk-1.8-perf.tar.gz'          | sha256sum --check
+echo '90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2 /tmp/jdk-9.tar.gz'                 | sha256sum --check
+echo '6633c20d53c50c20835364d0f3e172e0cbbce78fff81867488f22a6298fa372b /tmp/jdk-10.tar.gz'                | sha256sum --check
+echo 'f50fdec8a48a9b360d30ecc29af36f63f04f0b70ec829d3bf821e4e361682791 /tmp/jdk-11.tar.gz'                | sha256sum --check
+echo '2dde6fda89a4ec6e6560ed464e917861c9e40bf576e7a64856dafc55abaaff51 /tmp/jdk-12.tar.gz'                | sha256sum --check
+echo 'e2214a723d611b4a781641061a24ca6024f2c57dbd9f75ca9d857cad87d9475f /tmp/jdk-13.tar.gz'                | sha256sum --check
+echo 'cb811a86926cc0f529d16bec7bd2e25fb73e75125bbd1775cdb9a96998593dde /tmp/jdk-14.tar.gz'                | sha256sum --check
+echo '54b29a3756671fcb4b6116931e03e86645632ec39361bc16ad1aaa67332c7c61 /tmp/jdk-15.tar.gz'                | sha256sum --check
+echo '630e3e56c58f45db3788343ce842756d5a5a401a63884242cc6a141071285a62 /tmp/jdk-16.tar.gz'                | sha256sum --check
+echo '311f1448312ecab391fe2a1b2ac140d6e1c7aea6fbf08416b466a58874f2b40f /tmp/jdk-17.tar.gz'                | sha256sum --check
+echo 'cd905013facbb5c2b5354165cc372e327259de4991c28f31c7d4231dbf638934 /tmp/jdk-18.tar.gz'                | sha256sum --check
+echo '59f26ace2727d0e9b24fc09d5a48393c9dbaffe04c932a02938e8d6d582058c6 /tmp/jdk-19.tar.gz'                | sha256sum --check
+echo '499b59be8e3613c223e76f101598d7c28dc04b8e154d860edf2ed05980c67526 /tmp/jdk-20.tar.gz'                | sha256sum --check
+echo 'dc0d14d5cf1b44e02832a7e85d0d5eb1f4623dc389a2b7fb3d21089b84fc7eb1 /tmp/jdk-21.tar.gz'                | sha256sum --check
+echo 'cbc13aaa2618659f44cb261f820f179832d611f0df35dd30a78d7dea6d717858 /tmp/jdk-22.tar.gz'                | sha256sum --check
+echo '5387c8da8acb4261265c12bb46cea856c248d70bf9d64164019b74ed96545655 /tmp/jdk-23.tar.gz'                | sha256sum --check
+echo 'b6f3dace24cf1960ec790216f4c86f00d4f43df64e4e8b548f6382f04894713f /tmp/graalvm-17.tar.gz'            | sha256sum --check
+echo '30307941ab59e58f3f0f55e694885a930531a58f1917d07267b2439f6549605e /tmp/graalvm-21.tar.gz'            | sha256sum --check
+echo '1881aa2c431b0506ecb170439832b053b757368d7109bd422298ca23e7939cd0 /tmp/graalvm-22.tar.gz'            | sha256sum --check
+echo 'ef578730976154fd2c5968d75af8c2703b3de84a78dffe913f670326e149da3b /tmp/kotlin-compiler.zip'          | sha256sum --check
+echo '9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23 /tmp/zlib-1.3.1.tar.gz'            | sha256sum --check
+echo 'd587e1fadefaad60687dd1dcb9b278e7b587e12cb1dc48cae42a9f52bb8613a7 /tmp/x86_64-linux-musl-native.tgz' | sha256sum --check
 # ------------------------------------------------------------------------------
 
 
@@ -96,7 +154,7 @@ rm -f '/tmp/graalvm-22.tar.gz'
 
 
 # ------------------------------------------------------------------------------
-# Install Kotlin
+# Install (extract) Kotlin
 # ------------------------------------------------------------------------------
 rm -rf '/usr/lib/kotlin/'
 mkdir -p '/usr/lib/kotlin/'
@@ -106,7 +164,8 @@ rm -f '/tmp/kotlin-compiler.zip'
 
 
 # ------------------------------------------------------------------------------
-# Install the dependencies required to build the statically linked native image
+# Install the dependencies required to build the statically linked native
+# executable
 # ------------------------------------------------------------------------------
 dnf config-manager --set-enabled ol9_codeready_builder
 dnf install -y git-all gcc glibc-devel zlib-devel libstdc++-static make
@@ -127,7 +186,7 @@ chmod +x '/usr/local/sbin/hey'
 
 
 # ------------------------------------------------------------------------------
-# Install the Docker Engine to build container for the native image. Based on
+# Install the Docker Engine to build container images. Based on
 # - https://docs.docker.com/engine/install/fedora/
 # - https://stackoverflow.com/questions/70358656/rhel8-fedora-yum-dns-causes-cannot-download-repodata-repomd-xml-for-docker-ce
 # ------------------------------------------------------------------------------
@@ -140,8 +199,8 @@ chmod 666 '/var/run/docker.sock'
 
 
 # ------------------------------------------------------------------------------
-# Install dive (https://github.com/wagoodman/dive) to explore a docker image
-# layers.  Based on
+# Install dive (https://github.com/wagoodman/dive) to analyse container images
+# layers. Based on
 #  - https://github.com/wagoodman/dive?tab=readme-ov-file#installation
 # ------------------------------------------------------------------------------
 DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
@@ -192,7 +251,211 @@ EOF
 # ------------------------------------------------------------------------------
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.m2'
-cp -f '/tmp/toolchains.xml' '/home/opc/.m2/toolchains.xml'
+cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>1.8</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-1.8</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>epp</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-1.8-perf</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>9</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-9</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>10</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-10</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>11</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-11</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>12</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-12</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>13</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-13</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>14</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-14</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>15</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-15</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>16</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-16</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-17</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>18</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-18</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>19</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-19</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>20</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-20</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-21</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>22</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-22</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>23</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-23</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal17</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-17</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal21</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-21</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>graal22</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/graalvm-22</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>
+B_EOF
 EOF
 # ------------------------------------------------------------------------------
 
@@ -268,7 +531,7 @@ EOF
 
 
 # ------------------------------------------------------------------------------
-# Install MUSL required to build the static native image.
+# Install MUSL required to build the static native executables.
 # See: https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/StaticImages/#static-and-mostly-static-images
 # ------------------------------------------------------------------------------
 mkdir -p '/usr/lib/musl'
@@ -289,7 +552,7 @@ rm -f '/tmp/x86_64-linux-musl-native.tgz'
 
 # ------------------------------------------------------------------------------
 # Install zlib (https://zlib.net), a compression library that will be complied
-# and included into the GraalVM musl GCC toolchain.
+# and included into the GraalVM MUSL GCC toolchain.
 # ------------------------------------------------------------------------------
 mkdir -p '/tmp/zlib'
 tar --extract --file '/tmp/zlib-1.3.1.tar.gz' --directory '/tmp/zlib' --strip-components 1

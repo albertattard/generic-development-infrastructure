@@ -1,11 +1,12 @@
 # Generic Development Infrastructure
 
-Creates a generic Java **development** environment on the cloud that includes
-all versions of Oracle Java, Oracle GraalVM and more.
+Creates a generic Java **development** environment on OCI that includes many
+versions of Oracle Java, Oracle GraalVM and more.
 
 This repository is intended to be used within other repositories, such as
-workshops that require an instance on OCI. Run the following command from within
-an existing repository to include the `infrastructure` directory.
+workshops, that require an OCI compute instance. Run the following command from
+within an existing (top level directory) repository to include the
+`infrastructure` directory.
 
 ```shell
 $ git submodule add \
@@ -16,6 +17,10 @@ $ git submodule add \
 
 For more information, please refer to the
 [git submodule documentation](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+Some configuration is required. Please refer to the
+[`README.md` file](./oci/README.md) for more information about how to configure
+and deploy the resources on OCI.
 
 ## Run Wrapper
 
