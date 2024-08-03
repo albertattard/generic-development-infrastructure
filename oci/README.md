@@ -36,7 +36,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    ssh_authorized_keys             = []
    ssh_private_key_file            = "~/.ssh/xxxxxx.key"
    image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaap4fhruwd77p4kby5lhv5hacruznfu4clgueiixgciz747pld7sha"
-   binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries/"
+   binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
    freeform_tags                   = {}
    defined_tags                    = {}
    ```
@@ -89,7 +89,8 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      link. For example, the current version of Oracle Java 22 is expected to be
      downloaded from
      `${var.binaries_pre_authenticated_link}/jdk-22.0.2_linux-x64_bin.tar.gz`
-     using HTTP GET request.
+     using HTTP GET request. Note that the `binaries_pre_authenticated_link`
+     should not end with a `/` as one is always added.
    - `freeform_tags`: The freeform tags to be assigned to each OCI resource that
      is created as part of this setup. While this is optional and can be left
      blank, it is recommended to add a tag to group all the resources together.
