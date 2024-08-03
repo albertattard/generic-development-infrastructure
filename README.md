@@ -49,16 +49,7 @@ rsync \
   --recursive \
   --update \
   --delete \
-  --exclude '.DS_Store' \
-  --exclude '.gradle' \
-  --exclude '.idea' \
-  --exclude 'build' \
-  --exclude 'generated' \
-  --exclude 'target' \
-  --exclude '.git*' \
-  --exclude 'mvnw.cmd' \
-  --exclude 'runw' \
-  --exclude 'scpw' \
+  --exclude-from='../.rsync-exclude' \
   .. \
   "opc@${IP_ADDRESS}:${WORKSPACE}"
 
@@ -81,6 +72,25 @@ ssh -i ~/.ssh/ssh-key-oci-instance.key "opc@${IP_ADDRESS}" "${COMMAND[@]}"
 This bash script syncs the files to make sure that files are copied to the
 remote instance before executing any command. Then it executes the command
 remotely.
+
+Note that the `rsync` `--exclude-from` option is used to skip certain files from
+being uploaded to the OCI compute instance. The following example shows some
+typical files that can be excluded.
+
+```
+.DS_Store
+.gradle
+.idea
+build
+generated
+target
+.git*
+.me-commands-*.sh
+.sw-commands-*.sh
+mvnw.cmd
+runw
+scpw
+```
 
 You can run commands locally and have these executed remotely.
 
