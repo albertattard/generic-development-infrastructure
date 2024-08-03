@@ -34,7 +34,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    tenancy_id                      = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
-   ssh_private_key_file            = "~/.ssh/xxxxxx.key"
+   ssh_private_key_file            = "~/.ssh/ssh-key-oci-instance.key"
    image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaap4fhruwd77p4kby5lhv5hacruznfu4clgueiixgciz747pld7sha"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
    freeform_tags                   = {}
@@ -110,9 +110,9 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    $ ./deploy
    ```
 
-   This will take about 30 minutes as it needs to download all the binaries and
-   then install them and will create several resources including an OCI instance
-   with different versions of Java installed.
+   This will take about 5 minutes to complete as it needs to create several OCI
+   resources, including the OCI compute instance, download all the binaries and
+   then install them.
 
    Once ready, it will print the public IP address of this instance and a
    command that can be used to ssh into this machine.
