@@ -100,7 +100,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
 
    Please refer to the
    [`./terraform/main.tf` terraform file](./terraform/main.tf) for more
-   information about how this variable is used.
+   information about how each variable is used.
 
 3. Deploy the infrastructure
 
