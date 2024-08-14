@@ -170,11 +170,11 @@ rm -f '/tmp/kotlin-compiler.zip'
 
 # ------------------------------------------------------------------------------
 # Install the dependencies required to build the statically linked native
-# executable
+# executable and other commands
 # ------------------------------------------------------------------------------
 echo 'Installing the dependencies required to build the statically linked native executable'
 dnf config-manager --set-enabled ol9_codeready_builder
-dnf install -y git-all gcc glibc-devel zlib-devel libstdc++-static make
+dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make
 # ------------------------------------------------------------------------------
 
 
