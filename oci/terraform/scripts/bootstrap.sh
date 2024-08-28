@@ -506,6 +506,27 @@ sdk default java 21-oracle
 
 mkdir -p '/home/opc/.bashrc.d'
 cat << 'B_EOF' > '/home/opc/.bashrc.d/java'
+export JAVA_1_8_HOME='/usr/lib/jvm/jdk-1.8'
+export JAVA_EPP_HOME='/usr/lib/jvm/jdk-1.8-perf'
+export JAVA_9_HOME='/usr/lib/jvm/jdk-9'
+export JAVA_10_HOME='/usr/lib/jvm/jdk-10'
+export JAVA_11_HOME='/usr/lib/jvm/jdk-11'
+export JAVA_12_HOME='/usr/lib/jvm/jdk-12'
+export JAVA_13_HOME='/usr/lib/jvm/jdk-13'
+export JAVA_14_HOME='/usr/lib/jvm/jdk-14'
+export JAVA_15_HOME='/usr/lib/jvm/jdk-15'
+export JAVA_16_HOME='/usr/lib/jvm/jdk-16'
+export JAVA_17_HOME='/usr/lib/jvm/jdk-17'
+export JAVA_18_HOME='/usr/lib/jvm/jdk-18'
+export JAVA_19_HOME='/usr/lib/jvm/jdk-19'
+export JAVA_20_HOME='/usr/lib/jvm/jdk-20'
+export JAVA_21_HOME='/usr/lib/jvm/jdk-21'
+export JAVA_22_HOME='/usr/lib/jvm/jdk-22'
+export JAVA_23_HOME='/usr/lib/jvm/jdk-23'
+export GRAAL_17_HOME='/usr/lib/jvm/graalvm-17'
+export GRAAL_21_HOME='/usr/lib/jvm/graalvm-21'
+export GRAAL_22_HOME='/usr/lib/jvm/graalvm-22'
+
 export JAVA_HOME='/home/opc/.sdkman/candidates/java/current'
 PATH="${PATH}:/home/opc/.sdkman/candidates/java/current/bin"
 
