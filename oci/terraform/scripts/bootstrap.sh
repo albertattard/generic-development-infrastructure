@@ -22,6 +22,14 @@ echo 'Filling the remaining space'
 
 
 # ------------------------------------------------------------------------------
+# Allow unprivileged processes to bind to port 80. This is not really necessary
+# and kept the code here just in case we need it.
+# ------------------------------------------------------------------------------
+# sysctl -w net.ipv4.ip_unprivileged_port_start=80
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Download the binaries using the provided Pre-Authenticated link. Kindly note
 # that while some of these binaries are freely available others are not. Do not
 # make the Per-Authenticated link publicly available.
