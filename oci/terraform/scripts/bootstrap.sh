@@ -54,13 +54,13 @@ curl --silent --location --output '/tmp/jdk-19.tar.gz'                "${BINARIE
 curl --silent --location --output '/tmp/jdk-20.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-21.0.4_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-23_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-23-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-23-valhalla+1-90_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-ea+13_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-ea+16_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-24-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-leyden+2-8_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-17.0.12_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-21.0.4_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/graalvm-22.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-22.0.2_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.0.0.zip"
 curl --silent --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
 curl --silent --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
@@ -87,13 +87,13 @@ echo '59f26ace2727d0e9b24fc09d5a48393c9dbaffe04c932a02938e8d6d582058c6 /tmp/jdk-
 echo '499b59be8e3613c223e76f101598d7c28dc04b8e154d860edf2ed05980c67526 /tmp/jdk-20.tar.gz'                | sha256sum --check
 echo 'dc0d14d5cf1b44e02832a7e85d0d5eb1f4623dc389a2b7fb3d21089b84fc7eb1 /tmp/jdk-21.tar.gz'                | sha256sum --check
 echo 'cbc13aaa2618659f44cb261f820f179832d611f0df35dd30a78d7dea6d717858 /tmp/jdk-22.tar.gz'                | sha256sum --check
-echo '08fea92724127c6fa0f2e5ea0b07ff4951ccb1e2f22db3c21eebbd7347152a67 /tmp/jdk-23.tar.gz'                | sha256sum --check
+echo '6e35269e6f31ef80246045f704b41ff5b4ecf9811ba1f6c8ff54a25c84afaa27 /tmp/jdk-23.tar.gz'                | sha256sum --check
 echo '5235afaf5ecc86f2237458cf40f8ed965939372f606edbd0fc46e1ee2e69f5f5 /tmp/jdk-23-valhalla.tar.gz'       | sha256sum --check
-echo '6ff78227fb6865113ff0e844c0e3dbbd3c3fee0fd03b4a3b3f7134390f785bd4 /tmp/jdk-24.tar.gz'                | sha256sum --check
+echo '46c9e29e1e700ac596a07ef1795142939bcfd687dcc7f959043886bf800a3bee /tmp/jdk-24.tar.gz'                | sha256sum --check
 echo '7a6f9f5a602377b882e647ae9312706c6873afc582d2612681e6fbe9e122a088 /tmp/jdk-24-leyden.tar.gz'         | sha256sum --check
 echo 'b6f3dace24cf1960ec790216f4c86f00d4f43df64e4e8b548f6382f04894713f /tmp/graalvm-17.tar.gz'            | sha256sum --check
 echo '30307941ab59e58f3f0f55e694885a930531a58f1917d07267b2439f6549605e /tmp/graalvm-21.tar.gz'            | sha256sum --check
-echo '1881aa2c431b0506ecb170439832b053b757368d7109bd422298ca23e7939cd0 /tmp/graalvm-22.tar.gz'            | sha256sum --check
+echo '9e0632fe4be3d7fed6f03b3afc349b72fd5cb857ec6b69008202257e8a3ed858 /tmp/graalvm-23.tar.gz'            | sha256sum --check
 echo 'ef578730976154fd2c5968d75af8c2703b3de84a78dffe913f670326e149da3b /tmp/kotlin-compiler.zip'          | sha256sum --check
 echo '9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23 /tmp/zlib-1.3.1.tar.gz'            | sha256sum --check
 echo 'd587e1fadefaad60687dd1dcb9b278e7b587e12cb1dc48cae42a9f52bb8613a7 /tmp/x86_64-linux-musl-native.tgz' | sha256sum --check
@@ -128,7 +128,7 @@ mkdir -p '/usr/lib/jvm/jdk-24'
 mkdir -p '/usr/lib/jvm/jdk-24-leyden'
 mkdir -p '/usr/lib/jvm/graalvm-17'
 mkdir -p '/usr/lib/jvm/graalvm-21'
-mkdir -p '/usr/lib/jvm/graalvm-22'
+mkdir -p '/usr/lib/jvm/graalvm-23'
 
 tar --extract --file '/tmp/jdk-1.8.tar.gz'         --directory '/usr/lib/jvm/jdk-1.8'         --strip-components 1
 tar --extract --file '/tmp/jdk-1.8-perf.tar.gz'    --directory '/usr/lib/jvm/jdk-1.8-perf'    --strip-components 1
@@ -152,7 +152,7 @@ tar --extract --file '/tmp/jdk-24.tar.gz'          --directory '/usr/lib/jvm/jdk
 tar --extract --file '/tmp/jdk-24-leyden.tar.gz'   --directory '/usr/lib/jvm/jdk-24-leyden'   --strip-components 1
 tar --extract --file '/tmp/graalvm-17.tar.gz'      --directory '/usr/lib/jvm/graalvm-17'      --strip-components 1
 tar --extract --file '/tmp/graalvm-21.tar.gz'      --directory '/usr/lib/jvm/graalvm-21'      --strip-components 1
-tar --extract --file '/tmp/graalvm-22.tar.gz'      --directory '/usr/lib/jvm/graalvm-22'      --strip-components 1
+tar --extract --file '/tmp/graalvm-23.tar.gz'      --directory '/usr/lib/jvm/graalvm-23'      --strip-components 1
 
 rm -f '/tmp/jdk-1.8.tar.gz'
 rm -f '/tmp/jdk-1.8-perf.tar.gz'
@@ -176,7 +176,7 @@ rm -f '/tmp/jdk-24.tar.gz'
 rm -f '/tmp/jdk-24-leyden.tar.gz'
 rm -f '/tmp/graalvm-17.tar.gz'
 rm -f '/tmp/graalvm-21.tar.gz'
-rm -f '/tmp/graalvm-22.tar.gz'
+rm -f '/tmp/graalvm-23.tar.gz'
 # ------------------------------------------------------------------------------
 
 
@@ -512,11 +512,11 @@ cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>graal22</version>
+            <version>graal23</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
-            <jdkHome>/usr/lib/jvm/graalvm-22</jdkHome>
+            <jdkHome>/usr/lib/jvm/graalvm-23</jdkHome>
         </configuration>
     </toolchain>
 </toolchains>
@@ -556,7 +556,7 @@ ln -s '/usr/lib/jvm/jdk-24'          '/home/opc/.sdkman/candidates/java/24-oracl
 ln -s '/usr/lib/jvm/jdk-24-leyden'   '/home/opc/.sdkman/candidates/java/24-leyden'
 ln -s '/usr/lib/jvm/graalvm-17'      '/home/opc/.sdkman/candidates/java/17-graal'
 ln -s '/usr/lib/jvm/graalvm-21'      '/home/opc/.sdkman/candidates/java/21-graal'
-ln -s '/usr/lib/jvm/graalvm-22'      '/home/opc/.sdkman/candidates/java/22-graal'
+ln -s '/usr/lib/jvm/graalvm-23'      '/home/opc/.sdkman/candidates/java/23-graal'
 
 sdk default java 21-oracle
 
@@ -584,7 +584,7 @@ export JAVA_24_HOME='/usr/lib/jvm/jdk-24'
 export JAVA_24_LEYDEN_HOME='/usr/lib/jvm/jdk-24-leyden'
 export GRAAL_17_HOME='/usr/lib/jvm/graalvm-17'
 export GRAAL_21_HOME='/usr/lib/jvm/graalvm-21'
-export GRAAL_22_HOME='/usr/lib/jvm/graalvm-22'
+export GRAAL_23_HOME='/usr/lib/jvm/graalvm-23'
 
 export JAVA_HOME='/home/opc/.sdkman/candidates/java/current'
 PATH="${PATH}:/home/opc/.sdkman/candidates/java/current/bin"
@@ -611,7 +611,7 @@ alias   java24='sdk use java 24-oracle'
 alias   leyden='sdk use java 24-leyden'
 alias  graal17="sdk use java 17-graal"
 alias  graal21="sdk use java 21-graal"
-alias  graal22="sdk use java 22-graal"
+alias  graal23="sdk use java 23-graal"
 B_EOF
 
 mkdir -p '/home/opc/.sdkman/candidates/kotlin'
@@ -660,7 +660,7 @@ tar --extract --file '/tmp/zlib-1.3.1.tar.gz' --directory '/tmp/zlib' --strip-co
 make;
 make install;)
 
-for GRAALVM_PATH in '/usr/lib/jvm/graalvm-17' '/usr/lib/jvm/graalvm-21' '/usr/lib/jvm/graalvm-22'
+for GRAALVM_PATH in '/usr/lib/jvm/graalvm-17' '/usr/lib/jvm/graalvm-21' '/usr/lib/jvm/graalvm-23'
 do
   mkdir -p "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
   cp '/tmp/zlib/libz.a' "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
