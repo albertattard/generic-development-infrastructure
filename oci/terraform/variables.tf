@@ -37,7 +37,7 @@ variable "ssh_private_key_file" {
   type        = string
   description = <<EOF
 The path to the local private key matching one of the public keys. This is used
-to configre the public compute instances from this computer as part of the
+to configure the public compute instances from this computer as part of the
 terraform script set up.
 EOF
 }
