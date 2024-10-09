@@ -51,7 +51,8 @@ variable "binaries_pre_authenticated_link" {
   type        = string
   description = <<EOF
 The OCI Pre-Authenticated link used to download the binaries from the OCI
-bucket.
+bucket. Please talk to Albert Attard (albert.attard@oracle.com) for more
+information about this.
 EOF
 }
 
