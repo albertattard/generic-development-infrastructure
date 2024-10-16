@@ -44,33 +44,48 @@ echo 'Filling the remaining space'
 # convenience, so that you don't have to go to multiple places to update a
 # version
 # ------------------------------------------------------------------------------
+# https://www.oracle.com/java/technologies/downloads/#java8
+# https://www.oracle.com/a/tech/docs/8u431checksum.html
 JAVA_1_8_BINARY_FILE='jdk-8u431-linux-x64.tar.gz'
 JAVA_1_8_BINARY_SHA256='b396978a716b7d23ccccabfe5c47c3b75d2434d7f8f7af690bc648172382720d'
 
+# https://www.oracle.com/java/technologies/downloads/#jepp
+# https://www.oracle.com/a/tech/docs/8u431checksum.html
 JAVA_1_8_PERF_BINARY_FILE='jdk-8u431-perf-linux-x64.tar.gz'
-JAVA_1_8_PERF_BINARY_SHA256='90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2'
+JAVA_1_8_PERF_BINARY_SHA256='a610bfcb300beee600ecfc46dc74a6d3a8a00e7bde0fe1be32598c6040b9849a'
 
+# https://www.oracle.com/java/technologies/downloads/#java11
+# https://www.oracle.com/a/tech/docs/11-0-25-checksum.html
 JAVA_11_BINARY_FILE='jdk-11.0.25_linux-x64_bin.tar.gz'
 JAVA_11_BINARY_SHA256='d22d0fcca761861a1eb2f5f6eb116c933354e8b1f76b3cda189c722cc0177c98'
 
+# https://www.oracle.com/java/technologies/downloads/#java17
+# https://www.oracle.com/a/tech/docs/17-0-13-checksum.html
 JAVA_17_BINARY_FILE="jdk-17.0.13_linux-x64_bin.tar.gz"
 JAVA_17_BINARY_SHA256='f7a6fdebeb11840e1f5314bc330feb75b67e52491cf39073dbf3e51e3889ff08'
 
+# https://www.oracle.com/java/technologies/downloads/#java21
 JAVA_21_BINARY_FILE='jdk-21.0.5_linux-x64_bin.tar.gz'
 JAVA_21_BINARY_SHA256='9c2f7c39e0d5b296ce50e563740694b2ebfe4a620415d1b2b848ba47bebceb47'
 
+# https://www.oracle.com/java/technologies/downloads/#java23
 JAVA_23_BINARY_FILE='jdk-23.0.1_linux-x64_bin.tar.gz'
 JAVA_23_BINARY_SHA256='2bda38cd0f31d593b56ee5a607401bc6f245aafe07535b6525572861c2d15d6f'
 
+# https://jdk.java.net/24/
 JAVA_24_BINARY_FILE='openjdk-24-ea+19_linux-x64_bin.tar.gz'
 JAVA_24_BINARY_SHA256='b283aeaeda2e1fb83a01a61a370e2e95e217a00aa3a51641d1b65244b60b05f6'
 
+# https://www.oracle.com/java/technologies/downloads/#graalvmjava17
+# https://www.oracle.com/a/tech/docs/graalvm17-0-13-checksum.html
 GRAALVM_17_BINARY_FILE='graalvm-jdk-17.0.13_linux-x64_bin.tar.gz'
 GRAALVM_17_BINARY_SHA256='879a0678fdc8ff6d6a76f4af0681fb19ae0a75a767c3b384a61060e72b303d9e'
 
+# https://www.oracle.com/java/technologies/downloads/#graalvmjava21
 GRAALVM_21_BINARY_FILE='graalvm-jdk-21.0.5_linux-x64_bin.tar.gz'
 GRAALVM_21_BINARY_SHA256='c1960d4f9d278458bde1cd15115ac2f0b3240cb427d51cfeceb79dab91a7f5c9'
 
+# https://www.oracle.com/java/technologies/downloads/#graalvmjava23
 GRAALVM_23_BINARY_FILE='graalvm-jdk-23.0.1_linux-x64_bin.tar.gz'
 GRAALVM_23_BINARY_SHA256='46ec9582ebe114f93470403f2cc123238ac0c7982129c358af7d8e1de52dd663'
 # ------------------------------------------------------------------------------
