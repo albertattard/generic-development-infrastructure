@@ -62,7 +62,7 @@ JAVA_11_BINARY_SHA256='d22d0fcca761861a1eb2f5f6eb116c933354e8b1f76b3cda189c722cc
 # https://www.oracle.com/java/technologies/downloads/#java17
 # https://www.oracle.com/a/tech/docs/17-0-13-checksum.html
 JAVA_17_BINARY_FILE="jdk-17.0.13_linux-x64_bin.tar.gz"
-JAVA_17_BINARY_SHA256='f7a6fdebeb11840e1f5314bc330feb75b67e52491cf39073dbf3e51e3889ff08'
+JAVA_17_BINARY_SHA256='879a0678fdc8ff6d6a76f4af0681fb19ae0a75a767c3b384a61060e72b303d9e'
 
 # https://www.oracle.com/java/technologies/downloads/#java21
 JAVA_21_BINARY_FILE='jdk-21.0.5_linux-x64_bin.tar.gz'
