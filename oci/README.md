@@ -35,7 +35,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
    ssh_private_key_file            = "~/.ssh/ssh-key-oci-instance.key"
-   image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaap4fhruwd77p4kby5lhv5hacruznfu4clgueiixgciz747pld7sha"
+   image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaa5feemmpamcen2vhpgplzsc2odkurprzlshvdhx7iefpecwy6nyja"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
    freeform_tags                   = {}
    defined_tags                    = {}
