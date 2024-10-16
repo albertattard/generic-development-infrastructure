@@ -1,6 +1,15 @@
 #!/bin/bash
 
+# ------------------------------------------------------------------------------
+# This script downloads binaries using the provided Pre-Authenticated link.
+# Kindly note that while some of these binaries are freely available others are
+# not. Do not make the Per-Authenticated link publicly available.
+#
+# For more information or require additional help, please speak to Albert Attard
+# (albert.attard@oracle.com).
+# ------------------------------------------------------------------------------
 BINARIES_PRE_AUTHENTICATED_LINK="$1"
+# ------------------------------------------------------------------------------
 
 set -e
 
@@ -30,6 +39,44 @@ echo 'Filling the remaining space'
 
 
 # ------------------------------------------------------------------------------
+# Oracle releases four critical patch updates per year, and these versions of
+# Java need to be updated every three months. Their values are grouped here for
+# convenience, so that you don't have to go to multiple places to update a
+# version
+# ------------------------------------------------------------------------------
+JAVA_1_8_BINARY_FILE='jdk-8u431-linux-x64.tar.gz'
+JAVA_1_8_BINARY_SHA256='b396978a716b7d23ccccabfe5c47c3b75d2434d7f8f7af690bc648172382720d'
+
+JAVA_1_8_PERF_BINARY_FILE='jdk-8u431-linux-x64.tar.gz'
+JAVA_1_8_PERF_BINARY_SHA256='90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2'
+
+JAVA_11_BINARY_FILE='jdk-11.0.25_linux-x64_bin.tar.gz'
+JAVA_11_BINARY_SHA256='d22d0fcca761861a1eb2f5f6eb116c933354e8b1f76b3cda189c722cc0177c98'
+
+JAVA_17_BINARY_FILE="jdk-17.0.13_linux-x64_bin.tar.gz"
+JAVA_17_BINARY_SHA256='f7a6fdebeb11840e1f5314bc330feb75b67e52491cf39073dbf3e51e3889ff08'
+
+JAVA_21_BINARY_FILE='jdk-21.0.5_linux-x64_bin.tar.gz'
+JAVA_21_BINARY_SHA256='9c2f7c39e0d5b296ce50e563740694b2ebfe4a620415d1b2b848ba47bebceb47'
+
+JAVA_23_BINARY_FILE='jdk-23.0.1_linux-x64_bin.tar.gz'
+JAVA_23_BINARY_SHA256='2bda38cd0f31d593b56ee5a607401bc6f245aafe07535b6525572861c2d15d6f'
+
+JAVA_24_BINARY_FILE='openjdk-24-ea+19_linux-x64_bin.tar.gz'
+JAVA_24_BINARY_SHA256='b283aeaeda2e1fb83a01a61a370e2e95e217a00aa3a51641d1b65244b60b05f6'
+
+GRAALVM_17_BINARY_FILE='graalvm-jdk-17.0.13_linux-x64_bin.tar.gz'
+GRAALVM_17_BINARY_SHA256='879a0678fdc8ff6d6a76f4af0681fb19ae0a75a767c3b384a61060e72b303d9e'
+
+GRAALVM_21_BINARY_FILE='graalvm-jdk-21.0.5_linux-x64_bin.tar.gz'
+GRAALVM_21_BINARY_SHA256='c1960d4f9d278458bde1cd15115ac2f0b3240cb427d51cfeceb79dab91a7f5c9'
+
+GRAALVM_23_BINARY_FILE='graalvm-jdk-23.0.1_linux-x64_bin.tar.gz'
+GRAALVM_23_BINARY_SHA256='46ec9582ebe114f93470403f2cc123238ac0c7982129c358af7d8e1de52dd663'
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Download the binaries using the provided Pre-Authenticated link. Kindly note
 # that while some of these binaries are freely available others are not. Do not
 # make the Per-Authenticated link publicly available.
@@ -38,31 +85,31 @@ echo 'Filling the remaining space'
 # (albert.attard@oracle.com).
 # ------------------------------------------------------------------------------
 echo 'Downloading the binaries'
-curl --silent --location --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-linux-x64.tar.gz"
-curl --silent --location --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-8u421-perf-linux-x64.tar.gz"
+curl --silent --location --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_BINARY_FILE}"
+curl --silent --location --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_PERF_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-9.tar.gz'                 "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-10.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-10.0.2_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-11.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-11.0.24_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-11.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_11_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-12.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-12.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-13.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-13.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-14.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-14.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-15.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-15.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-16.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-16.0.2_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-17.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-17.0.12_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-17.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_17_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-18.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-18.0.2.1_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-19.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-19.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-20.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-21.0.4_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-22-jextract.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-22-jextract+5-33_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_23_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-23-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-23-valhalla+1-90_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-ea+18_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_24_BINARY_FILE}"
 curl --silent --location --output '/tmp/jdk-24-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-leyden+2-8_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/jdk-24-loom.tar.gz'           "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-loom+8-78_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-17.0.12_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-21.0.4_linux-x64_bin.tar.gz"
-curl --silent --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23_linux-x64_bin.tar.gz"
+curl --silent --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
+curl --silent --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
+curl --silent --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_23_BINARY_FILE}"
 curl --silent --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.0.0.zip"
 curl --silent --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
 curl --silent --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
@@ -73,31 +120,31 @@ curl --silent --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIE
 # Verify all the downloaded binaries
 # ------------------------------------------------------------------------------
 echo 'Verifying the downloaded binaries'
-echo '92bfdee599c334f641de2d4ae08a4a082b966cb19b88d13d48b8486f80727b58 /tmp/jdk-1.8.tar.gz'               | sha256sum --check
-echo '796666f8071202d85ad5d8013845d36045fd69b44135ebbeb76dffced3724c00 /tmp/jdk-1.8-perf.tar.gz'          | sha256sum --check
+echo "${JAVA_1_8_BINARY_SHA256} /tmp/jdk-1.8.tar.gz"                                                      | sha256sum --check
+echo "${JAVA_1_8_PERF_BINARY_SHA256} /tmp/jdk-1.8-perf.tar.gz"                                            | sha256sum --check
 echo '90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2 /tmp/jdk-9.tar.gz'                 | sha256sum --check
 echo '6633c20d53c50c20835364d0f3e172e0cbbce78fff81867488f22a6298fa372b /tmp/jdk-10.tar.gz'                | sha256sum --check
-echo 'f50fdec8a48a9b360d30ecc29af36f63f04f0b70ec829d3bf821e4e361682791 /tmp/jdk-11.tar.gz'                | sha256sum --check
+echo "${JAVA_11_BINARY_SHA256} /tmp/jdk-11.tar.gz"                                                        | sha256sum --check
 echo '2dde6fda89a4ec6e6560ed464e917861c9e40bf576e7a64856dafc55abaaff51 /tmp/jdk-12.tar.gz'                | sha256sum --check
 echo 'e2214a723d611b4a781641061a24ca6024f2c57dbd9f75ca9d857cad87d9475f /tmp/jdk-13.tar.gz'                | sha256sum --check
 echo 'cb811a86926cc0f529d16bec7bd2e25fb73e75125bbd1775cdb9a96998593dde /tmp/jdk-14.tar.gz'                | sha256sum --check
 echo '54b29a3756671fcb4b6116931e03e86645632ec39361bc16ad1aaa67332c7c61 /tmp/jdk-15.tar.gz'                | sha256sum --check
 echo '630e3e56c58f45db3788343ce842756d5a5a401a63884242cc6a141071285a62 /tmp/jdk-16.tar.gz'                | sha256sum --check
-echo '311f1448312ecab391fe2a1b2ac140d6e1c7aea6fbf08416b466a58874f2b40f /tmp/jdk-17.tar.gz'                | sha256sum --check
+echo "${JAVA_17_BINARY_SHA256} /tmp/jdk-17.tar.gz"                                                        | sha256sum --check
 echo 'cd905013facbb5c2b5354165cc372e327259de4991c28f31c7d4231dbf638934 /tmp/jdk-18.tar.gz'                | sha256sum --check
 echo '59f26ace2727d0e9b24fc09d5a48393c9dbaffe04c932a02938e8d6d582058c6 /tmp/jdk-19.tar.gz'                | sha256sum --check
 echo '499b59be8e3613c223e76f101598d7c28dc04b8e154d860edf2ed05980c67526 /tmp/jdk-20.tar.gz'                | sha256sum --check
-echo 'dc0d14d5cf1b44e02832a7e85d0d5eb1f4623dc389a2b7fb3d21089b84fc7eb1 /tmp/jdk-21.tar.gz'                | sha256sum --check
+echo "${JAVA_21_BINARY_SHA256} /tmp/jdk-21.tar.gz"                                                        | sha256sum --check
 echo 'cbc13aaa2618659f44cb261f820f179832d611f0df35dd30a78d7dea6d717858 /tmp/jdk-22.tar.gz'                | sha256sum --check
 echo '53d66299cda8d079aeff42b2cc765314e44b384f3e0ec2a7eb994bae62b4b728 /tmp/jdk-22-jextract.tar.gz'       | sha256sum --check
-echo '6e35269e6f31ef80246045f704b41ff5b4ecf9811ba1f6c8ff54a25c84afaa27 /tmp/jdk-23.tar.gz'                | sha256sum --check
+echo "${JAVA_23_BINARY_SHA256} /tmp/jdk-23.tar.gz"                                                        | sha256sum --check
 echo '5235afaf5ecc86f2237458cf40f8ed965939372f606edbd0fc46e1ee2e69f5f5 /tmp/jdk-23-valhalla.tar.gz'       | sha256sum --check
-echo '04f26aabbc1c5cf21303b08acbd073e87b08bc8522a9f23db6995356cff4c9c1 /tmp/jdk-24.tar.gz'                | sha256sum --check
+echo "${JAVA_24_BINARY_SHA256} /tmp/jdk-24.tar.gz"                                                        | sha256sum --check
 echo '7a6f9f5a602377b882e647ae9312706c6873afc582d2612681e6fbe9e122a088 /tmp/jdk-24-leyden.tar.gz'         | sha256sum --check
 echo '523c3483ad9f3ab154403d60804746dd74572511ff1b64f3c8c1be687e1eaa4d /tmp/jdk-24-loom.tar.gz'           | sha256sum --check
-echo 'b6f3dace24cf1960ec790216f4c86f00d4f43df64e4e8b548f6382f04894713f /tmp/graalvm-17.tar.gz'            | sha256sum --check
-echo '30307941ab59e58f3f0f55e694885a930531a58f1917d07267b2439f6549605e /tmp/graalvm-21.tar.gz'            | sha256sum --check
-echo '9e0632fe4be3d7fed6f03b3afc349b72fd5cb857ec6b69008202257e8a3ed858 /tmp/graalvm-23.tar.gz'            | sha256sum --check
+echo "${GRAALVM_17_BINARY_SHA256} /tmp/graalvm-17.tar.gz"                                                 | sha256sum --check
+echo "${GRAALVM_21_BINARY_SHA256} /tmp/graalvm-21.tar.gz"                                                 | sha256sum --check
+echo "${GRAALVM_23_BINARY_SHA256} /tmp/graalvm-23.tar.gz"                                                 | sha256sum --check
 echo 'ef578730976154fd2c5968d75af8c2703b3de84a78dffe913f670326e149da3b /tmp/kotlin-compiler.zip'          | sha256sum --check
 echo '9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23 /tmp/zlib-1.3.1.tar.gz'            | sha256sum --check
 echo 'd587e1fadefaad60687dd1dcb9b278e7b587e12cb1dc48cae42a9f52bb8613a7 /tmp/x86_64-linux-musl-native.tgz' | sha256sum --check
