@@ -47,7 +47,7 @@ echo 'Filling the remaining space'
 JAVA_1_8_BINARY_FILE='jdk-8u431-linux-x64.tar.gz'
 JAVA_1_8_BINARY_SHA256='b396978a716b7d23ccccabfe5c47c3b75d2434d7f8f7af690bc648172382720d'
 
-JAVA_1_8_PERF_BINARY_FILE='jdk-8u431-linux-x64.tar.gz'
+JAVA_1_8_PERF_BINARY_FILE='jdk-8u431-perf-linux-x64.tar.gz'
 JAVA_1_8_PERF_BINARY_SHA256='90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2'
 
 JAVA_11_BINARY_FILE='jdk-11.0.25_linux-x64_bin.tar.gz'
