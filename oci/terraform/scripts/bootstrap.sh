@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+set -e
+
 # ------------------------------------------------------------------------------
 # This script downloads binaries using the provided Pre-Authenticated link.
 # Kindly note that while some of these binaries are freely available others are
@@ -11,7 +14,17 @@
 BINARIES_PRE_AUTHENTICATED_LINK="$1"
 # ------------------------------------------------------------------------------
 
-set -e
+
+# ------------------------------------------------------------------------------
+# Verify that the this script can download the files using the provided
+# BINARIES_PRE_AUTHENTICATED_LINK
+# ------------------------------------------------------------------------------
+BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE=$(curl --silent --location "${BINARIES_PRE_AUTHENTICATED_LINK}/ok")
+if [ "$BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE" != "ok" ]; then
+  echo "Cannot access the binaries using the provided binaries pre authenticated link"
+  exit 1
+fi
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Upgrade the system to the current release (takes several minutes to run)
