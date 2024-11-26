@@ -3,6 +3,7 @@
 
 set -e
 
+
 # ------------------------------------------------------------------------------
 # This script downloads binaries using the provided Pre-Authenticated link.
 # Kindly note that while some of these binaries are freely available others are
@@ -25,6 +26,7 @@ if [ "$BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE" != "ok" ]; then
   exit 1
 fi
 # ------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------
 # Upgrade the system to the current release (takes several minutes to run)
