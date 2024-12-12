@@ -54,6 +54,18 @@ echo 'Filling the remaining space'
 
 
 # ------------------------------------------------------------------------------
+# Allow applications to be accessed from the internet on port 8080. The firewall
+# denies access from the internet on port 8080. Also, note that the application
+# needs to use the TCP/IPv4 over the TCP/IPv6. This can be achieved using the
+# java.net.preferIPv4Stack=true option as shown next:
+# java -jar -Djava.net.preferIPv4Stack=true application.jar
+# ------------------------------------------------------------------------------
+# firewall-cmd --permanent --zone=public --add-port=8080/tcp
+# firewall-cmd --reload
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Oracle releases four critical patch updates per year, and these versions of
 # Java need to be updated every three months. Their values are grouped here for
 # convenience, so that you don't have to go to multiple places to update a
