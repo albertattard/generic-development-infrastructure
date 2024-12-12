@@ -99,7 +99,7 @@ $ ./runw ls -la
 ```
 
 Please note that the first time you run a command, it may take some time to
-execute as rsync will be synching files. Add the `--verbose` option to see what
+execute as rsync will be syncing files. Add the `--verbose` option to see what
 is being synced.
 
 The output is printed in the local terminal. Note that any generated files are
@@ -107,4 +107,4 @@ not automatically copied locally.
 
 ## Feedback
 
-Please send any feedback to: `albertattard@gmail.com`.
+Please send any feedback to: `albert.attard@oracle.com`.
