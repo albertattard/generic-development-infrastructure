@@ -97,7 +97,7 @@ JAVA_21_BINARY_FILE='jdk-21.0.6_linux-x64_bin.tar.gz'
 JAVA_21_BINARY_SHA256='e6a8125085949cb6c9fb823c79ed009a0ef24c878662c02fcb5ae890375e5a38'
 
 # https://jdk.java.net/jextract/
-JAVA_22_JEXTRACT_BINARY_FILE='openjdk-22-jextract+5-33_linux-x64_bin.tar.gz'
+JAVA_22_JEXTRACT_BINARY_FILE='openjdk-22-jextract+6-47_linux-x64_bin.tar.gz'
 JAVA_22_JEXTRACT_BINARY_SHA256='a6a42d5b5f4bff119455daadd1ccec9389b2554aea3342f391577843769cc7ec'
 
 # https://www.oracle.com/java/technologies/downloads/#java23
