@@ -336,6 +336,10 @@ echo 'Installing Podman'
 dnf install -y podman
 dnf install -y podman-docker
 dnf install -y buildah skopeo
+
+# To suppress the message:
+#   'Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.'
+touch '/etc/containers/nodocker'
 # ------------------------------------------------------------------------------
 
 
@@ -706,7 +710,6 @@ ln -s '/usr/lib/jvm/graalvm-23'      '/home/opc/.sdkman/candidates/java/23-graal
 
 sdk default java 21-oracle
 
-mkdir -p '/home/opc/.bashrc.d'
 cat << 'B_EOF' > '/home/opc/.bashrc.d/java'
 export JAVA_1_8_HOME='/usr/lib/jvm/jdk-1.8'
 export JAVA_EPP_HOME='/usr/lib/jvm/jdk-1.8-perf'
