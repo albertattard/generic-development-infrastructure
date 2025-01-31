@@ -329,16 +329,27 @@ chmod +x '/usr/local/sbin/hey'
 
 
 # ------------------------------------------------------------------------------
+# Install Podman (a docker runtime)
+# - https://oracle-base.com/articles/linux/podman-install-on-oracle-linux-ol9
+# ------------------------------------------------------------------------------
+echo 'Installing Podman'
+dnf install -y podman
+dnf install -y podman-docker
+dnf install -y buildah skopeo
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install the Docker Engine to build container images. Based on
 # - https://docs.docker.com/engine/install/fedora/
 # - https://stackoverflow.com/questions/70358656/rhel8-fedora-yum-dns-causes-cannot-download-repodata-repomd-xml-for-docker-ce
 # ------------------------------------------------------------------------------
-echo 'Installing Docker Engine'
-dnf install -y dnf-plugins-core
-dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-systemctl start docker
-chmod 666 '/var/run/docker.sock'
+# echo 'Installing Docker Engine'
+# dnf install -y dnf-plugins-core
+# dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# systemctl start docker
+# chmod 666 '/var/run/docker.sock'
 # ------------------------------------------------------------------------------
 
 
