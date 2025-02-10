@@ -117,10 +117,10 @@ resource "oci_core_instance" "public" {
   compartment_id      = var.compartment_id
   availability_domain = local.availability_domain
 
-  shape = "VM.Standard.E4.Flex"
+  shape = var.instance_shape
   shape_config {
-    memory_in_gbs = "32"
-    ocpus         = "4"
+    memory_in_gbs = var.instance_shape_memory_in_gbs
+    ocpus         = var.instance_shape_ocpus
   }
 
   create_vnic_details {

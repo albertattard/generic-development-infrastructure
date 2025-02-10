@@ -47,6 +47,33 @@ variable "image_source_id" {
   description = "The OCI image ID for the compute instances"
 }
 
+variable "instance_shape" {
+  type        = string
+  description = <<EOF
+The compute shape
+(See: https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm)
+EOF
+  default     = "VM.Standard.E4.Flex"
+}
+
+variable "instance_shape_memory_in_gbs" {
+  type        = number
+  description = <<EOF
+The memory available to the compute instance
+(See: https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm)
+EOF
+  default     = 32
+}
+
+variable "instance_shape_ocpus" {
+  type        = number
+  description = <<EOF
+The number of CPUs that the compute will have
+(See: https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm)
+EOF
+  default     = 4
+}
+
 variable "binaries_pre_authenticated_link" {
   type        = string
   description = <<EOF
