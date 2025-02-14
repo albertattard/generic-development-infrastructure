@@ -2,6 +2,6 @@
 
 set -e
 
-terraform -chdir=terraform init
+terraform -chdir=terraform init -upgrade
 terraform -chdir=terraform fmt
 terraform -chdir=terraform apply -auto-approve
