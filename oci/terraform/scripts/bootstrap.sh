@@ -131,11 +131,6 @@ GRAALVM_21_BINARY_FILE='graalvm-jdk-21.0.6_linux-x64_bin.tar.gz'
 GRAALVM_21_BINARY_SHA256='9089225518328ae0f6bc95ca303c44d8b9dc7fc7a8f1b29def90bab198450861'
 
 # https://www.oracle.com/java/technologies/downloads/#graalvmjava23
-# https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_linux-x64_bin.tar.gz.sha256
-GRAALVM_23_BINARY_FILE='graalvm-jdk-23.0.2_linux-x64_bin.tar.gz'
-GRAALVM_23_BINARY_SHA256='db09b1fe18b83f338af9b3291443774b3170d9eba17538ce2ee39c5e6d601dfc'
-
-# https://www.oracle.com/java/technologies/downloads/#graalvmjava23
 # https://download.oracle.com/graalvm/24/latest/graalvm-jdk-24_linux-x64_bin.tar.gz.sha256
 GRAALVM_24_BINARY_FILE='graalvm-jdk-24_linux-x64_bin.tar.gz'
 GRAALVM_24_BINARY_SHA256='ae5771a7b4ef84041e0d9008f754849fab14aa574681e0130eb27606f3dfb012'
@@ -176,7 +171,7 @@ curl --silent --location --output '/tmp/jdk-25.tar.gz'                "${BINARIE
 curl --silent --location --output '/tmp/jdk-25-loom.tar.gz'           "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
 curl --silent --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
 curl --silent --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
-curl --silent --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_23_BINARY_FILE}"
+curl --silent --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23.0.2_linux-x64_bin.tar.gz"
 curl --silent --location --output '/tmp/graalvm-24.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_24_BINARY_FILE}"
 curl --silent --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.1.0.zip"
 curl --silent --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
@@ -213,7 +208,7 @@ echo "${JAVA_25_BINARY_SHA256} /tmp/jdk-25.tar.gz"                              
 echo "${JAVA_25_LOOM_BINARY_SHA256} /tmp/jdk-25-loom.tar.gz"                                              | sha256sum --check
 echo "${GRAALVM_17_BINARY_SHA256} /tmp/graalvm-17.tar.gz"                                                 | sha256sum --check
 echo "${GRAALVM_21_BINARY_SHA256} /tmp/graalvm-21.tar.gz"                                                 | sha256sum --check
-echo "${GRAALVM_23_BINARY_SHA256} /tmp/graalvm-23.tar.gz"                                                 | sha256sum --check
+echo 'db09b1fe18b83f338af9b3291443774b3170d9eba17538ce2ee39c5e6d601dfc /tmp/graalvm-23.tar.gz'            | sha256sum --check
 echo "${GRAALVM_24_BINARY_SHA256} /tmp/graalvm-24.tar.gz"                                                 | sha256sum --check
 echo 'b6698d5728ad8f9edcdd01617d638073191d8a03139cc538a391b4e3759ad297 /tmp/kotlin-compiler.zip'          | sha256sum --check
 echo '9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23 /tmp/zlib-1.3.1.tar.gz'            | sha256sum --check
