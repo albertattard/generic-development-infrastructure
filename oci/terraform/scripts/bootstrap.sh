@@ -395,7 +395,6 @@ rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
 # ------------------------------------------------------------------------------
 echo 'Installing GDB'
 dnf install -y gdb
-gdb --version
 # ------------------------------------------------------------------------------
 
 
@@ -404,6 +403,15 @@ gdb --version
 # ------------------------------------------------------------------------------
 echo 'Installing xq'
 curl -sSL https://bit.ly/install-xq | bash
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install Syft (https://github.com/anchore/syft) to extract SBOM from native
+# executables
+# ------------------------------------------------------------------------------
+echo 'Installing Syft'
+curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 # ------------------------------------------------------------------------------
 
 
