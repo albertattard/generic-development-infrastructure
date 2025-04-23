@@ -416,6 +416,14 @@ curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -
 
 
 # ------------------------------------------------------------------------------
+# Install grype (https://github.com/anchore/grype) to scan for vulnerabilities
+# ------------------------------------------------------------------------------
+echo 'Installing grype'
+curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install the Markdown Executor (me)
 # https://github.com/albertattard/me
 # ------------------------------------------------------------------------------
