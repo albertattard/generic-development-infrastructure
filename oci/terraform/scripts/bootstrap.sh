@@ -394,7 +394,7 @@ rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
 # Install GNU Debugger (GDB)
 # ------------------------------------------------------------------------------
 echo 'Installing GDB'
-dnf install -y gdb
+dnf install -y gdb gdb-gdbserver
 # ------------------------------------------------------------------------------
 
 
