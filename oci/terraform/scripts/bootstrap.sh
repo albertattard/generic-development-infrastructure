@@ -345,6 +345,29 @@ chmod +x '/usr/local/sbin/hey'
 
 
 # ------------------------------------------------------------------------------
+# Install JMeter
+# ------------------------------------------------------------------------------
+echo 'Installing JMeter'
+curl \
+  --silent \
+  --location \
+  --output '/tmp/apache-jmeter-5.6.3.tgz' \
+  'https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz'
+
+mkdir -p '/opt/jmeter'
+tar --extract --file '/tmp/apache-jmeter-5.6.3.tgz' --directory '/opt/jmeter' --strip-components 1
+
+sudo -i -u opc bash << 'EOF'
+mkdir -p '/home/opc/.bashrc.d'
+cat << 'B_EOF' > '/home/opc/.bashrc.d/jmeter'
+PATH="${PATH}:/opt/jmeter/bin"
+B_EOF
+EOF
+rm '/tmp/apache-jmeter-5.6.3.tgz'
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install Podman (a docker runtime)
 # - https://oracle-base.com/articles/linux/podman-install-on-oracle-linux-ol9
 # ------------------------------------------------------------------------------
