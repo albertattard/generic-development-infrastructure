@@ -112,9 +112,9 @@ JAVA_24_BINARY_FILE='jdk-24.0.1_linux-x64_bin.tar.gz'
 JAVA_24_BINARY_SHA256='07096b29c65feb393972870347f36021be421a74c1800be468b3c19f04e8e943'
 
 # https://jdk.java.net/25/
-# https://download.java.net/java/early_access/jdk25/18/GPL/openjdk-25-ea+18_linux-x64_bin.tar.gz.sha256
-JAVA_25_BINARY_FILE='openjdk-25-ea+18_linux-x64_bin.tar.gz'
-JAVA_25_BINARY_SHA256='ee6ce5bbdd9156680b3022019f79622afcb37c06de135a7ad1a5fe893f78eb61'
+# https://download.java.net/java/early_access/jdk25/27/GPL/openjdk-25-ea+27_linux-x64_bin.tar.gz.sha256
+JAVA_25_BINARY_FILE='openjdk-25-ea+27_linux-x64_bin.tar.gz'
+JAVA_25_BINARY_SHA256='96753b911566d9a6bcbdc84cde764dad6ac5250976260bbd3af509765ddfc8bf'
 
 # https://jdk.java.net/loom/
 # https://download.java.net/java/early_access/loom/1/openjdk-25-loom+1-11_linux-x64_bin.tar.gz.sha256
