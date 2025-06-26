@@ -16,6 +16,7 @@ variable "instance_vnic_display_name" {
 variable "region" {
   type        = string
   description = "The OCI region where the resources will be created"
+  default     = "us-ashburn-1"
 }
 
 variable "tenancy_id" {
@@ -44,7 +45,11 @@ EOF
 
 variable "image_source_id" {
   type        = string
-  description = "The OCI image ID for the compute instances"
+  description = <<EOF
+The OCI image ID for the compute instances
+(See: https://docs.oracle.com/en-us/iaas/images/oracle-linux-9x/index.htm)
+EOF
+  default     = "ocid1.image.oc1.iad.aaaaaaaafjz2wgkvdamf3epnseff5aybkefqpqmbx5ol6xklszeatspdwswa"
 }
 
 variable "instance_shape" {
@@ -53,7 +58,7 @@ variable "instance_shape" {
 The compute shape
 (See: https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm)
 EOF
-  default     = "VM.Standard.E4.Flex"
+  default     = "VM.Standard.E5.Flex"
 }
 
 variable "instance_shape_memory_in_gbs" {
