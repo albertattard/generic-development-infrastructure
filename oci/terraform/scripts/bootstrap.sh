@@ -33,8 +33,7 @@ BINARIES_PRE_AUTHENTICATED_LINK="$1"
 # Verify that the this script can download the files using the provided
 # BINARIES_PRE_AUTHENTICATED_LINK
 # ------------------------------------------------------------------------------
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok"
-BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE=$( curl --silent --show-error --location "${BINARIES_PRE_AUTHENTICATED_LINK}/ok")
+BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE=$(curl --silent --show-error --location "${BINARIES_PRE_AUTHENTICATED_LINK}/ok")
 if [ "$BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE" != "ok" ]; then
   echo "Cannot access the binaries using the provided binaries pre authenticated link"
   exit 1
