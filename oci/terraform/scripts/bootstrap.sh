@@ -7,10 +7,11 @@ set -e
 # Tests the provided link and fails if the link is not reachable
 # ------------------------------------------------------------------------------
 require_reachable_link() {
-    local link="$1"
+    local link="${1}"
+    local message="${2:-Link: ${link} is not reachable}"
 
     if ! curl --silent --show-error --fail --head "${link}" > '/dev/null'; then
-        echo "Link: ${link} is not reachable" >&2
+        echo "${message}" >&2
         exit 1
     fi
 }
@@ -33,11 +34,7 @@ BINARIES_PRE_AUTHENTICATED_LINK="$1"
 # Verify that the this script can download the files using the provided
 # BINARIES_PRE_AUTHENTICATED_LINK
 # ------------------------------------------------------------------------------
-BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE=$(curl --silent --show-error --location "${BINARIES_PRE_AUTHENTICATED_LINK}/ok")
-if [ "$BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE" != "ok" ]; then
-  echo "Cannot access the binaries using the provided binaries pre authenticated link"
-  exit 1
-fi
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok" 'Cannot access the binaries using the provided pre authenticated link'
 # ------------------------------------------------------------------------------
 
 
@@ -154,19 +151,37 @@ GRAALVM_24_BINARY_SHA256='b0161a49bbc1d0f40697532ddfabb8052a5a15e463775e6945fe3e
 # ------------------------------------------------------------------------------
 # Verify the links before proceeding
 # ------------------------------------------------------------------------------
+echo 'Verifying the links'
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_PERF_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-10.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_11_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-12.0.2_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-13.0.2_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-14.0.2_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-15.0.2_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-16.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_17_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-18.0.2.1_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-19.0.2_linux-x64_bin.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_22_JEXTRACT_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_23_VALHALLA_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_24_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-leyden+2-8_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_24_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.1.0.zip"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
 # ------------------------------------------------------------------------------
 
 
