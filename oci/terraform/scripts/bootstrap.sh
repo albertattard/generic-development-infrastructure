@@ -450,6 +450,15 @@ curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh 
 
 
 # ------------------------------------------------------------------------------
+# Install the Ollama
+# https://ollama.com/download/linux
+# ------------------------------------------------------------------------------
+echo 'Installing Ollama'
+curl -fsSL https://ollama.com/install.sh | sh
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install the Sociable Weaver (sw)
 # https://github.com/albertattard/sociable-weaver
 # ------------------------------------------------------------------------------
