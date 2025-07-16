@@ -3,6 +3,19 @@
 
 set -e
 
+# ------------------------------------------------------------------------------
+# Tests the provided link and fails if the link is not reachable
+# ------------------------------------------------------------------------------
+require_reachable_link() {
+    local link="$1"
+
+    if ! curl --silent --show-error --fail --head "${link}" > '/dev/null'; then
+        echo "Link: ${link} is not reachable" >&2
+        exit 1
+    fi
+}
+# ------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------
 # This script downloads binaries using the provided Pre-Authenticated link.
@@ -20,6 +33,7 @@ BINARIES_PRE_AUTHENTICATED_LINK="$1"
 # Verify that the this script can download the files using the provided
 # BINARIES_PRE_AUTHENTICATED_LINK
 # ------------------------------------------------------------------------------
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok"
 BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE=$( curl --silent --show-error --location "${BINARIES_PRE_AUTHENTICATED_LINK}/ok")
 if [ "$BINARIES_PRE_AUTHENTICATED_LINK_RESPONSE" != "ok" ]; then
   echo "Cannot access the binaries using the provided binaries pre authenticated link"
@@ -135,6 +149,25 @@ GRAALVM_21_BINARY_SHA256='c8035b3ce6e45f1481752c6b38153bb4a53eeb477c5345d5bec5ca
 # https://download.oracle.com/graalvm/24/latest/graalvm-jdk-24_linux-x64_bin.tar.gz.sha256
 GRAALVM_24_BINARY_FILE='graalvm-jdk-24.0.2_linux-x64_bin.tar.gz'
 GRAALVM_24_BINARY_SHA256='b0161a49bbc1d0f40697532ddfabb8052a5a15e463775e6945fe3e4920259bae'
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Verify the links before proceeding
+# ------------------------------------------------------------------------------
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_PERF_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_11_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_17_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_22_JEXTRACT_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_23_VALHALLA_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_24_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_24_BINARY_FILE}"
 # ------------------------------------------------------------------------------
 
 
