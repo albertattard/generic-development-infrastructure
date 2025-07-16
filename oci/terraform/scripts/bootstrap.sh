@@ -450,24 +450,6 @@ curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh 
 
 
 # ------------------------------------------------------------------------------
-# Install the Markdown Executor (me)
-# https://github.com/albertattard/me
-# ------------------------------------------------------------------------------
-echo 'Installing Markdown Executor (me)'
-sudo -i -u opc bash << 'EOF'
-mkdir -p '/home/opc/.local/bin'
-curl \
-  --silent \
-  --show-error \
-  --location \
-  --output '/home/opc/.local/bin/me' \
-  'https://github.com/albertattard/me/releases/latest/download/me'
-chmod +x '/home/opc/.local/bin/me'
-EOF
-# ------------------------------------------------------------------------------
-
-
-# ------------------------------------------------------------------------------
 # Install the Sociable Weaver (sw)
 # https://github.com/albertattard/sociable-weaver
 # ------------------------------------------------------------------------------
