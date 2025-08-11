@@ -453,7 +453,7 @@ touch '/etc/containers/nodocker'
 #  - https://github.com/wagoodman/dive?tab=readme-ov-file#installation
 # ------------------------------------------------------------------------------
 echo 'Installing dive'
-DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+DIVE_VERSION=$(curl --silent --show-error --fail --location "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
 curl \
   --silent \
   --show-error \
@@ -817,7 +817,7 @@ EOF
 # ------------------------------------------------------------------------------
 echo 'Installing and configuring SDKMAN'
 sudo -i -u opc bash << 'EOF'
-curl --silent --show-error --location 'https://get.sdkman.io' | bash
+curl --silent --show-error --fail --location 'https://get.sdkman.io' | bash
 source '/home/opc/.sdkman/bin/sdkman-init.sh'
 
 mkdir -p '/home/opc/.sdkman/candidates/java'
