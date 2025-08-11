@@ -478,7 +478,7 @@ dnf install -y gdb gdb-gdbserver
 # Install XQ (https://github.com/sibprogrammer/xq) to format XML files
 # ------------------------------------------------------------------------------
 echo 'Installing xq'
-curl -silent --show-error --fail --location https://bit.ly/install-xq | bash
+curl --silent --show-error --fail --location https://bit.ly/install-xq | bash
 # ------------------------------------------------------------------------------
 
 
@@ -487,7 +487,7 @@ curl -silent --show-error --fail --location https://bit.ly/install-xq | bash
 # executables
 # ------------------------------------------------------------------------------
 echo 'Installing Syft'
-curl -silent --show-error --fail --location https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+curl --silent --show-error --fail --location https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 # ------------------------------------------------------------------------------
 
 
@@ -495,7 +495,7 @@ curl -silent --show-error --fail --location https://raw.githubusercontent.com/an
 # Install grype (https://github.com/anchore/grype) to scan for vulnerabilities
 # ------------------------------------------------------------------------------
 echo 'Installing grype'
-curl -silent --show-error --fail --location https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+curl --silent --show-error --fail --location https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 # ------------------------------------------------------------------------------
 
 
@@ -504,7 +504,7 @@ curl -silent --show-error --fail --location https://raw.githubusercontent.com/an
 # https://ollama.com/download/linux
 # ------------------------------------------------------------------------------
 echo 'Installing Ollama'
-curl -silent --show-error --fail --location https://ollama.com/install.sh | sh
+curl --silent --show-error --fail --location https://ollama.com/install.sh | sh
 # ------------------------------------------------------------------------------
 
 
