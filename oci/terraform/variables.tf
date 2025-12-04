@@ -49,7 +49,7 @@ variable "image_source_id" {
 The OCI image ID for the compute instances
 (See: https://docs.oracle.com/en-us/iaas/images/oracle-linux-9x/index.htm)
 EOF
-  default     = "ocid1.image.oc1.iad.aaaaaaaafjz2wgkvdamf3epnseff5aybkefqpqmbx5ol6xklszeatspdwswa"
+  default     = "ocid1.image.oc1.iad.aaaaaaaa4l64brs5udx52nedrhlex4cpaorcd2jwvpoududksmw4lgmameqq"
 }
 
 variable "instance_shape" {

@@ -422,6 +422,14 @@ rm '/tmp/apache-jmeter-5.6.3.tgz'
 
 
 # ------------------------------------------------------------------------------
+# Install the Python
+# ------------------------------------------------------------------------------
+echo 'Installing Python'
+dnf install -y python3-pip python3
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install Podman (a docker runtime)
 # - https://oracle-base.com/articles/linux/podman-install-on-oracle-linux-ol9
 # ------------------------------------------------------------------------------
@@ -433,6 +441,14 @@ dnf install -y buildah skopeo
 # To suppress the message:
 #   'Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.'
 touch '/etc/containers/nodocker'
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install Podman Compose
+# ------------------------------------------------------------------------------
+echo 'Installing Podman Compose'
+pip3 install --user podman-compose
 # ------------------------------------------------------------------------------
 
 
