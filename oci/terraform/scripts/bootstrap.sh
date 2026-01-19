@@ -434,6 +434,12 @@ dnf install -y python3-pip python3
 # - https://oracle-base.com/articles/linux/podman-install-on-oracle-linux-ol9
 # ------------------------------------------------------------------------------
 echo 'Installing Podman'
+
+# Podman needs zstd because modern container images and storage use zstd
+# compression for better speed and efficiency. Without it, Podman may fail to
+# pull or handle some images.
+dnf install -y zstd
+
 dnf install -y podman
 dnf install -y podman-docker
 dnf install -y buildah skopeo
