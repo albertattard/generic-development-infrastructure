@@ -80,39 +80,34 @@ echo 'Filling the remaining space'
 # version
 # ------------------------------------------------------------------------------
 # https://www.oracle.com/java/technologies/downloads/#java8
-# https://www.oracle.com/a/tech/docs/8u471checksum.html
-JAVA_1_8_BINARY_FILE='jdk-8u471-linux-x64.tar.gz'
-JAVA_1_8_BINARY_SHA256='5cddefbe9e10551d7149153a416111d1cbd177afaa7873f61b3168de104f13d8'
+# https://www.oracle.com/a/tech/docs/8u481checksum.html
+JAVA_1_8_BINARY_FILE='jdk-8u481-linux-x64.tar.gz'
+JAVA_1_8_BINARY_SHA256='ab2220d1e8ce7226ae601aacba4d22c56d9007e843ee470ad84cc98dbcb7cd92'
 
 # https://www.oracle.com/java/technologies/downloads/#jepp
-# https://www.oracle.com/a/tech/docs/8u471checksum.html
-JAVA_1_8_PERF_BINARY_FILE='jdk-8u471-perf-linux-x64.tar.gz'
-JAVA_1_8_PERF_BINARY_SHA256='3bfa358007564b0f7d09d8f1fd59a9e6c20195bd2071de72ead9644f19a287e9'
+# https://www.oracle.com/a/tech/docs/8u481checksum.html
+JAVA_1_8_PERF_BINARY_FILE='jdk-8u481-perf-linux-x64.tar.gz'
+JAVA_1_8_PERF_BINARY_SHA256='a468e4e0d91796b02fef67c9e0d998379a027ea88daeb7cf76e9b7b30cc50e37'
 
 # https://www.oracle.com/java/technologies/downloads/#java11
-# https://www.oracle.com/a/tech/docs/11-0-29-checksum.html
-JAVA_11_BINARY_FILE='jdk-11.0.29_linux-x64_bin.tar.gz'
-JAVA_11_BINARY_SHA256='282a1289781e949f50939a3f7c81c66383a8736e636557b9be223965a3d25713'
+# https://www.oracle.com/a/tech/docs/11-0-30-checksum.html
+JAVA_11_BINARY_FILE='jdk-11.0.30_linux-x64_bin.tar.gz'
+JAVA_11_BINARY_SHA256='850a02b784ade48f2dc059bbd095947ad4c69e15ddd878d166e7f38c71d6109b'
 
 # https://www.oracle.com/java/technologies/downloads/#java17
-# https://www.oracle.com/a/tech/docs/17-0-17-checksum.html
-JAVA_17_BINARY_FILE="jdk-17.0.17_linux-x64_bin.tar.gz"
-JAVA_17_BINARY_SHA256='7f3575b3e95182068eda7f82b211991f6b5f2db957a6dcabb1507eb3b6a5677f'
+# https://www.oracle.com/a/tech/docs/17-0-18-checksum.html
+JAVA_17_BINARY_FILE="jdk-17.0.18_linux-x64_bin.tar.gz"
+JAVA_17_BINARY_SHA256='3b47cf7886438a73065a18cbd1c8d091836571669b3e7922c255c79855ad3c5e'
 
 # https://www.oracle.com/java/technologies/downloads/#java21
 # https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz.sha256
-JAVA_21_BINARY_FILE='jdk-21_linux-x64_bin.tar.gz'
-JAVA_21_BINARY_SHA256='0854421306468559813f1e5068e036213f9710e1e239d823c0d63552a1259e25'
-
-# https://jdk.java.net/valhalla/
-# https://download.java.net/java/early_access/valhalla/1/openjdk-23-valhalla+1-90_linux-x64_bin.tar.gz.sha256
-JAVA_23_VALHALLA_BINARY_FILE='openjdk-23-valhalla+1-90_linux-x64_bin.tar.gz'
-JAVA_23_VALHALLA_BINARY_SHA256='5235afaf5ecc86f2237458cf40f8ed965939372f606edbd0fc46e1ee2e69f5f5'
+JAVA_21_BINARY_FILE='jdk-21.0.10_linux-x64_bin.tar.gz'
+JAVA_21_BINARY_SHA256='773eff7191d996d3b6ce3a99c21ce69cf2d836fd07277106313732a098d4309a'
 
 # https://www.oracle.com/java/technologies/downloads/#java25
 # https://download.oracle.com/java/25/latest/jdk-25_linux-x64_bin.tar.gz.sha256
-JAVA_25_BINARY_FILE='jdk-25_linux-x64_bin.tar.gz'
-JAVA_25_BINARY_SHA256='a159db241c72f804ec7c862d465f8237e31d36a463e0b86e18f68bc654dcef91'
+JAVA_25_BINARY_FILE='jdk-25.0.2_linux-x64_bin.tar.gz'
+JAVA_25_BINARY_SHA256='505fdcb1f172b4aad23415f0584912cff90b7d902adc5f1593894b4a8cbf7c39'
 
 # https://jdk.java.net/loom/
 # https://download.java.net/java/early_access/loom/1/openjdk-25-loom+1-11_linux-x64_bin.tar.gz.sha256
@@ -120,29 +115,28 @@ JAVA_25_LOOM_BINARY_FILE='openjdk-25-loom+1-11_linux-x64_bin.tar.gz'
 JAVA_25_LOOM_BINARY_SHA256='0f526d5f25cc9bcb2a7fe449c9f9853d835e4e1bda4fcb998a8d7b17db43d885'
 
 # https://jdk.java.net/jextract/
-# https://download.java.net/java/early_access/jextract/25/1/openjdk-25-jextract+1-1_linux-x64_bin.tar.gz.sha256
-JAVA_25_JEXTRACT_BINARY_FILE='openjdk-25-jextract+1-1_linux-x64_bin.tar.gz'
-JAVA_25_JEXTRACT_BINARY_SHA256='d826d366b5db8edbed9cfef3779e45e43ba496ca2166b8f70cdaf81ee90c0b1e'
+# https://download.java.net/java/early_access/jextract/25/2/openjdk-25-jextract+2-4_linux-x64_bin.tar.gz.sha256
+JAVA_25_JEXTRACT_BINARY_FILE='openjdk-25-jextract+2-4_linux-x64_bin.tar.gz'
+JAVA_25_JEXTRACT_BINARY_SHA256='d0cc481abc1adb16fb9514e1c5e0bfc08d38c29228bece667fb5054ceaffaa42'
 
 # https://jdk.java.net/26/
-# https://download.java.net/java/early_access/jdk26/21/GPL/openjdk-26-ea+21_linux-x64_bin.tar.gz.sha256
-JAVA_26_BINARY_FILE='openjdk-26-ea+21_linux-x64_bin.tar.gz'
-JAVA_26_BINARY_SHA256='3189ce7f96b6fb0b69ce1e8ca7bc626aa30009023f9e2ddf7faeaa5ddf9e8626'
+# https://download.java.net/java/early_access/jdk26/32/GPL/openjdk-26-ea+32_linux-x64_bin.tar.gz.sha256
+JAVA_26_BINARY_FILE='openjdk-26-ea+32_linux-x64_bin.tar.gz'
+JAVA_26_BINARY_SHA256='99e956807a500a396bc799f5b450e79c295bccece78ae9ca67f3e75646d3a099'
 
-# https://www.oracle.com/java/technologies/downloads/#graalvmjava17
-# https://www.oracle.com/a/tech/docs/graalvm17-0-16-checksum.html
-GRAALVM_17_BINARY_FILE='graalvm-jdk-17.0.16_linux-x64_bin.tar.gz'
-GRAALVM_17_BINARY_SHA256='abc708c5ce66c6378581257e905e2fe683843455a392c437b5bd252e405551ef'
+# https://jdk.java.net/valhalla/
+# https://download.java.net/java/early_access/valhalla/26/1/openjdk-26-jep401ea2+1-1_linux-x64_bin.tar.gz.sha256
+JAVA_26_VALHALLA_BINARY_FILE='openjdk-26-jep401ea2+1-1_linux-x64_bin.tar.gz'
+JAVA_26_VALHALLA_BINARY_SHA256='27d12e7ed51b0a9e94c6356adb4c42a50a8861031e1bc833b3f6b7a3212bed55'
 
-# https://www.oracle.com/java/technologies/downloads/#graalvmjava21
-# https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz.sha256
-GRAALVM_21_BINARY_FILE='graalvm-jdk-21.0.8_linux-x64_bin.tar.gz'
-GRAALVM_21_BINARY_SHA256='c8035b3ce6e45f1481752c6b38153bb4a53eeb477c5345d5bec5ca44ed18a056'
+# https://jdk.java.net/valhalla/
+# https://download.java.net/java/early_access/leyden/1/openjdk-26-leydenpremain+1_linux-x64_bin.tar.gz.sha256
+JAVA_26_LEYDEN_BINARY_FILE='openjdk-26-leydenpremain+1_linux-x64_bin.tar.gz'
+JAVA_26_LEYDEN_BINARY_SHA256='866efe47f88fbe0b50dc0ba7e2ea501e0d760deacfa2b1d473fa991c285001dd'
 
-# https://www.oracle.com/java/technologies/downloads/#graalvmjava24
-# https://download.oracle.com/graalvm/24/latest/graalvm-jdk-24_linux-x64_bin.tar.gz.sha256
-GRAALVM_24_BINARY_FILE='graalvm-jdk-24.0.2_linux-x64_bin.tar.gz'
-GRAALVM_24_BINARY_SHA256='b0161a49bbc1d0f40697532ddfabb8052a5a15e463775e6945fe3e4920259bae'
+# https://www.oracle.com/downloads/graalvm-downloads.html
+GRAALVM_25_BINARY_FILE='graalvm-jdk-25.0.2_linux-x64_bin.tar.gz'
+GRAALVM_25_BINARY_SHA256='af545b1bc12ecd24a5ba95e2370da2163e87c4cf13991a482d5b176bf4165c12'
 # ------------------------------------------------------------------------------
 
 
@@ -167,17 +161,15 @@ require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23.0.2_linux-x64_bin.tar.gz"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_23_VALHALLA_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-24.0.2_linux-x64_bin.tar.gz"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-leyden+2-8_linux-x64_bin.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_JEXTRACT_BINARY_FILE}"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23.0.2_linux-x64_bin.tar.gz"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_24_BINARY_FILE}"
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.1.0.zip"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_LEYDEN_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_VALHALLA_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_25_BINARY_FILE}"
+require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.3.0.zip"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
 require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
 # ------------------------------------------------------------------------------
@@ -209,18 +201,15 @@ curl --silent --show-error --fail --location --output '/tmp/jdk-20.tar.gz'      
 curl --silent --show-error --fail --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
 curl --silent --show-error --fail --location --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
 curl --silent --show-error --fail --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-23-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_23_VALHALLA_BINARY_FILE}"
 curl --silent --show-error --fail --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-24.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-24-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/openjdk-24-leyden+2-8_linux-x64_bin.tar.gz"
 curl --silent --show-error --fail --location --output '/tmp/jdk-25.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
 curl --silent --show-error --fail --location --output '/tmp/jdk-25-loom.tar.gz'           "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
 curl --silent --show-error --fail --location --output '/tmp/jdk-25-jextract.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_JEXTRACT_BINARY_FILE}"
 curl --silent --show-error --fail --location --output '/tmp/jdk-26.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/graalvm-17.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_17_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/graalvm-21.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_21_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/graalvm-23.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/graalvm-jdk-23.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/graalvm-24.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_24_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.1.0.zip"
+curl --silent --show-error --fail --location --output '/tmp/jdk-26-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_LEYDEN_BINARY_FILE}"
+curl --silent --show-error --fail --location --output '/tmp/jdk-26-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_VALHALLA_BINARY_FILE}"
+curl --silent --show-error --fail --location --output '/tmp/graalvm-25.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_25_BINARY_FILE}"
+curl --silent --show-error --fail --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/kotlin-compiler-2.3.0.zip"
 curl --silent --show-error --fail --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
 curl --silent --show-error --fail --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
 # ------------------------------------------------------------------------------
@@ -246,19 +235,16 @@ echo '59f26ace2727d0e9b24fc09d5a48393c9dbaffe04c932a02938e8d6d582058c6 /tmp/jdk-
 echo '499b59be8e3613c223e76f101598d7c28dc04b8e154d860edf2ed05980c67526 /tmp/jdk-20.tar.gz'                | sha256sum --check
 echo "${JAVA_21_BINARY_SHA256} /tmp/jdk-21.tar.gz"                                                        | sha256sum --check
 echo 'cbc13aaa2618659f44cb261f820f179832d611f0df35dd30a78d7dea6d717858 /tmp/jdk-22.tar.gz'                | sha256sum --check
-echo "${JAVA_25_JEXTRACT_BINARY_SHA256} /tmp/jdk-25-jextract.tar.gz"                                      | sha256sum --check
 echo '12d7553d06b5cacf88b26cad4a8ba83cabe79646f1defb1b7fd029f3356d0922 /tmp/jdk-23.tar.gz'                | sha256sum --check
-echo "${JAVA_23_VALHALLA_BINARY_SHA256} /tmp/jdk-23-valhalla.tar.gz"                                      | sha256sum --check
 echo "5f9f7c4ca2a6cef0f18a27465e1be81bddd8653218f450a329a2afc9bf2a1dd8 /tmp/jdk-24.tar.gz"                | sha256sum --check
-echo '7a6f9f5a602377b882e647ae9312706c6873afc582d2612681e6fbe9e122a088 /tmp/jdk-24-leyden.tar.gz'         | sha256sum --check
 echo "${JAVA_25_BINARY_SHA256} /tmp/jdk-25.tar.gz"                                                        | sha256sum --check
 echo "${JAVA_25_LOOM_BINARY_SHA256} /tmp/jdk-25-loom.tar.gz"                                              | sha256sum --check
+echo "${JAVA_25_JEXTRACT_BINARY_SHA256} /tmp/jdk-25-jextract.tar.gz"                                      | sha256sum --check
 echo "${JAVA_26_BINARY_SHA256} /tmp/jdk-26.tar.gz"                                                        | sha256sum --check
-echo "${GRAALVM_17_BINARY_SHA256} /tmp/graalvm-17.tar.gz"                                                 | sha256sum --check
-echo "${GRAALVM_21_BINARY_SHA256} /tmp/graalvm-21.tar.gz"                                                 | sha256sum --check
-echo 'db09b1fe18b83f338af9b3291443774b3170d9eba17538ce2ee39c5e6d601dfc /tmp/graalvm-23.tar.gz'            | sha256sum --check
-echo "${GRAALVM_24_BINARY_SHA256} /tmp/graalvm-24.tar.gz"                                                 | sha256sum --check
-echo 'b6698d5728ad8f9edcdd01617d638073191d8a03139cc538a391b4e3759ad297 /tmp/kotlin-compiler.zip'          | sha256sum --check
+echo "${JAVA_26_LEYDEN_BINARY_SHA256} /tmp/jdk-26-leyden.tar.gz"                                          | sha256sum --check
+echo "${JAVA_26_VALHALLA_BINARY_SHA256} /tmp/jdk-26-valhalla.tar.gz"                                      | sha256sum --check
+echo "${GRAALVM_25_BINARY_SHA256} /tmp/graalvm-25.tar.gz"                                                 | sha256sum --check
+echo 'ea16ab1cab29d419bf41b60ecc0e305d449fa661d9c05fbcc5b2a6672505456a /tmp/kotlin-compiler.zip'          | sha256sum --check
 echo '9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23 /tmp/zlib-1.3.1.tar.gz'            | sha256sum --check
 echo 'd587e1fadefaad60687dd1dcb9b278e7b587e12cb1dc48cae42a9f52bb8613a7 /tmp/x86_64-linux-musl-native.tgz' | sha256sum --check
 # ------------------------------------------------------------------------------
@@ -286,18 +272,15 @@ mkdir -p '/usr/lib/jvm/jdk-19'
 mkdir -p '/usr/lib/jvm/jdk-20'
 mkdir -p '/usr/lib/jvm/jdk-21'
 mkdir -p '/usr/lib/jvm/jdk-22'
-mkdir -p '/usr/lib/jvm/jdk-22-jextract'
 mkdir -p '/usr/lib/jvm/jdk-23'
-mkdir -p '/usr/lib/jvm/jdk-23-valhalla'
 mkdir -p '/usr/lib/jvm/jdk-24'
-mkdir -p '/usr/lib/jvm/jdk-24-leyden'
 mkdir -p '/usr/lib/jvm/jdk-25'
 mkdir -p '/usr/lib/jvm/jdk-25-loom'
+mkdir -p '/usr/lib/jvm/jdk-25-jextract'
 mkdir -p '/usr/lib/jvm/jdk-26'
-mkdir -p '/usr/lib/jvm/graalvm-17'
-mkdir -p '/usr/lib/jvm/graalvm-21'
-mkdir -p '/usr/lib/jvm/graalvm-23'
-mkdir -p '/usr/lib/jvm/graalvm-24'
+mkdir -p '/usr/lib/jvm/jdk-26-leyden'
+mkdir -p '/usr/lib/jvm/jdk-26-valhalla'
+mkdir -p '/usr/lib/jvm/graalvm-25'
 
 tar --extract --file '/tmp/jdk-1.8.tar.gz'         --directory '/usr/lib/jvm/jdk-1.8'         --strip-components 1
 tar --extract --file '/tmp/jdk-1.8-perf.tar.gz'    --directory '/usr/lib/jvm/jdk-1.8-perf'    --strip-components 1
@@ -315,18 +298,15 @@ tar --extract --file '/tmp/jdk-19.tar.gz'          --directory '/usr/lib/jvm/jdk
 tar --extract --file '/tmp/jdk-20.tar.gz'          --directory '/usr/lib/jvm/jdk-20'          --strip-components 1
 tar --extract --file '/tmp/jdk-21.tar.gz'          --directory '/usr/lib/jvm/jdk-21'          --strip-components 1
 tar --extract --file '/tmp/jdk-22.tar.gz'          --directory '/usr/lib/jvm/jdk-22'          --strip-components 1
-tar --extract --file '/tmp/jdk-25-jextract.tar.gz' --directory '/usr/lib/jvm/jdk-22-jextract' --strip-components 1
 tar --extract --file '/tmp/jdk-23.tar.gz'          --directory '/usr/lib/jvm/jdk-23'          --strip-components 1
-tar --extract --file '/tmp/jdk-23-valhalla.tar.gz' --directory '/usr/lib/jvm/jdk-23-valhalla' --strip-components 1
 tar --extract --file '/tmp/jdk-24.tar.gz'          --directory '/usr/lib/jvm/jdk-24'          --strip-components 1
-tar --extract --file '/tmp/jdk-24-leyden.tar.gz'   --directory '/usr/lib/jvm/jdk-24-leyden'   --strip-components 1
 tar --extract --file '/tmp/jdk-25.tar.gz'          --directory '/usr/lib/jvm/jdk-25'          --strip-components 1
 tar --extract --file '/tmp/jdk-25-loom.tar.gz'     --directory '/usr/lib/jvm/jdk-25-loom'     --strip-components 1
+tar --extract --file '/tmp/jdk-25-jextract.tar.gz' --directory '/usr/lib/jvm/jdk-25-jextract' --strip-components 1
 tar --extract --file '/tmp/jdk-26.tar.gz'          --directory '/usr/lib/jvm/jdk-26'          --strip-components 1
-tar --extract --file '/tmp/graalvm-17.tar.gz'      --directory '/usr/lib/jvm/graalvm-17'      --strip-components 1
-tar --extract --file '/tmp/graalvm-21.tar.gz'      --directory '/usr/lib/jvm/graalvm-21'      --strip-components 1
-tar --extract --file '/tmp/graalvm-23.tar.gz'      --directory '/usr/lib/jvm/graalvm-23'      --strip-components 1
-tar --extract --file '/tmp/graalvm-24.tar.gz'      --directory '/usr/lib/jvm/graalvm-24'      --strip-components 1
+tar --extract --file '/tmp/jdk-26-leyden.tar.gz'   --directory '/usr/lib/jvm/jdk-26-leyden'   --strip-components 1
+tar --extract --file '/tmp/jdk-26-valhalla.tar.gz' --directory '/usr/lib/jvm/jdk-26-valhalla' --strip-components 1
+tar --extract --file '/tmp/graalvm-25.tar.gz'      --directory '/usr/lib/jvm/graalvm-25'      --strip-components 1
 
 rm -f '/tmp/jdk-1.8.tar.gz'
 rm -f '/tmp/jdk-1.8-perf.tar.gz'
@@ -344,18 +324,15 @@ rm -f '/tmp/jdk-19.tar.gz'
 rm -f '/tmp/jdk-20.tar.gz'
 rm -f '/tmp/jdk-21.tar.gz'
 rm -f '/tmp/jdk-22.tar.gz'
-rm -f '/tmp/jdk-25-jextract.tar.gz'
 rm -f '/tmp/jdk-23.tar.gz'
-rm -f '/tmp/jdk-23-valhalla.tar.gz'
 rm -f '/tmp/jdk-24.tar.gz'
-rm -f '/tmp/jdk-24-leyden.tar.gz'
 rm -f '/tmp/jdk-25.tar.gz'
 rm -f '/tmp/jdk-25-loom.tar.gz'
+rm -f '/tmp/jdk-25-jextract.tar.gz'
 rm -f '/tmp/jdk-26.tar.gz'
-rm -f '/tmp/graalvm-17.tar.gz'
-rm -f '/tmp/graalvm-21.tar.gz'
-rm -f '/tmp/graalvm-23.tar.gz'
-rm -f '/tmp/graalvm-24.tar.gz'
+rm -f '/tmp/jdk-26-leyden.tar.gz'
+rm -f '/tmp/jdk-26-valhalla.tar.gz'
+rm -f '/tmp/graalvm-25.tar.gz'
 # ------------------------------------------------------------------------------
 
 
@@ -454,7 +431,9 @@ touch '/etc/containers/nodocker'
 # Install Podman Compose
 # ------------------------------------------------------------------------------
 echo 'Installing Podman Compose'
+sudo -i -u opc bash << 'EOF'
 pip3 install --user podman-compose
+EOF
 # ------------------------------------------------------------------------------
 
 
@@ -724,16 +703,6 @@ cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>22-jextract</version>
-            <vendor>Oracle Corporation</vendor>
-        </provides>
-        <configuration>
-            <jdkHome>/usr/lib/jvm/jdk-22-jextract</jdkHome>
-        </configuration>
-    </toolchain>
-    <toolchain>
-        <type>jdk</type>
-        <provides>
             <version>23</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
@@ -744,31 +713,11 @@ cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>23-valhalla</version>
-            <vendor>Oracle Corporation</vendor>
-        </provides>
-        <configuration>
-            <jdkHome>/usr/lib/jvm/jdk-23-valhalla</jdkHome>
-        </configuration>
-    </toolchain>
-    <toolchain>
-        <type>jdk</type>
-        <provides>
             <version>24</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
             <jdkHome>/usr/lib/jvm/jdk-24</jdkHome>
-        </configuration>
-    </toolchain>
-    <toolchain>
-        <type>jdk</type>
-        <provides>
-            <version>24-leyden</version>
-            <vendor>Oracle Corporation</vendor>
-        </provides>
-        <configuration>
-            <jdkHome>/usr/lib/jvm/jdk-24-leyden</jdkHome>
         </configuration>
     </toolchain>
     <toolchain>
@@ -794,6 +743,16 @@ cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
     <toolchain>
         <type>jdk</type>
         <provides>
+            <version>25-jextract</version>
+            <vendor>Oracle Corporation</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>/usr/lib/jvm/jdk-25-jextract</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
             <version>26</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
@@ -804,41 +763,31 @@ cat << 'B_EOF' > '/home/opc/.m2/toolchains.xml'
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>graal17</version>
+            <version>26-leyden</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
-            <jdkHome>/usr/lib/jvm/graalvm-17</jdkHome>
+            <jdkHome>/usr/lib/jvm/jdk-26-leyden</jdkHome>
         </configuration>
     </toolchain>
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>graal21</version>
+            <version>26-valhalla</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
-            <jdkHome>/usr/lib/jvm/graalvm-21</jdkHome>
+            <jdkHome>/usr/lib/jvm/jdk-26-valhalla</jdkHome>
         </configuration>
     </toolchain>
     <toolchain>
         <type>jdk</type>
         <provides>
-            <version>graal23</version>
+            <version>graal25</version>
             <vendor>Oracle Corporation</vendor>
         </provides>
         <configuration>
-            <jdkHome>/usr/lib/jvm/graalvm-23</jdkHome>
-        </configuration>
-    </toolchain>
-    <toolchain>
-        <type>jdk</type>
-        <provides>
-            <version>graal24</version>
-            <vendor>Oracle Corporation</vendor>
-        </provides>
-        <configuration>
-            <jdkHome>/usr/lib/jvm/graalvm-24</jdkHome>
+            <jdkHome>/usr/lib/jvm/graalvm-25</jdkHome>
         </configuration>
     </toolchain>
 </toolchains>
@@ -872,18 +821,15 @@ ln -s '/usr/lib/jvm/jdk-19'          '/home/opc/.sdkman/candidates/java/19-oracl
 ln -s '/usr/lib/jvm/jdk-20'          '/home/opc/.sdkman/candidates/java/20-oracle'
 ln -s '/usr/lib/jvm/jdk-21'          '/home/opc/.sdkman/candidates/java/21-oracle'
 ln -s '/usr/lib/jvm/jdk-22'          '/home/opc/.sdkman/candidates/java/22-oracle'
-ln -s '/usr/lib/jvm/jdk-22-jextract' '/home/opc/.sdkman/candidates/java/22-jextract'
 ln -s '/usr/lib/jvm/jdk-23'          '/home/opc/.sdkman/candidates/java/23-oracle'
-ln -s '/usr/lib/jvm/jdk-23-valhalla' '/home/opc/.sdkman/candidates/java/23-valhalla'
 ln -s '/usr/lib/jvm/jdk-24'          '/home/opc/.sdkman/candidates/java/24-oracle'
-ln -s '/usr/lib/jvm/jdk-24-leyden'   '/home/opc/.sdkman/candidates/java/24-leyden'
 ln -s '/usr/lib/jvm/jdk-25'          '/home/opc/.sdkman/candidates/java/25-oracle'
 ln -s '/usr/lib/jvm/jdk-25-loom'     '/home/opc/.sdkman/candidates/java/25-loom'
+ln -s '/usr/lib/jvm/jdk-25-jextract' '/home/opc/.sdkman/candidates/java/25-jextract'
 ln -s '/usr/lib/jvm/jdk-26'          '/home/opc/.sdkman/candidates/java/26-oracle'
-ln -s '/usr/lib/jvm/graalvm-17'      '/home/opc/.sdkman/candidates/java/17-graal'
-ln -s '/usr/lib/jvm/graalvm-21'      '/home/opc/.sdkman/candidates/java/21-graal'
-ln -s '/usr/lib/jvm/graalvm-23'      '/home/opc/.sdkman/candidates/java/23-graal'
-ln -s '/usr/lib/jvm/graalvm-24'      '/home/opc/.sdkman/candidates/java/24-graal'
+ln -s '/usr/lib/jvm/jdk-26-leyden'   '/home/opc/.sdkman/candidates/java/26-leyden'
+ln -s '/usr/lib/jvm/jdk-26-valhalla' '/home/opc/.sdkman/candidates/java/26-valhalla'
+ln -s '/usr/lib/jvm/graalvm-25'      '/home/opc/.sdkman/candidates/java/25-graal'
 
 sdk default java 25-oracle
 
@@ -905,18 +851,15 @@ export JAVA_19_HOME='/usr/lib/jvm/jdk-19'
 export JAVA_20_HOME='/usr/lib/jvm/jdk-20'
 export JAVA_21_HOME='/usr/lib/jvm/jdk-21'
 export JAVA_22_HOME='/usr/lib/jvm/jdk-22'
-export JAVA_22_JEXTRACT_HOME='/usr/lib/jvm/jdk-22-jextract'
 export JAVA_23_HOME='/usr/lib/jvm/jdk-23'
-export JAVA_23_VALHALLA_HOME='/usr/lib/jvm/jdk-23-valhalla'
 export JAVA_24_HOME='/usr/lib/jvm/jdk-24'
-export JAVA_24_LEYDEN_HOME='/usr/lib/jvm/jdk-24-leyden'
 export JAVA_25_HOME='/usr/lib/jvm/jdk-25'
 export JAVA_25_LOOM_HOME='/usr/lib/jvm/jdk-25-loom'
+export JAVA_25_JEXTRACT_HOME='/usr/lib/jvm/jdk-25-jextract'
 export JAVA_26_HOME='/usr/lib/jvm/jdk-26'
-export GRAAL_17_HOME='/usr/lib/jvm/graalvm-17'
-export GRAAL_21_HOME='/usr/lib/jvm/graalvm-21'
-export GRAAL_23_HOME='/usr/lib/jvm/graalvm-23'
-export GRAAL_24_HOME='/usr/lib/jvm/graalvm-24'
+export JAVA_26_LEYDEN_HOME='/usr/lib/jvm/jdk-26-leyden'
+export JAVA_26_VALHALLA_HOME='/usr/lib/jvm/jdk-26-valhalla'
+export GRAAL_25_HOME='/usr/lib/jvm/graalvm-25'
 
 export JAVA_HOME='/home/opc/.sdkman/candidates/java/current'
 PATH="${PATH}:/home/opc/.sdkman/candidates/java/current/bin"
@@ -937,24 +880,21 @@ alias   java19='sdk use java 19-oracle'
 alias   java20='sdk use java 20-oracle'
 alias   java21='sdk use java 21-oracle'
 alias   java22='sdk use java 22-oracle'
-alias jextract='sdk use java 22-jextract'
 alias   java23='sdk use java 23-oracle'
-alias valhalla='sdk use java 23-valhalla'
 alias   java24='sdk use java 24-oracle'
-alias   leyden='sdk use java 24-leyden'
 alias   java25='sdk use java 25-oracle'
 alias     loom='sdk use java 25-loom'
+alias jextract='sdk use java 25-jextract'
 alias   java26='sdk use java 26-oracle'
-alias  graal17="sdk use java 17-graal"
-alias  graal21="sdk use java 21-graal"
-alias  graal23="sdk use java 23-graal"
-alias  graal24="sdk use java 24-graal"
+alias   leyden='sdk use java 26-leyden'
+alias valhalla='sdk use java 26-valhalla'
+alias  graal25="sdk use java 25-graal"
 B_EOF
 
 mkdir -p '/home/opc/.sdkman/candidates/kotlin'
-ln -s '/usr/lib/kotlin/kotlinc' '/home/opc/.sdkman/candidates/kotlin/2.0.0'
+ln -s '/usr/lib/kotlin/kotlinc' '/home/opc/.sdkman/candidates/kotlin/2.3.0'
 
-sdk default kotlin 2.0.0
+sdk default kotlin 2.3.0
 
 cat << 'B_EOF' > '/home/opc/.bashrc.d/kotlin'
 PATH="${PATH}:/home/opc/.sdkman/candidates/kotlin/current/bin"
@@ -997,7 +937,7 @@ tar --extract --file '/tmp/zlib-1.3.1.tar.gz' --directory '/tmp/zlib' --strip-co
 make;
 make install;)
 
-for GRAALVM_PATH in '/usr/lib/jvm/graalvm-17' '/usr/lib/jvm/graalvm-21' '/usr/lib/jvm/graalvm-23' '/usr/lib/jvm/graalvm-24'
+for GRAALVM_PATH in '/usr/lib/jvm/graalvm-25'
 do
   mkdir -p "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
   cp '/tmp/zlib/libz.a' "${GRAALVM_PATH}/lib/static/linux-amd64/musl"
