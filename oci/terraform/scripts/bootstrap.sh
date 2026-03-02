@@ -348,11 +348,21 @@ rm -f '/tmp/kotlin-compiler.zip'
 
 
 # ------------------------------------------------------------------------------
+# Enable additional OL9 repositories (CodeReady Builder + EPEL), then refresh
+# DNF metadata cache so package lookups/installations use the latest repo index.
+# ------------------------------------------------------------------------------
+dnf config-manager --set-enabled ol9_codeready_builder
+dnf config-manager --set-enabled ol9_developer_EPEL
+dnf clean all
+dnf makecache
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install the dependencies required to build the statically linked native
 # executable and other commands
 # ------------------------------------------------------------------------------
 echo 'Installing the dependencies required to build the statically linked native executable'
-dnf config-manager --set-enabled ol9_codeready_builder
 dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make
 # ------------------------------------------------------------------------------
 
@@ -509,6 +519,15 @@ curl --silent --show-error --fail --location https://raw.githubusercontent.com/a
 # ------------------------------------------------------------------------------
 echo 'Installing Ollama'
 curl --silent --show-error --fail --location https://ollama.com/install.sh | sh
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install the ripgrep (rg)
+# https://github.com/BurntSushi/ripgrep
+# ------------------------------------------------------------------------------
+echo 'Installing ripgrep (rg)'
+dnf install -y ripgrep
 # ------------------------------------------------------------------------------
 
 
