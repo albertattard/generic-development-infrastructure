@@ -417,6 +417,20 @@ dnf install -y python3-pip python3
 
 
 # ------------------------------------------------------------------------------
+# Install the Falcon Heartbeat (required by security)
+# ------------------------------------------------------------------------------
+echo 'Install the Falcon Heartbeat (required by security)'
+echo 'See: https://confluence.oraclecorp.com/confluence/display/NIT/Falcon+Heartbeat+Findings+Resolution+-+Scripts'
+curl --fail \
+  --location \
+  --silent \
+  --show-error \
+  --output '/tmp/install_falcon.py' 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/wpj0M57XjIImf1jZcEsGhqdP1ZyUY27tr1eL6NAqsXVpapFp468aredx6whaWinG/n/orasenatdpltintegration03/b/FalconSupport-donotdelete/o/install_falcon.py'
+python3 '/tmp/install_falcon.py'
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install Podman (a docker runtime)
 # - https://oracle-base.com/articles/linux/podman-install-on-oracle-linux-ol9
 # ------------------------------------------------------------------------------
