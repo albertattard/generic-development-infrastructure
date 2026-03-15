@@ -506,7 +506,8 @@ dnf install -y gdb gdb-gdbserver
 # Install XQ (https://github.com/sibprogrammer/xq) to format XML files
 # ------------------------------------------------------------------------------
 echo 'Installing xq'
-curl --silent --show-error --fail --location https://bit.ly/install-xq | bash
+dnf install -y xq
+xq --version
 # ------------------------------------------------------------------------------
 
 
