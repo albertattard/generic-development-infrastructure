@@ -368,6 +368,16 @@ dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make
 
 
 # ------------------------------------------------------------------------------
+# Install Rust
+# ------------------------------------------------------------------------------
+echo 'Installing Rust'
+dnf install -y rust cargo
+rustc --version
+cargo --version
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install hey, an HTTP load generator and ApacheBench (ab) replacement
 # ------------------------------------------------------------------------------
 echo 'Installing hey'
