@@ -482,18 +482,28 @@ EOF
 # Install dive (https://github.com/wagoodman/dive) to analyse container images
 # layers. Based on
 #  - https://github.com/wagoodman/dive?tab=readme-ov-file#installation
+# Version source:
+# - https://github.com/wagoodman/dive/releases
+# Checksum source:
+# - dive_${DIVE_VERSION}_checksums.txt from the matching GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing dive'
-DIVE_VERSION=$(curl --silent --show-error --fail --location "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+DIVE_VERSION='0.13.1'
+DIVE_RPM="dive_${DIVE_VERSION}_linux_amd64.rpm"
+DIVE_SHA256='17d399388dc87c06d8b63917c256e702c0ec5c5158039a73ed20f191bc4758b1'
+
 curl \
   --silent \
   --show-error \
   --fail \
   --location \
-  --output "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm" \
-  "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.rpm"
-dnf install -y "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
-rm -f "/tmp/dive_${DIVE_VERSION}_linux_amd64.rpm"
+  --output "/tmp/${DIVE_RPM}" \
+  "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/${DIVE_RPM}"
+
+echo "${DIVE_SHA256} /tmp/${DIVE_RPM}" | sha256sum --check
+dnf install -y "/tmp/${DIVE_RPM}"
+rm -f "/tmp/${DIVE_RPM}"
+dive --version
 # ------------------------------------------------------------------------------
 
 
