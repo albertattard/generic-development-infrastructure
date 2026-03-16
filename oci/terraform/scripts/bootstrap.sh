@@ -453,10 +453,13 @@ touch '/etc/containers/nodocker'
 
 # ------------------------------------------------------------------------------
 # Install Podman Compose
+# Version source:
+# - https://pypi.org/project/podman-compose/
 # ------------------------------------------------------------------------------
 echo 'Installing Podman Compose'
 sudo -i -u opc bash << 'EOF'
-pip3 install --user podman-compose
+PODMAN_COMPOSE_VERSION='1.5.0'
+pip3 install --user "podman-compose==${PODMAN_COMPOSE_VERSION}"
 EOF
 # ------------------------------------------------------------------------------
 
