@@ -541,9 +541,28 @@ syft --version
 
 # ------------------------------------------------------------------------------
 # Install grype (https://github.com/anchore/grype) to scan for vulnerabilities
+# Version source:
+# - https://github.com/anchore/grype/releases
+# Checksum source:
+# - grype_${GRYPE_VERSION}_checksums.txt from the matching GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing grype'
-curl --silent --show-error --fail --location https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+GRYPE_VERSION='0.104.4'
+GRYPE_RPM="grype_${GRYPE_VERSION}_linux_amd64.rpm"
+GRYPE_SHA256='979c12a9a7aeb6b6d7cfd24ed8ebfc01be6dbe96dc6508df11d9914b70b362e6'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "/tmp/${GRYPE_RPM}" \
+  "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/${GRYPE_RPM}"
+
+echo "${GRYPE_SHA256} /tmp/${GRYPE_RPM}" | sha256sum --check
+dnf install -y "/tmp/${GRYPE_RPM}"
+rm -f "/tmp/${GRYPE_RPM}"
+grype version
 # ------------------------------------------------------------------------------
 
 
