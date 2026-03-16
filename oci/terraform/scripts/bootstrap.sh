@@ -514,9 +514,28 @@ xq --version
 # ------------------------------------------------------------------------------
 # Install Syft (https://github.com/anchore/syft) to extract SBOM from native
 # executables
+# Version source:
+# - https://github.com/anchore/syft/releases
+# Checksum source:
+# - syft_${SYFT_VERSION}_checksums.txt from the matching GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing Syft'
-curl --silent --show-error --fail --location https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+SYFT_VERSION='1.42.2'
+SYFT_RPM="syft_${SYFT_VERSION}_linux_amd64.rpm"
+SYFT_SHA256='9f0fea41666db4d3c76f04dce3a6537ddceaf34c419aad90af534bca62e85f5c'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "/tmp/${SYFT_RPM}" \
+  "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/${SYFT_RPM}"
+
+echo "${SYFT_SHA256} /tmp/${SYFT_RPM}" | sha256sum --check
+dnf install -y "/tmp/${SYFT_RPM}"
+rm -f "/tmp/${SYFT_RPM}"
+syft --version
 # ------------------------------------------------------------------------------
 
 
