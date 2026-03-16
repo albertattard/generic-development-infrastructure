@@ -568,10 +568,63 @@ grype version
 
 # ------------------------------------------------------------------------------
 # Install the Ollama
-# https://ollama.com/download/linux
+# Version source:
+# - https://github.com/ollama/ollama/releases
+# Checksum source:
+# - the sha256 value published next to ollama-linux-amd64.tgz in the matching
+#   GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing Ollama'
-curl --silent --show-error --fail --location https://ollama.com/install.sh | sh
+OLLAMA_VERSION='0.13.5'
+OLLAMA_ARCHIVE='ollama-linux-amd64.tgz'
+OLLAMA_SHA256='41fb93ff8be35e4d2d22bafd1c42b487efb15b766076d976766bd1ee4db3f8e2'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "/tmp/${OLLAMA_ARCHIVE}" \
+  "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/${OLLAMA_ARCHIVE}"
+
+echo "${OLLAMA_SHA256} /tmp/${OLLAMA_ARCHIVE}" | sha256sum --check
+tar --extract --gzip --file "/tmp/${OLLAMA_ARCHIVE}" --directory /usr
+rm -f "/tmp/${OLLAMA_ARCHIVE}"
+
+if ! id -u ollama >/dev/null 2>&1; then
+  useradd --system --user-group --create-home --home-dir /usr/share/ollama --shell /bin/false ollama
+fi
+
+if getent group render >/dev/null 2>&1; then
+  usermod -a -G render ollama
+fi
+
+if getent group video >/dev/null 2>&1; then
+  usermod -a -G video ollama
+fi
+
+usermod -a -G ollama opc
+
+cat << 'EOF' > /etc/systemd/system/ollama.service
+[Unit]
+Description=Ollama Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+User=ollama
+Group=ollama
+Restart=always
+RestartSec=3
+Environment="HOME=/usr/share/ollama"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now ollama
+ollama --version
 # ------------------------------------------------------------------------------
 
 
