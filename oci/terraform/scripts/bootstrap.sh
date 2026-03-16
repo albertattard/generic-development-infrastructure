@@ -662,19 +662,21 @@ dnf install -y ripgrep
 
 # ------------------------------------------------------------------------------
 # Install the Sociable Weaver (sw)
-# https://github.com/albertattard/sociable-weaver
+# Source repository:
+# - https://github.com/albertattard/sw
 # ------------------------------------------------------------------------------
 echo 'Installing Sociable Weaver (sw)'
 sudo -i -u opc bash << 'EOF'
+rm -rf '/home/opc/sw'
+
+git clone 'https://github.com/albertattard/sw' '/home/opc/sw'
+
+cd '/home/opc/sw'
+cargo build --release
+
 mkdir -p '/home/opc/.local/bin'
-curl \
-  --silent \
-  --show-error \
-  --fail \
-  --location \
-  --output '/home/opc/.local/bin/sw' \
-  'https://github.com/albertattard/sociable-weaver/releases/latest/download/sw'
-chmod +x '/home/opc/.local/bin/sw'
+cp '/home/opc/sw/target/release/sw' '/home/opc/.local/bin/sw'
+rm -rf '/home/opc/sw'
 EOF
 # ------------------------------------------------------------------------------
 
