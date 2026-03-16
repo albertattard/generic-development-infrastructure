@@ -923,10 +923,26 @@ EOF
 
 # ------------------------------------------------------------------------------
 # Install SDKMAN
+# Installation source:
+# - https://sdkman.io/install
+# We still rely on the official installer here, but download it first instead of
+# piping network output directly into bash.
 # ------------------------------------------------------------------------------
 echo 'Installing and configuring SDKMAN'
 sudo -i -u opc bash << 'EOF'
-curl --silent --show-error --fail --location 'https://get.sdkman.io' | bash
+SDKMAN_INSTALL_SCRIPT='/tmp/sdkman-install.sh'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "${SDKMAN_INSTALL_SCRIPT}" \
+  'https://get.sdkman.io?ci=true&rcupdate=false'
+
+bash "${SDKMAN_INSTALL_SCRIPT}"
+rm -f "${SDKMAN_INSTALL_SCRIPT}"
+
 source '/home/opc/.sdkman/bin/sdkman-init.sh'
 
 mkdir -p '/home/opc/.sdkman/candidates/java'
