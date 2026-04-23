@@ -388,7 +388,7 @@ curl \
   --fail \
   --location \
   --output '/usr/local/sbin/hey' \
-  'https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64'
+  'https://storage.googleapis.com/hey-releases/hey_linux_amd64'
 chmod +x '/usr/local/sbin/hey'
 # ------------------------------------------------------------------------------
 
