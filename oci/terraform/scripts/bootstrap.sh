@@ -4,14 +4,42 @@ set -euo pipefail
 # ------------------------------------------------------------------------------
 # Tests the provided link and fails if the link is not reachable
 # ------------------------------------------------------------------------------
+check_reachable_link() {
+    local link="${1}"
+
+    curl --silent --show-error --fail --head "${link}" > /dev/null
+}
+
 require_reachable_link() {
     local link="${1}"
     local message="${2:-Link: ${link} is not reachable}"
 
-    if ! curl --silent --show-error --fail --head "${link}" > '/dev/null'; then
+    if ! check_reachable_link "${link}"; then
         echo "${message}" >&2
         exit 1
     fi
+}
+
+retry_require_reachable_link() {
+    local link="${1}"
+    local message="${2:-Link: ${link} is not reachable}"
+    local attempts="${3:-5}"
+    local sleep_seconds="${4:-60}"
+    local attempt
+
+    for (( attempt=1; attempt<=attempts; attempt++ )); do
+        if check_reachable_link "${link}"; then
+            return 0
+        fi
+
+        if (( attempt < attempts )); then
+            echo "Link not reachable yet, retrying in ${sleep_seconds}s (${attempt}/${attempts})" >&2
+            sleep "${sleep_seconds}"
+        fi
+    done
+
+    echo "${message}" >&2
+    exit 1
 }
 # ------------------------------------------------------------------------------
 
@@ -32,7 +60,7 @@ BINARIES_PRE_AUTHENTICATED_LINK="$1"
 # Verify that the this script can download the files using the provided
 # BINARIES_PRE_AUTHENTICATED_LINK
 # ------------------------------------------------------------------------------
-require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok" 'Cannot access the binaries using the provided pre authenticated link'
+retry_require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok" 'Cannot access the binaries using the provided pre authenticated link'
 # ------------------------------------------------------------------------------
 
 
@@ -40,7 +68,9 @@ require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/ok" 'Cannot access th
 # Upgrade the system to the current release (takes several minutes to run)
 # Note that the updates will vary depending on when this command executes
 # ------------------------------------------------------------------------------
-# dnf upgrade -y
+# dnf upgrade --refresh -y
+# dnf upgrade -y openssh openssh-server openssh-clients
+# systemctl restart sshd
 # ------------------------------------------------------------------------------
 
 
@@ -667,15 +697,27 @@ dnf install -y ripgrep
 # ------------------------------------------------------------------------------
 echo 'Installing Sociable Weaver (sw)'
 sudo -i -u opc bash << 'EOF'
-rm -rf '/home/opc/sw'
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --proto '=https' \
+  --tlsv1.2 \
+  https://sh.rustup.rs | \
+  sh -s -- -y --profile minimal --default-toolchain 1.94.1
+source "$HOME/.cargo/env"
 
+rustup component add clippy rustfmt
+
+rm -rf '/home/opc/sw'
 git clone 'https://github.com/albertattard/sw' '/home/opc/sw'
 
 cd '/home/opc/sw'
 cargo build --release
 
-mkdir -p '/home/opc/.local/bin'
-cp '/home/opc/sw/target/release/sw' '/home/opc/.local/bin/sw'
+mkdir --parents '/home/opc/.local/bin'
+install --mode 0755 '/home/opc/sw/target/release/sw' '/home/opc/.local/bin/sw'
 rm -rf '/home/opc/sw'
 EOF
 # ------------------------------------------------------------------------------

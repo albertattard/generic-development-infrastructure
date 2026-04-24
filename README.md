@@ -9,7 +9,7 @@ within an existing (top level directory) repository to include the
 `infrastructure` directory.
 
 ```shell
-$ git submodule add \
+git submodule add \
   --name 'infrastructure' \
   'https://github.com/albertattard/generic-development-infrastructure' \
   './infrastructure'
@@ -41,32 +41,31 @@ IP_ADDRESS=$(terraform -chdir='../../infrastructure/oci/terraform' output -json 
 # The place where the code is placed
 WORKSPACE='/home/opc/workspace'
 
-# Sync the files from the parent directory before executing any commands. We
-# need the files from the parent directory as there are the parent POM and the
-# Maven wrapper.
-rsync \
-  --rsh 'ssh -i ~/.ssh/ssh-key-oci-instance.key' \
-  --recursive \
-  --update \
-  --delete \
-  --exclude-from='../.rsync-exclude' \
-  .. \
-  "opc@${IP_ADDRESS}:${WORKSPACE}"
-
-# Switch to GraalVM 21
-SWITCH_JAVA='sdk use java 21-graal'
-
 # The current project/directory
 PROJECT="${PWD##*/}"
 
 # The remote directory from where the commands are executed
 WORKDIR="${WORKSPACE}/${PROJECT}"
 
+# Sync the files before executing any commands
+rsync \
+  --rsh 'ssh -i ~/.ssh/key' \
+  --recursive \
+  --verbose \
+  --update \
+  --delete \
+  --exclude-from='../.rsync-exclude' \
+  . \
+  "opc@${IP_ADDRESS}:${WORKDIR}"
+
+# Switch to Java 25
+SWITCH_JAVA='sdk use java 25-oracle'
+
 # Build the command
 COMMAND=("${SWITCH_JAVA};cd ${WORKDIR};$@")
 
 # Execute the given command(s)
-ssh -i ~/.ssh/ssh-key-oci-instance.key "opc@${IP_ADDRESS}" "${COMMAND[@]}"
+ssh -T -i ~/.ssh/key "opc@${IP_ADDRESS}" "${COMMAND[@]}"
 ```
 
 This bash script syncs the files to make sure that files are copied to the
@@ -95,7 +94,7 @@ scpw
 You can run commands locally and have these executed remotely.
 
 ```shell
-$ ./runw ls -la
+./runw ls -la
 ```
 
 Please note that the first time you run a command, it may take some time to
