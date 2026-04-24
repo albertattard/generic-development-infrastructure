@@ -183,6 +183,39 @@ resource "null_resource" "bootstrap" {
   }
 }
 
+resource "null_resource" "verify" {
+  depends_on = [
+    null_resource.bootstrap,
+  ]
+
+  provisioner "file" {
+    connection {
+      agent       = false
+      timeout     = "5m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    source      = "./scripts/verify.sh"
+    destination = "/tmp/verify.sh"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      agent       = false
+      timeout     = "5m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    inline = [
+      "bash /tmp/verify.sh"
+    ]
+  }
+}
+
 output "instance_public_ip" {
   description = "The public IP address of the public instance"
   value       = oci_core_instance.public.public_ip

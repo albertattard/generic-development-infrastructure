@@ -35,7 +35,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
    ssh_private_key_file            = "~/.ssh/ssh-key-oci-instance.key"
-   image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaa5feemmpamcen2vhpgplzsc2odkurprzlshvdhx7iefpecwy6nyja"
+   image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaalkf4mkx2efw7xghafasr2ehia42ombnybkbmejjtvfa6nd3yttfa"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
    freeform_tags                   = {}
    defined_tags                    = {}
@@ -79,8 +79,8 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      `ssh_authorized_keys`.
    - `image_source_id`: This setup creates an OCI compute instance. This OCI
      compute instance uses this Oracle Linux image as its base. You can find the
-     latest versions of the Oracle Linux 9.x Images
-     [here](https://docs.oracle.com/en-us/iaas/images/oracle-linux-9x/). Make
+     latest versions of the Oracle Linux 10.x Images
+     [here](https://docs.oracle.com/en-us/iaas/images/oracle-linux-10x/). Make
      sure to select an image that belong to the same region as set by the
      `region` variable.
    - `binaries_pre_authenticated_link`: This setup creates an OCI compute

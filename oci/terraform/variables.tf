@@ -47,9 +47,9 @@ variable "image_source_id" {
   type        = string
   description = <<EOF
 The OCI image ID for the compute instances
-(See: https://docs.oracle.com/en-us/iaas/images/oracle-linux-9x/index.htm)
+(See: https://docs.oracle.com/en-us/iaas/images/oracle-linux-10x/index.htm)
 EOF
-  default     = "ocid1.image.oc1.iad.aaaaaaaaglxne5nh73mxqppl3fkzkqdlda3k22y6oyxcvy6gcaxxsym54mca"
+  default     = "ocid1.image.oc1.iad.aaaaaaaalkf4mkx2efw7xghafasr2ehia42ombnybkbmejjtvfa6nd3yttfa"
 }
 
 variable "instance_shape" {

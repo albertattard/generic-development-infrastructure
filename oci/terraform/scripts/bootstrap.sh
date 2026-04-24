@@ -104,6 +104,28 @@ echo 'Filling the remaining space'
 
 
 # ------------------------------------------------------------------------------
+# Enable the additional Oracle Linux CodeReady Builder repository, then refresh
+# DNF metadata cache so package lookups/installations use the latest repo index.
+# ------------------------------------------------------------------------------
+echo 'Installing bootstrap prerequisites'
+dnf install -y dnf-plugins-core
+
+dnf config-manager --set-enabled "ol10_codeready_builder"
+dnf clean all
+dnf makecache
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install the dependencies required to build the statically linked native
+# executable and other commands
+# ------------------------------------------------------------------------------
+echo 'Installing the dependencies required to build the statically linked native executable'
+dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make unzip zip
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Oracle releases four critical patch updates per year, and these versions of
 # Java need to be updated every three months. Their values are grouped here for
 # convenience, so that you don't have to go to multiple places to update a
@@ -378,26 +400,6 @@ rm -f '/tmp/kotlin-compiler.zip'
 
 
 # ------------------------------------------------------------------------------
-# Enable additional OL9 repositories (CodeReady Builder + EPEL), then refresh
-# DNF metadata cache so package lookups/installations use the latest repo index.
-# ------------------------------------------------------------------------------
-dnf config-manager --set-enabled ol9_codeready_builder
-dnf config-manager --set-enabled ol9_developer_EPEL
-dnf clean all
-dnf makecache
-# ------------------------------------------------------------------------------
-
-
-# ------------------------------------------------------------------------------
-# Install the dependencies required to build the statically linked native
-# executable and other commands
-# ------------------------------------------------------------------------------
-echo 'Installing the dependencies required to build the statically linked native executable'
-dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make
-# ------------------------------------------------------------------------------
-
-
-# ------------------------------------------------------------------------------
 # Install Rust
 # ------------------------------------------------------------------------------
 echo 'Installing Rust'
@@ -413,10 +415,14 @@ cargo --version
 echo 'Installing hey'
 mkdir -p '/usr/local/sbin'
 curl \
+  --ipv4 \
   --silent \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output '/usr/local/sbin/hey' \
   'https://storage.googleapis.com/hey-releases/hey_linux_amd64'
 chmod +x '/usr/local/sbin/hey'
@@ -557,10 +563,29 @@ dnf install -y gdb gdb-gdbserver
 
 # ------------------------------------------------------------------------------
 # Install XQ (https://github.com/sibprogrammer/xq) to format XML files
+# Version source:
+# - https://github.com/sibprogrammer/xq/releases
+# Checksum source:
+# - checksums.txt from the matching GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing xq'
-dnf install -y xq
-xq --version
+XQ_VERSION='1.4.0'
+XQ_ARCHIVE="xq_${XQ_VERSION}_linux_amd64.tar.gz"
+XQ_SHA256='467e83864c3cf70a3a0754cd08070d21fa4b5fbccb8eb10ac3d7ea499fa48217'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "/tmp/${XQ_ARCHIVE}" \
+  "https://github.com/sibprogrammer/xq/releases/download/v${XQ_VERSION}/${XQ_ARCHIVE}"
+
+echo "${XQ_SHA256} /tmp/${XQ_ARCHIVE}" | sha256sum --check
+tar --extract --gzip --file "/tmp/${XQ_ARCHIVE}" --directory /tmp xq
+install --mode 0755 /tmp/xq /usr/local/bin/xq
+rm -f "/tmp/${XQ_ARCHIVE}" /tmp/xq
+/usr/local/bin/xq --version
 # ------------------------------------------------------------------------------
 
 
@@ -683,10 +708,30 @@ ollama --version
 
 # ------------------------------------------------------------------------------
 # Install the ripgrep (rg)
-# https://github.com/BurntSushi/ripgrep
+# Version source:
+# - https://github.com/BurntSushi/ripgrep/releases
+# Checksum source:
+# - ripgrep-<version>-x86_64-unknown-linux-musl.tar.gz.sha256 from the matching
+#   GitHub release
 # ------------------------------------------------------------------------------
 echo 'Installing ripgrep (rg)'
-dnf install -y ripgrep
+RIPGREP_VERSION='14.1.1'
+RIPGREP_ARCHIVE="ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+RIPGREP_SHA256='4cf9f2741e6c465ffdb7c26f38056a59e2a2544b51f7cc128ef28337eeae4d8e'
+
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --output "/tmp/${RIPGREP_ARCHIVE}" \
+  "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_ARCHIVE}"
+
+echo "${RIPGREP_SHA256} /tmp/${RIPGREP_ARCHIVE}" | sha256sum --check
+tar --extract --gzip --file "/tmp/${RIPGREP_ARCHIVE}" --directory /tmp "ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl/rg"
+install --mode 0755 "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl/rg" /usr/local/bin/rg
+rm -rf "/tmp/${RIPGREP_ARCHIVE}" "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl"
+/usr/local/bin/rg --version
 # ------------------------------------------------------------------------------
 
 
