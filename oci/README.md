@@ -140,6 +140,15 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    ...
    ```
 
+   The `sw` binary can be refreshed later without reprovisioning the instance by
+   running:
+
+   ```shell
+   > update_sw
+   ```
+
+   To build a different branch, pass the branch name as the first argument.
+
 ## Tear down
 
 When ready, destroy the infrastructure so that you don't incur unnecessarily

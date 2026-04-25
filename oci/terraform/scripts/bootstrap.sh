@@ -742,6 +742,29 @@ rm -rf "/tmp/${RIPGREP_ARCHIVE}" "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown
 # ------------------------------------------------------------------------------
 echo 'Installing Sociable Weaver (sw)'
 sudo -i -u opc bash << 'EOF'
+mkdir --parents '/home/opc/.local/bin'
+
+cat << 'B_EOF' > '/home/opc/.local/bin/update_sw'
+#!/usr/bin/env bash
+set -euo pipefail
+
+SW_REPOSITORY='https://github.com/albertattard/sw'
+SW_BRANCH="${1:-main}"
+WORK_DIR="$(mktemp -d)"
+trap 'rm -rf "${WORK_DIR}"' EXIT
+
+source "${HOME}/.cargo/env"
+
+git clone --depth 1 --branch "${SW_BRANCH}" "${SW_REPOSITORY}" "${WORK_DIR}/sw"
+
+cd "${WORK_DIR}/sw"
+cargo build --release
+
+install --mode 0755 "${WORK_DIR}/sw/target/release/sw" "${HOME}/.local/bin/sw"
+B_EOF
+
+chmod 0755 '/home/opc/.local/bin/update_sw'
+
 curl \
   --silent \
   --show-error \
@@ -755,15 +778,7 @@ source "$HOME/.cargo/env"
 
 rustup component add clippy rustfmt
 
-rm -rf '/home/opc/sw'
-git clone 'https://github.com/albertattard/sw' '/home/opc/sw'
-
-cd '/home/opc/sw'
-cargo build --release
-
-mkdir --parents '/home/opc/.local/bin'
-install --mode 0755 '/home/opc/sw/target/release/sw' '/home/opc/.local/bin/sw'
-rm -rf '/home/opc/sw'
+update_sw
 EOF
 # ------------------------------------------------------------------------------
 

@@ -108,6 +108,8 @@ run_bash_check 'JMeter is installed' 'source "${HOME}/.bashrc" && jmeter --versi
 run_bash_check 'xq is installed' 'source "${HOME}/.bashrc" && /usr/local/bin/xq --version'
 run_bash_check 'ripgrep is installed' 'source "${HOME}/.bashrc" && /usr/local/bin/rg --version'
 run_bash_check 'gdb is installed' 'source "${HOME}/.bashrc" && gdb --version'
+run_bash_check 'sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/sw"'
+run_bash_check 'update_sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/update_sw"'
 
 log_section 'Containers'
 run_bash_check 'Podman is installed' 'source "${HOME}/.bashrc" && podman --version'
