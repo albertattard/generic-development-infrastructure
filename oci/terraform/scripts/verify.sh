@@ -101,6 +101,8 @@ run_bash_check 'GCC is installed' 'source "${HOME}/.bashrc" && gcc --version'
 run_bash_check 'make is installed' 'source "${HOME}/.bashrc" && make --version'
 run_bash_check 'Git is installed' 'source "${HOME}/.bashrc" && git --version'
 run_bash_check 'patch is installed' 'source "${HOME}/.bashrc" && patch --version'
+run_bash_check 'rsync is installed' 'source "${HOME}/.bashrc" && rsync --version'
+run_bash_check 'tree is installed' 'source "${HOME}/.bashrc" && tree --version'
 
 log_section 'Utilities'
 run_bash_check 'hey is installed' 'source "${HOME}/.bashrc" && /usr/local/sbin/hey -n 1 -c 1 http://127.0.0.1:9 >/dev/null 2>&1; test -x /usr/local/sbin/hey'
