@@ -121,7 +121,7 @@ dnf makecache
 # executable and other commands
 # ------------------------------------------------------------------------------
 echo 'Installing the dependencies required to build the statically linked native executable'
-dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make unzip zip
+dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make unzip zip rsync tree
 # ------------------------------------------------------------------------------
 
 
