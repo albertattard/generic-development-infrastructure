@@ -751,6 +751,21 @@ rm -rf "/tmp/${RIPGREP_ARCHIVE}" "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown
 
 
 # ------------------------------------------------------------------------------
+# Configure user-local executables
+# ------------------------------------------------------------------------------
+echo 'Configuring user-local executables'
+sudo -i -u opc bash << 'EOF'
+mkdir --parents '/home/opc/.local/bin'
+mkdir -p '/home/opc/.bashrc.d'
+
+cat << 'B_EOF' > '/home/opc/.bashrc.d/local-bin'
+PATH="${PATH}:/home/opc/.local/bin"
+B_EOF
+EOF
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 # Install NPM
 # ------------------------------------------------------------------------------
 echo 'Installing NPM'
@@ -833,7 +848,8 @@ source "$HOME/.cargo/env"
 
 rustup component add clippy rustfmt
 
-update_sw
+# The local-bin profile snippet is loaded by future shells, not this running heredoc.
+/home/opc/.local/bin/update_sw
 EOF
 # ------------------------------------------------------------------------------
 

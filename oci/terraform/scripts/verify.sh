@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 set -uo pipefail
 
 FAILURES=0
@@ -114,8 +115,8 @@ run_bash_check 'JMeter is installed' 'source "${HOME}/.bashrc" && jmeter --versi
 run_bash_check 'xq is installed' 'source "${HOME}/.bashrc" && /usr/local/bin/xq --version'
 run_bash_check 'ripgrep is installed' 'source "${HOME}/.bashrc" && /usr/local/bin/rg --version'
 run_bash_check 'gdb is installed' 'source "${HOME}/.bashrc" && gdb --version'
-run_bash_check 'sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/sw"'
-run_bash_check 'update_sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/update_sw"'
+run_bash_check 'sw is available on PATH' 'source "${HOME}/.bashrc" && command -v sw >/dev/null'
+run_bash_check 'update_sw is available on PATH' 'source "${HOME}/.bashrc" && command -v update_sw >/dev/null'
 run_bash_check 'Codex CLI is installed' 'source "${HOME}/.bashrc" && codex --version'
 
 log_section 'Containers'
