@@ -21,7 +21,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    instance.
 
    This example assumes that the private key is found at
-   `~/.ssh/ssh-key-oci-instance.key`.
+   `~/.ssh/oracle_id_ed25519`.
 
 2. Create the `./terraform/terraform.tfvars` file and provide a value to each
    variable. Following is a **sample**.
@@ -34,7 +34,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    tenancy_id                      = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
-   ssh_private_key_file            = "~/.ssh/ssh-key-oci-instance.key"
+   ssh_private_key_file            = "~/.ssh/oracle_id_ed25519"
    image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaalkf4mkx2efw7xghafasr2ehia42ombnybkbmejjtvfa6nd3yttfa"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
    freeform_tags                   = {}
@@ -75,8 +75,10 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      installing several versions of Java amongst other things. The SSH private
      key is used to upload the
      [`./terraform/scripts/bootstrap.sh` script](./terraform/scripts/bootstrap.sh)
-     and then execute it. This SSH private key needs to match one of the
-     `ssh_authorized_keys`.
+     and the
+     [`./terraform/scripts/config.toml` Codex configuration file](./terraform/scripts/config.toml),
+     and then execute the bootstrap script. This SSH private key needs to match
+     one of the `ssh_authorized_keys`.
    - `image_source_id`: This setup creates an OCI compute instance. This OCI
      compute instance uses this Oracle Linux image as its base. You can find the
      latest versions of the Oracle Linux 10.x Images
@@ -104,13 +106,13 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
 
 3. Deploy the infrastructure
 
-   Run the [`deploy`](./deploy) script from within this directory.
+   Run the [`deploy.sh`](./deploy.sh) script from within the `oci` directory.
 
    ```shell
-   $ ./deploy
+   ./deploy.sh
    ```
 
-   This will take about 5 minutes to complete as it needs to create several OCI
+   This will take about 15 minutes to complete as it needs to create several OCI
    resources, including the OCI compute instance, download all the binaries and
    then install them.
 
@@ -120,13 +122,13 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    ```
    ...
    instance_public_ip = "###.###.###.###"
-   ssh_command = "ssh -i ~/.ssh/ssh-key-oci-instance.key opc@###.###.###.###"
+   ssh_command = "ssh -i ~/.ssh/oracle_id_ed25519 opc@###.###.###.###"
    ```
 
 4. (_Optional_) Verify that it is working.
 
    ```shell
-   $ ssh -i ~/.ssh/ssh-key-oci-instance.key \
+   ssh -i ~/.ssh/oracle_id_ed25519 \
      "opc@$(terraform -chdir='./terraform' output -json | jq --raw-output '.instance_public_ip.value')"
    ```
 
@@ -135,8 +137,8 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    version.
 
    ```shell
-   > java17
-   > java --version
+   java17
+   java --version
    ...
    ```
 
@@ -144,18 +146,36 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    running:
 
    ```shell
-   > update_sw
+   update_sw
    ```
 
    To build a different branch, pass the branch name as the first argument.
 
+   The Codex CLI is installed for the `opc` user with the configuration from
+   [`./terraform/scripts/config.toml`](./terraform/scripts/config.toml) copied
+   to `/home/opc/.codex/config.toml`.
+
+5. Copy the Codex authentication file.
+
+   After the infrastructure is deployed and verification completes successfully,
+   copy the local Codex authentication file to the instance.
+
+   ```shell
+   ./copy-codex-auth.sh
+   ```
+
+   The script uses `~/.ssh/oracle_id_ed25519` by default. It copies
+   `~/.codex/auth.json` to `/home/opc/.codex/auth.json` and sets the remote file
+   permissions to `600`. The authentication file is not handled by Terraform
+   because it contains credentials.
+
 ## Tear down
 
 When ready, destroy the infrastructure so that you don't incur unnecessarily
-charges, by running the `destroy` script from within the `./oci` directory.
+charges, by running the `destroy.sh` script from within the `./oci` directory.
 
 ```shell
-$ ./destroy
+./destroy.sh
 ```
 
 This will destroy all resources that were created by the same terraform script.

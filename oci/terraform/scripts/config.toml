@@ -1,0 +1,42 @@
+# Ask for user approval before running sensitive or high-impact actions
+approval_policy = "on-request"
+
+# Allow read/write access within the workspace, but restrict system-wide changes
+sandbox_mode = "workspace-write"
+
+# Use real-time internet queries for the most up-to-date information
+web_search = "live"
+
+# Allow web search only when needed
+web_search_request = true
+
+# Bias responses toward practical solutions
+personality = "pragmatic"
+
+# Keep reasoning balanced for day-to-day work
+model_reasoning_effort = "medium"
+
+# Use the newer Responses API for model interactions
+wire_api = "responses"
+
+# Specify the model to use via the selected provider
+model = "gpt-5.5"
+
+# Select Oracle Code Assist as the model provider
+model_provider = "oca"
+
+# Define the Oracle Code Assist model provider
+[model_providers.oca]
+name = "OCA Model Provider (Chicago)"  # Human-readable identifier
+base_url = "https://code-internal.aiservice.us-chicago-1.oci.oraclecloud.com/20250206/app/litellm"  # API endpoint
+http_headers = { "client" = "codex-cli", "client-version" = "0" }  # Client identification headers
+
+[features]
+# Enable multi-agent workflows for larger tasks that benefit from planning and review
+multi_agent = true
+
+[sandbox_workspace_write]
+network_access = true
+
+[projects."/home/opc/workspace"]
+trust_level = "trusted"

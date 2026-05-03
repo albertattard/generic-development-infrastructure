@@ -121,7 +121,7 @@ dnf makecache
 # executable and other commands
 # ------------------------------------------------------------------------------
 echo 'Installing the dependencies required to build the statically linked native executable'
-dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make unzip zip rsync tree
+dnf install -y patch git-all gcc glibc-devel zlib-devel libstdc++-static make unzip zip rsync tree bubblewrap
 # ------------------------------------------------------------------------------
 
 
@@ -747,6 +747,46 @@ tar --extract --gzip --file "/tmp/${RIPGREP_ARCHIVE}" --directory /tmp "ripgrep-
 install --mode 0755 "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl/rg" /usr/local/bin/rg
 rm -rf "/tmp/${RIPGREP_ARCHIVE}" "/tmp/ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl"
 /usr/local/bin/rg --version
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Install NPM
+# ------------------------------------------------------------------------------
+echo 'Installing NPM'
+dnf install -y nodejs npm
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Install Codex CLI
+# Installation source:
+# - https://developers.openai.com/codex/cli/
+# ------------------------------------------------------------------------------
+echo 'Installing Codex CLI'
+CODEX_CONFIG_SOURCE='/tmp/codex-config.toml'
+if [[ ! -f "${CODEX_CONFIG_SOURCE}" ]]; then
+  echo "Codex configuration file not found: ${CODEX_CONFIG_SOURCE}" >&2
+  exit 1
+fi
+
+sudo -i -u opc bash << EOF
+set -euo pipefail
+NPM_GLOBAL_PREFIX='/home/opc/.local/share/npm'
+mkdir -p "\${NPM_GLOBAL_PREFIX}"
+npm config set prefix "\${NPM_GLOBAL_PREFIX}"
+npm install --global @openai/codex
+
+mkdir -p '/home/opc/.codex'
+install --mode 0600 "${CODEX_CONFIG_SOURCE}" '/home/opc/.codex/config.toml'
+
+mkdir -p '/home/opc/.bashrc.d'
+cat << 'B_EOF' > '/home/opc/.bashrc.d/codex'
+PATH="${PATH}:/home/opc/.local/share/npm/bin"
+B_EOF
+
+PATH="\${PATH}:\${NPM_GLOBAL_PREFIX}/bin"
+codex --version
+EOF
 # ------------------------------------------------------------------------------
 
 

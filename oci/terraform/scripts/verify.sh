@@ -93,6 +93,8 @@ run_bash_check 'kotlin command works' 'source "${HOME}/.bashrc" && kotlin -versi
 run_bash_check 'kotlinc command works' 'source "${HOME}/.bashrc" && kotlinc -version'
 run_bash_check 'Python is installed' 'source "${HOME}/.bashrc" && python3 --version'
 run_bash_check 'pip is installed' 'source "${HOME}/.bashrc" && pip3 --version'
+run_bash_check 'Node.js is installed' 'source "${HOME}/.bashrc" && node --version'
+run_bash_check 'npm is installed' 'source "${HOME}/.bashrc" && npm --version'
 run_bash_check 'Rust compiler is installed' 'source "${HOME}/.bashrc" && source "${HOME}/.cargo/env" && rustc --version'
 run_bash_check 'Cargo is installed' 'source "${HOME}/.bashrc" && source "${HOME}/.cargo/env" && cargo --version'
 run_bash_check 'rustup is installed' 'source "${HOME}/.bashrc" && source "${HOME}/.cargo/env" && rustup show active-toolchain'
@@ -104,6 +106,7 @@ run_bash_check 'Git is installed' 'source "${HOME}/.bashrc" && git --version'
 run_bash_check 'patch is installed' 'source "${HOME}/.bashrc" && patch --version'
 run_bash_check 'rsync is installed' 'source "${HOME}/.bashrc" && rsync --version'
 run_bash_check 'tree is installed' 'source "${HOME}/.bashrc" && tree --version'
+run_bash_check 'bubblewrap is installed' 'source "${HOME}/.bashrc" && bwrap --version'
 
 log_section 'Utilities'
 run_bash_check 'hey is installed' 'source "${HOME}/.bashrc" && /usr/local/sbin/hey -n 1 -c 1 http://127.0.0.1:9 >/dev/null 2>&1; test -x /usr/local/sbin/hey'
@@ -113,6 +116,7 @@ run_bash_check 'ripgrep is installed' 'source "${HOME}/.bashrc" && /usr/local/bi
 run_bash_check 'gdb is installed' 'source "${HOME}/.bashrc" && gdb --version'
 run_bash_check 'sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/sw"'
 run_bash_check 'update_sw is installed' 'source "${HOME}/.bashrc" && test -x "${HOME}/.local/bin/update_sw"'
+run_bash_check 'Codex CLI is installed' 'source "${HOME}/.bashrc" && codex --version'
 
 log_section 'Containers'
 run_bash_check 'Podman is installed' 'source "${HOME}/.bashrc" && podman --version'
@@ -134,6 +138,7 @@ log_section 'Filesystem'
 run_bash_check 'JDK installation directory exists' 'source "${HOME}/.bashrc" && test -d /usr/lib/jvm'
 run_bash_check 'SDKMAN java current link exists' 'source "${HOME}/.bashrc" && test -L "${HOME}/.sdkman/candidates/java/current"'
 run_bash_check 'SDKMAN kotlin current link exists' 'source "${HOME}/.bashrc" && test -L "${HOME}/.sdkman/candidates/kotlin/current"'
+run_bash_check 'Codex config file exists' 'source "${HOME}/.bashrc" && test -f "${HOME}/.codex/config.toml"'
 
 if (( FAILURES > 0 )); then
     printf '\nVerification completed with %d failure(s).\n' "${FAILURES}" >&2

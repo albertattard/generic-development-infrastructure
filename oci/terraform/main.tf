@@ -168,6 +168,19 @@ resource "null_resource" "bootstrap" {
     destination = "/tmp/bootstrap.sh"
   }
 
+  provisioner "file" {
+    connection {
+      agent       = false
+      timeout     = "5m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    source      = "./scripts/config.toml"
+    destination = "/tmp/codex-config.toml"
+  }
+
   provisioner "remote-exec" {
     connection {
       agent       = false
