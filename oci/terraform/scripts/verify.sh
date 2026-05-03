@@ -84,6 +84,7 @@ run_alias_check 'java23 alias works' 'java23' 'java --version'
 run_alias_check 'java24 alias works' 'java24' 'java --version'
 run_alias_check 'java25 alias works' 'java25' 'java --version'
 run_alias_check 'java26 alias works' 'java26' 'java --version'
+run_alias_check 'java27 alias works' 'java27' 'java --version'
 run_alias_check 'graal25 alias exposes native-image' 'graal25' 'native-image --version'
 run_check "Java smoke test compiles and runs" bash -lc "source \"\${HOME}/.bashrc\" && shopt -s expand_aliases && eval 'java25' && javac '${TEMP_DIR}/Hello.java' && java -cp '${TEMP_DIR}' Hello"
 
