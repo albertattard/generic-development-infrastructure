@@ -258,35 +258,35 @@ require_reachable_link "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-nat
 # (albert.attard@oracle.com).
 # ------------------------------------------------------------------------------
 echo 'Downloading the binaries'
-curl --silent --show-error --fail --location --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_PERF_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-9.tar.gz'                 "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-10.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-10.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-11.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_11_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-12.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-12.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-13.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-13.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-14.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-14.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-15.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-15.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-16.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-16.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-17.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_17_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-18.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-18.0.2.1_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-19.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-19.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-20.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-24.0.2_linux-x64_bin.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/jdk-25.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-25-loom.tar.gz'           "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-25-jextract.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_JEXTRACT_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-26.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-26-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_LEYDEN_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-27.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_27_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/jdk-27-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_27_VALHALLA_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/graalvm-25.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_25_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/${KOTLINC_BINARY_FILE}"
-curl --silent --show-error --fail --location --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
-curl --silent --show-error --fail --location --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-1.8.tar.gz'               "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-1.8-perf.tar.gz'          "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_1_8_PERF_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-9.tar.gz'                 "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-9.0.4_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-10.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-10.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-11.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_11_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-12.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-12.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-13.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-13.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-14.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-14.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-15.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-15.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-16.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-16.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-17.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_17_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-18.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-18.0.2.1_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-19.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-19.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-20.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-20.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-21.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_21_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-22.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-22.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-23.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-23.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-24.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/jdk-24.0.2_linux-x64_bin.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-25.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-25-loom.tar.gz'           "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_LOOM_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-25-jextract.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_25_JEXTRACT_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-26.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-26-leyden.tar.gz'         "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_26_LEYDEN_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-27.tar.gz'                "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_27_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/jdk-27-valhalla.tar.gz'       "${BINARIES_PRE_AUTHENTICATED_LINK}/${JAVA_27_VALHALLA_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/graalvm-25.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/${GRAALVM_25_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/kotlin-compiler.zip'          "${BINARIES_PRE_AUTHENTICATED_LINK}/${KOTLINC_BINARY_FILE}"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/zlib-1.3.1.tar.gz'            "${BINARIES_PRE_AUTHENTICATED_LINK}/zlib-1.3.1.tar.gz"
+curl --silent --show-error --fail --location --retry 5 --retry-delay 10 --retry-connrefused --output '/tmp/x86_64-linux-musl-native.tgz' "${BINARIES_PRE_AUTHENTICATED_LINK}/x86_64-linux-musl-native.tgz"
 # ------------------------------------------------------------------------------
 
 
@@ -438,8 +438,14 @@ cargo --version
 
 # ------------------------------------------------------------------------------
 # Install hey, an HTTP load generator and ApacheBench (ab) replacement
+# Checksum note:
+# - The Google Storage URL does not include a versioned filename or published
+#   checksum. This hash pins the currently expected object and detects drift.
 # ------------------------------------------------------------------------------
 echo 'Installing hey'
+HEY_BINARY_FILE='hey_linux_amd64'
+HEY_BINARY_SHA256='798bfb262a0d098ffc0d144f61bc2d01eeb18ff1cdbb03280ccf0481cf64cfed'
+
 mkdir -p '/usr/local/sbin'
 curl \
   --ipv4 \
@@ -450,26 +456,39 @@ curl \
   --retry 5 \
   --retry-delay 10 \
   --retry-connrefused \
-  --output '/usr/local/sbin/hey' \
+  --output "/tmp/${HEY_BINARY_FILE}" \
   'https://storage.googleapis.com/hey-releases/hey_linux_amd64'
+
+echo "${HEY_BINARY_SHA256} /tmp/${HEY_BINARY_FILE}" | sha256sum --check
+install --mode 0755 "/tmp/${HEY_BINARY_FILE}" '/usr/local/sbin/hey'
+rm -f "/tmp/${HEY_BINARY_FILE}"
 chmod +x '/usr/local/sbin/hey'
 # ------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------
 # Install JMeter
+# Checksum source:
+# - https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz.sha512
 # ------------------------------------------------------------------------------
 echo 'Installing JMeter'
+JMETER_ARCHIVE='apache-jmeter-5.6.3.tgz'
+JMETER_SHA512='5978a1a35edb5a7d428e270564ff49d2b1b257a65e17a759d259a9283fc17093e522fe46f474a043864aea6910683486340706d745fcdf3db1505fd71e689083'
+
 curl \
   --silent \
   --show-error \
   --fail \
   --location \
-  --output '/tmp/apache-jmeter-5.6.3.tgz' \
-  'https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz'
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
+  --output "/tmp/${JMETER_ARCHIVE}" \
+  "https://downloads.apache.org/jmeter/binaries/${JMETER_ARCHIVE}"
 
+echo "${JMETER_SHA512} /tmp/${JMETER_ARCHIVE}" | sha512sum --check
 mkdir -p '/opt/jmeter'
-tar --extract --file '/tmp/apache-jmeter-5.6.3.tgz' --directory '/opt/jmeter' --strip-components 1
+tar --extract --file "/tmp/${JMETER_ARCHIVE}" --directory '/opt/jmeter' --strip-components 1
 
 sudo -i -u opc bash << 'EOF'
 mkdir -p '/home/opc/.bashrc.d'
@@ -477,7 +496,7 @@ cat << 'B_EOF' > '/home/opc/.bashrc.d/jmeter'
 PATH="${PATH}:/opt/jmeter/bin"
 B_EOF
 EOF
-rm '/tmp/apache-jmeter-5.6.3.tgz'
+rm "/tmp/${JMETER_ARCHIVE}"
 # ------------------------------------------------------------------------------
 
 
@@ -494,10 +513,14 @@ dnf install -y python3-pip python3
 # ------------------------------------------------------------------------------
 echo 'Install the Falcon Heartbeat (required by security)'
 echo 'See: https://confluence.oraclecorp.com/confluence/display/NIT/Falcon+Heartbeat+Findings+Resolution+-+Scripts'
-curl --fail \
-  --location \
+curl \
   --silent \
   --show-error \
+  --fail \
+  --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output '/tmp/install_falcon.py' 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/wpj0M57XjIImf1jZcEsGhqdP1ZyUY27tr1eL6NAqsXVpapFp468aredx6whaWinG/n/orasenatdpltintegration03/b/FalconSupport-donotdelete/o/install_falcon.py'
 python3 '/tmp/install_falcon.py'
 # ------------------------------------------------------------------------------
@@ -570,6 +593,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${DIVE_RPM}" \
   "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/${DIVE_RPM}"
 
@@ -605,6 +631,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${XQ_ARCHIVE}" \
   "https://github.com/sibprogrammer/xq/releases/download/v${XQ_VERSION}/${XQ_ARCHIVE}"
 
@@ -634,6 +663,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${SYFT_RPM}" \
   "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/${SYFT_RPM}"
 
@@ -661,6 +693,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${GRYPE_RPM}" \
   "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/${GRYPE_RPM}"
 
@@ -689,6 +724,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${OLLAMA_ARCHIVE}" \
   "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/${OLLAMA_ARCHIVE}"
 
@@ -751,6 +789,9 @@ curl \
   --show-error \
   --fail \
   --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   --output "/tmp/${RIPGREP_ARCHIVE}" \
   "https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP_ARCHIVE}"
 
@@ -790,6 +831,7 @@ dnf install -y nodejs npm
 # - https://developers.openai.com/codex/cli/
 # ------------------------------------------------------------------------------
 echo 'Installing Codex CLI'
+CODEX_CLI_VERSION='0.129.0'
 CODEX_CONFIG_SOURCE='/tmp/codex-config.toml'
 if [[ ! -f "${CODEX_CONFIG_SOURCE}" ]]; then
   echo "Codex configuration file not found: ${CODEX_CONFIG_SOURCE}" >&2
@@ -801,7 +843,7 @@ set -euo pipefail
 NPM_GLOBAL_PREFIX='/home/opc/.local/share/npm'
 mkdir -p "\${NPM_GLOBAL_PREFIX}"
 npm config set prefix "\${NPM_GLOBAL_PREFIX}"
-npm install --global @openai/codex
+npm install --global "@openai/codex@${CODEX_CLI_VERSION}"
 
 mkdir -p '/home/opc/.codex'
 install --mode 0600 "${CODEX_CONFIG_SOURCE}" '/home/opc/.codex/config.toml'
@@ -854,6 +896,9 @@ curl \
   --location \
   --proto '=https' \
   --tlsv1.2 \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
   https://sh.rustup.rs | \
   sh -s -- -y --profile minimal --default-toolchain 1.94.1
 source "$HOME/.cargo/env"
@@ -1151,7 +1196,15 @@ echo 'Installing and configuring SDKMAN'
 sudo -i -u opc bash << 'EOF'
 rm -rf '/home/opc/.sdkman'
 
-curl --silent --show-error --fail --location 'https://get.sdkman.io' | bash
+curl \
+  --silent \
+  --show-error \
+  --fail \
+  --location \
+  --retry 5 \
+  --retry-delay 10 \
+  --retry-connrefused \
+  'https://get.sdkman.io' | bash
 
 source '/home/opc/.sdkman/bin/sdkman-init.sh'
 
