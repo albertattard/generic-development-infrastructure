@@ -22,7 +22,7 @@ Status legend:
   - Likely first fix: add `instance_options { are_legacy_imds_endpoints_disabled = true }` to the instance resource.
   - Files: `oci/terraform/main.tf`, `oci/README.md`.
 
-- [ ] **3. Treat the binaries pre-authenticated URL as sensitive.**
+- [x] **3. Treat the binaries pre-authenticated URL as sensitive.**
   - Current state: `binaries_pre_authenticated_link` is a normal string and is passed as a remote command argument.
   - Risk: the URL may appear in Terraform state, logs, or process listings.
   - Likely first fix: mark the variable `sensitive = true` and pass it to the remote script through a less exposed mechanism.
@@ -78,3 +78,4 @@ Status legend:
 
 - Task 1: SSH access is now restricted to explicit CIDR blocks through `ssh_ingress_cidr_blocks`, and `oci/README.md` documents how to find the current public IP for a `/32` allowlist entry.
 - Task 2: The compute instance now disables legacy IMDSv1 metadata endpoints and `oci/README.md` documents that IMDSv2 is required.
+- Task 3: The binaries pre-authenticated URL is now a sensitive Terraform variable and bootstrap reads it from `/tmp/.binaries-pre-authenticated-link` instead of receiving it as a shell command argument.

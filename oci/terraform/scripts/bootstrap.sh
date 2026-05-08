@@ -45,14 +45,26 @@ retry_require_reachable_link() {
 
 
 # ------------------------------------------------------------------------------
-# This script downloads binaries using the provided Pre-Authenticated link.
+# This script downloads binaries using the provided Pre-Authenticated link file.
 # Kindly note that while some of these binaries are freely available others are
 # not. Do not make the Per-Authenticated link publicly available.
 #
 # For more information or require additional help, please speak to Albert Attard
 # (albert.attard@oracle.com).
 # ------------------------------------------------------------------------------
-BINARIES_PRE_AUTHENTICATED_LINK="$1"
+BINARIES_PRE_AUTHENTICATED_LINK_FILE='/tmp/.binaries-pre-authenticated-link'
+trap 'rm -f "${BINARIES_PRE_AUTHENTICATED_LINK_FILE}"' EXIT
+
+if [[ ! -r "${BINARIES_PRE_AUTHENTICATED_LINK_FILE}" ]]; then
+  echo "Cannot read binaries pre-authenticated link file: ${BINARIES_PRE_AUTHENTICATED_LINK_FILE}" >&2
+  exit 1
+fi
+
+IFS= read -r BINARIES_PRE_AUTHENTICATED_LINK < "${BINARIES_PRE_AUTHENTICATED_LINK_FILE}"
+if [[ -z "${BINARIES_PRE_AUTHENTICATED_LINK}" ]]; then
+  echo "Binaries pre-authenticated link file is empty" >&2
+  exit 1
+fi
 # ------------------------------------------------------------------------------
 
 

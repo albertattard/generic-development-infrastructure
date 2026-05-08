@@ -100,6 +100,7 @@ The OCI Pre-Authenticated link used to download the binaries from the OCI
 bucket. Please talk to Albert Attard (albert.attard@oracle.com) for more
 information about this.
 EOF
+  sensitive   = true
 }
 
 variable "freeform_tags" {

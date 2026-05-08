@@ -116,7 +116,11 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      downloaded from
      `${var.binaries_pre_authenticated_link}/jdk-22.0.2_linux-x64_bin.tar.gz`
      using HTTP GET request. Note that the `binaries_pre_authenticated_link`
-     should not end with a `/` as one is always added.
+     should not end with a `/` as one is always added. Terraform treats this
+     value as sensitive and uploads it to
+     `/tmp/.binaries-pre-authenticated-link` as a temporary bootstrap file,
+     rather than passing it as a shell command argument. The bootstrap script
+     removes this file when it exits.
    - `freeform_tags`: The freeform tags to be assigned to each OCI resource that
      is created as part of this setup. While this is optional and can be left
      blank, it is recommended to add a tag to group all the resources together.

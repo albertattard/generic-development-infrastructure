@@ -189,6 +189,19 @@ resource "null_resource" "bootstrap" {
     destination = "/tmp/codex-config.toml"
   }
 
+  provisioner "file" {
+    connection {
+      agent       = false
+      timeout     = "5m"
+      host        = oci_core_instance.public.public_ip
+      user        = "opc"
+      private_key = file(var.ssh_private_key_file)
+    }
+
+    content     = "${var.binaries_pre_authenticated_link}\n"
+    destination = "/tmp/.binaries-pre-authenticated-link"
+  }
+
   provisioner "remote-exec" {
     connection {
       agent       = false
@@ -199,7 +212,8 @@ resource "null_resource" "bootstrap" {
     }
 
     inline = [
-      "sudo bash /tmp/bootstrap.sh '${var.binaries_pre_authenticated_link}'"
+      "chmod 0600 '/tmp/.binaries-pre-authenticated-link'",
+      "sudo bash /tmp/bootstrap.sh"
     ]
   }
 }
