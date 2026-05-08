@@ -140,6 +140,10 @@ resource "oci_core_instance" "public" {
     "ssh_authorized_keys" = join("\n", var.ssh_authorized_keys)
   }
 
+  instance_options {
+    are_legacy_imds_endpoints_disabled = true
+  }
+
   source_details {
     source_id               = var.image_source_id
     source_type             = "image"

@@ -128,6 +128,9 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    [`./terraform/main.tf` terraform file](./terraform/main.tf) for more
    information about how each variable is used.
 
+   The compute instance disables legacy IMDSv1 metadata endpoints and requires
+   IMDSv2. Instance metadata callers must use the IMDSv2 authorization header.
+
 3. Deploy the infrastructure
 
    Run the [`deploy.sh`](./deploy.sh) script from within the `oci` directory.

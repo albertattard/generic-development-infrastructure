@@ -17,7 +17,7 @@ Status legend:
   - Likely first fix: add an `ssh_ingress_cidr_blocks` variable and stop defaulting SSH to the whole internet.
   - Files: `oci/terraform/main.tf`, `oci/terraform/variables.tf`, `oci/README.md`.
 
-- [ ] **2. Enforce IMDSv2 on the compute instance.**
+- [x] **2. Enforce IMDSv2 on the compute instance.**
   - Current state: remediation docs require IMDSv2, but Terraform does not disable legacy IMDS endpoints.
   - Likely first fix: add `instance_options { are_legacy_imds_endpoints_disabled = true }` to the instance resource.
   - Files: `oci/terraform/main.tf`, `oci/README.md`.
@@ -77,3 +77,4 @@ Status legend:
 ## Completed
 
 - Task 1: SSH access is now restricted to explicit CIDR blocks through `ssh_ingress_cidr_blocks`, and `oci/README.md` documents how to find the current public IP for a `/32` allowlist entry.
+- Task 2: The compute instance now disables legacy IMDSv1 metadata endpoints and `oci/README.md` documents that IMDSv2 is required.
