@@ -1136,7 +1136,8 @@ EOF
 # Install SDKMAN
 # Installation source:
 # - https://sdkman.io/install
-# We rely on the official installer here.
+# We trust SDKMAN's official installer and let it manage its own installation
+# layout and native CLI downloads.
 # ------------------------------------------------------------------------------
 echo 'Installing and configuring SDKMAN'
 sudo -i -u opc bash << 'EOF'
