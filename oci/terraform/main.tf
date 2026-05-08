@@ -185,7 +185,7 @@ resource "null_resource" "bootstrap" {
       private_key = file(var.ssh_private_key_file)
     }
 
-    source      = "./scripts/config.toml"
+    source      = "./scripts/codex-config.toml"
     destination = "/tmp/codex-config.toml"
   }
 

@@ -1,13 +1,14 @@
-# Create compute instance with different Oracle Java and different Oracle GraalVM
+# Create development environment with several Oracle Java and other development tools
 
-Create compute instance with different Oracle Java and different Oracle GraalVM.
+Create development environment with several Oracle Java and other development
+tools.
 
 ## Prerequisites
 
 - Oracle OCI account
 
-  Create an [OCI account](https://cloud.oracle.com/) and create/download an
-  API key
+  Create an [OCI account](https://cloud.oracle.com/) and create/download an API
+  key
 
 - [Terraform](https://www.terraform.io/)
 
@@ -34,7 +35,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    tenancy_id                      = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
-   ssh_ingress_cidr_blocks        = ["203.0.113.10/32"]
+   ssh_ingress_cidr_blocks         = ["203.0.113.10/32"]
    ssh_private_key_file            = "~/.ssh/oracle_id_ed25519"
    image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaalkf4mkx2efw7xghafasr2ehia42ombnybkbmejjtvfa6nd3yttfa"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
@@ -56,7 +57,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      [`./terraform/main.tf` terraform file](./terraform/main.tf) for more
      information about how this variable is used.
    - `instance_vnic_display_name`: This setup creates an OCI compute instance
-     and attaches a VNIC to it. The value of this variable is used as the VNIC's
+     and attaches a VNIC to it. The value of this variable is used as the VNIC’s
      name. This name will also be show as part of the prompt when login into
      this compute instance.
    - `region`: The
@@ -92,9 +93,10 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      the risk of exposing SSH to the whole internet.
 
      The `/32` suffix matters. It means "only this one IPv4 address". Do not
-     replace it with a broader suffix such as `/10` unless you intentionally want
-     a much larger network range. If you do use a broader range, the IP portion
-     must be the network address for that range, not your laptop's host address.
+     replace it with a broader suffix such as `/10` unless you intentionally
+     want a much larger network range. If you do use a broader range, the IP
+     portion must be the network address for that range, not your laptop's host
+     address.
    - `ssh_private_key_file`: This setup configures the OCI compute instance by
      installing several versions of Java amongst other things. The SSH private
      key is used to upload the
