@@ -41,7 +41,8 @@ Status legend:
   - Challenge: the script already proves checksums are feasible, so the exceptions should be deliberate and documented.
   - Likely first fix: pin and verify `hey`, JMeter, SDKMAN/Codex install path, and `sw` revision; document any unavoidable installer trust.
   - Progress: `hey` now has a pinned expected SHA-256 for the downloaded object, JMeter is verified against Apache's published SHA-512, and Codex CLI is pinned to an explicit npm package version.
-  - Remaining: decide how to handle the Falcon installer, SDKMAN installer, and `sw` default build from a mutable branch.
+  - Accepted exception: the Falcon installer comes from Oracle's internal Falcon support bucket and is documented as a trusted internal installer without an independent checksum.
+  - Remaining: decide how to handle the SDKMAN installer and `sw` default build from a mutable branch.
   - Files: `oci/terraform/scripts/bootstrap.sh`, `oci/README.md`.
 
 - [ ] **6. Restore Terraform provider reproducibility.**

@@ -514,6 +514,9 @@ dnf install -y python3-pip python3
 
 # ------------------------------------------------------------------------------
 # Install the Falcon Heartbeat (required by security)
+# This installer is provided by Oracle's internal Falcon support bucket. No
+# independent checksum is published for this script, so this is an explicit
+# trusted internal installer exception.
 # ------------------------------------------------------------------------------
 echo 'Install the Falcon Heartbeat (required by security)'
 echo 'See: https://confluence.oraclecorp.com/confluence/display/NIT/Falcon+Heartbeat+Findings+Resolution+-+Scripts'
