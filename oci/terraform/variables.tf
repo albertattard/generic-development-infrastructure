@@ -34,6 +34,20 @@ variable "ssh_authorized_keys" {
   description = "The list of public keys to be added to all compute instances"
 }
 
+variable "ssh_ingress_cidr_blocks" {
+  type        = list(string)
+  description = "The CIDR blocks that are allowed to SSH to the public compute instance"
+
+  validation {
+    condition = length(var.ssh_ingress_cidr_blocks) > 0 && alltrue([
+      for cidr_block in var.ssh_ingress_cidr_blocks :
+      can(cidrhost(cidr_block, 0)) &&
+      cidr_block == format("%s/%s", cidrhost(cidr_block, 0), split("/", cidr_block)[1])
+    ])
+    error_message = "Provide at least one valid canonical CIDR block. For one laptop public IPv4 address, use /32, for example 203.0.113.10/32. Broader ranges must use the network address, for example 203.0.113.0/24."
+  }
+}
+
 variable "ssh_private_key_file" {
   type        = string
   description = <<EOF

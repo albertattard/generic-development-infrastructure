@@ -76,14 +76,18 @@ resource "oci_core_default_security_list" "this" {
     protocol    = "all"
   }
 
-  ingress_security_rules {
-    description = "Allow SSH from the anywhere (without this cannot SSH to the public instance)"
-    protocol    = "6"
-    source      = "0.0.0.0/0"
+  dynamic "ingress_security_rules" {
+    for_each = toset(var.ssh_ingress_cidr_blocks)
 
-    tcp_options {
-      min = 22
-      max = 22
+    content {
+      description = "Allow SSH from ${ingress_security_rules.value}"
+      protocol    = "6"
+      source      = ingress_security_rules.value
+
+      tcp_options {
+        min = 22
+        max = 22
+      }
     }
   }
 

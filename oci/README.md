@@ -34,6 +34,7 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
    tenancy_id                      = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    compartment_id                  = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ssh_authorized_keys             = []
+   ssh_ingress_cidr_blocks        = ["203.0.113.10/32"]
    ssh_private_key_file            = "~/.ssh/oracle_id_ed25519"
    image_source_id                 = "ocid1.image.oc1.iad.aaaaaaaalkf4mkx2efw7xghafasr2ehia42ombnybkbmejjtvfa6nd3yttfa"
    binaries_pre_authenticated_link = "https://xxxxxx.oci.customer-oci.com/p/xxxxxx/n/xxxxxx/b/generic-development-infrastructure/o/binaries"
@@ -71,6 +72,29 @@ Create compute instance with different Oracle Java and different Oracle GraalVM.
      public/private key pair as means of authentication instead of password.
      These SSH public keys will be added to the OCI compute instance and are the
      only means of logging into the instance.
+   - `ssh_ingress_cidr_blocks`: The public CIDR blocks that are allowed to SSH
+     to the compute instance. To allow only your current laptop connection, find
+     your current public IPv4 address and add it with a `/32` suffix:
+
+     ```shell
+     curl --silent --show-error --fail --ipv4 https://ifconfig.me
+     ```
+
+     For example, if this prints `123.123.123.123`, set:
+
+     ```terraform
+     ssh_ingress_cidr_blocks = ["123.123.123.123/32"]
+     ```
+
+     If your public IP address changes, update this value in
+     `./terraform/terraform.tfvars` and run `./deploy.sh` again to update the
+     security list. Do not use `0.0.0.0/0` unless you have explicitly accepted
+     the risk of exposing SSH to the whole internet.
+
+     The `/32` suffix matters. It means "only this one IPv4 address". Do not
+     replace it with a broader suffix such as `/10` unless you intentionally want
+     a much larger network range. If you do use a broader range, the IP portion
+     must be the network address for that range, not your laptop's host address.
    - `ssh_private_key_file`: This setup configures the OCI compute instance by
      installing several versions of Java amongst other things. The SSH private
      key is used to upload the
