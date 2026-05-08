@@ -28,10 +28,10 @@ Status legend:
   - Likely first fix: mark the variable `sensitive = true` and pass it to the remote script through a less exposed mechanism.
   - Files: `oci/terraform/variables.tf`, `oci/terraform/main.tf`, `oci/terraform/scripts/bootstrap.sh`.
 
-- [ ] **4. Make bootstrap and verification changes trigger reprovisioning.**
+- [x] **4. Make bootstrap and verification changes trigger reprovisioning.**
   - Current state: `null_resource` provisioners have no triggers tied to script or config content.
   - Risk: changing bootstrap, verify, or config files may not rerun provisioning.
-  - Likely first fix: add `triggers` using file hashes for `bootstrap.sh`, `verify.sh`, and `config.toml`.
+  - Likely first fix: add `triggers` using file hashes for `bootstrap.sh`, `verify.sh`, and `codex-config.toml`.
   - Files: `oci/terraform/main.tf`.
 
 ## P2
@@ -79,3 +79,4 @@ Status legend:
 - Task 1: SSH access is now restricted to explicit CIDR blocks through `ssh_ingress_cidr_blocks`, and `oci/README.md` documents how to find the current public IP for a `/32` allowlist entry.
 - Task 2: The compute instance now disables legacy IMDSv1 metadata endpoints and `oci/README.md` documents that IMDSv2 is required.
 - Task 3: The binaries pre-authenticated URL is now a sensitive Terraform variable and bootstrap reads it from `/tmp/.binaries-pre-authenticated-link` instead of receiving it as a shell command argument.
+- Task 4: Bootstrap and verification `null_resource` blocks now use file-hash triggers so script and Codex config changes rerun provisioning; verification also reruns after bootstrap replacement.

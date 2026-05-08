@@ -163,6 +163,11 @@ resource "null_resource" "bootstrap" {
     oci_core_instance.public,
   ]
 
+  triggers = {
+    bootstrap_script_sha256 = filesha256("${path.module}/scripts/bootstrap.sh")
+    codex_config_sha256     = filesha256("${path.module}/scripts/codex-config.toml")
+  }
+
   provisioner "file" {
     connection {
       agent       = false
@@ -222,6 +227,11 @@ resource "null_resource" "verify" {
   depends_on = [
     null_resource.bootstrap,
   ]
+
+  triggers = {
+    bootstrap_id         = null_resource.bootstrap.id
+    verify_script_sha256 = filesha256("${path.module}/scripts/verify.sh")
+  }
 
   provisioner "file" {
     connection {
