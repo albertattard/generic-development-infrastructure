@@ -36,13 +36,12 @@ Status legend:
 
 ## P2
 
-- [ ] **5. Normalize supply-chain verification for downloaded and installed tools.**
+- [x] **5. Normalize supply-chain verification for downloaded and installed tools.**
   - Current state: some artifacts have checksums, while others use unverified downloads, `curl | bash`, unpinned npm installs, or a mutable Git branch.
   - Challenge: the script already proves checksums are feasible, so the exceptions should be deliberate and documented.
   - Likely first fix: pin and verify `hey`, JMeter, SDKMAN/Codex install path, and `sw` revision; document any unavoidable installer trust.
   - Progress: `hey` now has a pinned expected SHA-256 for the downloaded object, JMeter is verified against Apache's published SHA-512, and Codex CLI is pinned to an explicit npm package version.
-  - Accepted exception: the Falcon installer comes from Oracle's internal Falcon support bucket and SDKMAN uses its official upstream installer; both are trusted installers without independent checksums in this script.
-  - Remaining: decide how to handle the `sw` default build from a mutable branch.
+  - Accepted exception: the Falcon installer comes from Oracle's internal Falcon support bucket and SDKMAN uses its official upstream installer; both are trusted installers without independent checksums in this script. `sw` intentionally builds from the mutable `main` branch because it is developed alongside this environment and rebuilt on the VM after changes are pushed.
   - Files: `oci/terraform/scripts/bootstrap.sh`, `oci/README.md`.
 
 - [ ] **6. Restore Terraform provider reproducibility.**
@@ -83,3 +82,4 @@ Status legend:
 - Task 2: The compute instance now disables legacy IMDSv1 metadata endpoints and `oci/README.md` documents that IMDSv2 is required.
 - Task 3: The binaries pre-authenticated URL is now a sensitive Terraform variable and bootstrap reads it from `/tmp/.binaries-pre-authenticated-link` instead of receiving it as a shell command argument.
 - Task 4: Bootstrap and verification `null_resource` blocks now use file-hash triggers so script and Codex config changes rerun provisioning; verification also reruns after bootstrap replacement.
+- Task 5: Downloaded tool installation now uses available checksum verification or explicit version pins where practical. Falcon and SDKMAN are documented trusted-installer exceptions, and `sw` is documented as an intentional mutable development-tool exception.

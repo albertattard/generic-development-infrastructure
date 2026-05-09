@@ -819,6 +819,8 @@ cat << 'B_EOF' > '/home/opc/.local/bin/update_sw'
 set -euo pipefail
 
 SW_REPOSITORY='https://github.com/albertattard/sw'
+# This intentionally defaults to main because sw is developed alongside this
+# environment and is rebuilt on the VM after changes are pushed.
 SW_BRANCH="${1:-main}"
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "${WORK_DIR}"' EXIT
