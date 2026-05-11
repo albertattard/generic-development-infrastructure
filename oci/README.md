@@ -158,7 +158,7 @@ tools.
    ssh_command = "ssh -i ~/.ssh/oracle_id_ed25519 opc@###.###.###.###"
    ```
 
-4. (_Optional_) Verify that it is working.
+4. (*Optional*) Verify that it is working.
 
    ```shell
    ssh -i ~/.ssh/oracle_id_ed25519 \
