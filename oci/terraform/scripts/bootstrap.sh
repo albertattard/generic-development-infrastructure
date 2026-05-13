@@ -1190,6 +1190,7 @@ sdk default java 25-oracle
 mkdir -p '/home/opc/.bashrc.d'
 cat << 'B_EOF' > '/home/opc/.bashrc.d/java'
 export JAVA_1_8_HOME='/usr/lib/jvm/jdk-1.8'
+export JAVA_8_HOME='/usr/lib/jvm/jdk-1.8'
 export JAVA_EPP_HOME='/usr/lib/jvm/jdk-1.8-perf'
 export JAVA_9_HOME='/usr/lib/jvm/jdk-9'
 export JAVA_10_HOME='/usr/lib/jvm/jdk-10'
