@@ -1,0 +1,286 @@
+#!/usr/bin/env -S java --source 25
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+class CheckSshAccess {
+  public static void main(String[] args) throws IOException, InterruptedException {
+    if (args.length > 1) {
+      usage();
+      System.exit(2);
+    }
+
+    if (args.length == 1 && (args[0].equals("-h") || args[0].equals("--help"))) {
+      usage();
+      return;
+    }
+
+    Path terraformDir = findTerraformDir();
+    if (terraformDir == null) {
+      System.err.println("terraform.tfvars not found. Run this script from the repository root or the oci directory.");
+      System.exit(2);
+      return;
+    }
+
+    if (!commandExists("terraform")) {
+      System.err.println("terraform is required to read ssh_ingress_cidr_blocks from terraform.tfvars");
+      System.exit(2);
+      return;
+    }
+
+    String publicIp = args.length == 1 ? args[0] : fetchCurrentPublicIpv4();
+    long address;
+    try {
+      address = parseIpv4(publicIp);
+    } catch (IllegalArgumentException error) {
+      System.err.printf("Invalid public IPv4 address: %s (%s)%n", publicIp, error.getMessage());
+      System.exit(2);
+      return;
+    }
+
+    List<String> cidrBlocks = readSshIngressCidrBlocks(terraformDir);
+    if (cidrBlocks.isEmpty()) {
+      System.err.println("Could not read ssh_ingress_cidr_blocks from terraform.tfvars");
+      System.exit(2);
+      return;
+    }
+
+    List<String> matches = new ArrayList<>();
+    List<String> invalidBlocks = new ArrayList<>();
+
+    for (String cidrBlock : cidrBlocks) {
+      try {
+        if (contains(cidrBlock, address)) {
+          matches.add(cidrBlock);
+        }
+      } catch (IllegalArgumentException error) {
+        invalidBlocks.add("%s (%s)".formatted(cidrBlock, error.getMessage()));
+      }
+    }
+
+    System.out.printf("Public IP: %s%n", publicIp);
+    System.out.println("Allowed CIDR blocks:");
+    for (String cidrBlock : cidrBlocks) {
+      System.out.printf("  - %s%n", cidrBlock);
+    }
+
+    if (!invalidBlocks.isEmpty()) {
+      System.err.println("Invalid CIDR blocks in ssh_ingress_cidr_blocks:");
+      for (String invalidBlock : invalidBlocks) {
+        System.err.printf("  - %s%n", invalidBlock);
+      }
+      System.exit(2);
+    }
+
+    if (!matches.isEmpty()) {
+      System.out.println("Result: ALLOWED");
+      System.out.println("Matched CIDR block:");
+      for (String match : matches) {
+        System.out.printf("  - %s%n", match);
+      }
+      return;
+    }
+
+    System.out.println("Result: NOT ALLOWED");
+    System.out.println("Update oci/terraform/terraform.tfvars and run ./deploy.sh from the oci directory.");
+    System.exit(1);
+  }
+
+  private static void usage() {
+    System.out.println("""
+        Usage: check_ssh_access [PUBLIC_IPV4]
+
+        Checks whether the current public IPv4 address is included in
+        terraform.tfvars variable ssh_ingress_cidr_blocks.
+
+        If PUBLIC_IPV4 is provided, the script checks that address instead of fetching
+        the current public IPv4 address.
+        """);
+  }
+
+  private static Path findTerraformDir() {
+    Path workingDir = Path.of(System.getProperty("user.dir")).toAbsolutePath().normalize();
+    List<Path> candidates = new ArrayList<>();
+
+    candidates.add(workingDir.resolve("terraform"));
+    candidates.add(workingDir.resolve("oci/terraform"));
+
+    Path scriptDir = scriptDir(workingDir);
+    if (scriptDir != null) {
+      candidates.add(scriptDir.resolve("terraform"));
+    }
+
+    for (Path candidate : candidates) {
+      if (Files.isRegularFile(candidate.resolve("terraform.tfvars"))) {
+        return candidate;
+      }
+    }
+
+    return null;
+  }
+
+  private static Path scriptDir(Path workingDir) {
+    String command = System.getProperty("sun.java.command", "").strip();
+    if (command.isEmpty()) {
+      return null;
+    }
+
+    String scriptPath = command.split("\\s+", 2)[0];
+    Path path = Path.of(scriptPath);
+    if (!path.isAbsolute()) {
+      path = workingDir.resolve(path);
+    }
+
+    Path parent = path.normalize().getParent();
+    return parent == null ? workingDir : parent;
+  }
+
+  private static boolean commandExists(String command) throws IOException, InterruptedException {
+    Process process = new ProcessBuilder("sh", "-c", "command -v " + command)
+        .redirectErrorStream(true)
+        .start();
+    return process.waitFor() == 0;
+  }
+
+  private static String fetchCurrentPublicIpv4() throws IOException, InterruptedException {
+    ProcessResult result = run(List.of(
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail",
+        "--ipv4",
+        "--max-time",
+        "10",
+        "https://ifconfig.me"
+    ), null);
+
+    if (result.exitCode() != 0) {
+      System.err.println(result.output().strip());
+      System.err.println("Could not fetch current public IPv4 address");
+      System.exit(2);
+    }
+
+    return result.output().strip();
+  }
+
+  private static List<String> readSshIngressCidrBlocks(Path terraformDir) throws IOException, InterruptedException {
+    ProcessResult result = run(
+        List.of("terraform", "-chdir=" + terraformDir, "console"),
+        "formatlist(\"%s\", var.ssh_ingress_cidr_blocks)\n"
+    );
+
+    if (result.exitCode() != 0) {
+      System.err.println(result.output().strip());
+      System.err.println("Could not read ssh_ingress_cidr_blocks from Terraform");
+      System.exit(2);
+    }
+
+    List<String> cidrBlocks = new ArrayList<>();
+    for (String line : result.output().split("\\R")) {
+      String trimmed = line.strip();
+      if (trimmed.startsWith("\"")) {
+        int closingQuote = trimmed.indexOf('"', 1);
+        if (closingQuote > 1) {
+          cidrBlocks.add(trimmed.substring(1, closingQuote));
+        }
+      }
+    }
+
+    return cidrBlocks;
+  }
+
+  private static ProcessResult run(List<String> command, String stdin) throws IOException, InterruptedException {
+    Process process = new ProcessBuilder(command)
+        .redirectErrorStream(true)
+        .start();
+
+    try (OutputStream outputStream = process.getOutputStream()) {
+      if (stdin != null) {
+        outputStream.write(stdin.getBytes(StandardCharsets.UTF_8));
+      }
+    }
+
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    process.getInputStream().transferTo(output);
+
+    return new ProcessResult(process.waitFor(), output.toString(StandardCharsets.UTF_8));
+  }
+
+  private static boolean contains(String cidrBlock, long address) {
+    int slashIndex = cidrBlock.indexOf('/');
+    if (slashIndex < 0 || slashIndex != cidrBlock.lastIndexOf('/')) {
+      throw new IllegalArgumentException("expected IPv4 CIDR notation");
+    }
+
+    long networkAddress = parseIpv4(cidrBlock.substring(0, slashIndex));
+    int prefixLength = parsePrefixLength(cidrBlock.substring(slashIndex + 1));
+    long mask = prefixLength == 0 ? 0 : (0xffffffffL << (32 - prefixLength)) & 0xffffffffL;
+
+    if ((networkAddress & mask) != networkAddress) {
+      throw new IllegalArgumentException("network address has host bits set");
+    }
+
+    return (address & mask) == networkAddress;
+  }
+
+  private static int parsePrefixLength(String rawPrefixLength) {
+    if (rawPrefixLength.isBlank()) {
+      throw new IllegalArgumentException("missing prefix length");
+    }
+
+    try {
+      int prefixLength = Integer.parseInt(rawPrefixLength);
+      if (prefixLength < 0 || prefixLength > 32) {
+        throw new IllegalArgumentException("prefix length must be between 0 and 32");
+      }
+      return prefixLength;
+    } catch (NumberFormatException error) {
+      throw new IllegalArgumentException("prefix length is not a number");
+    }
+  }
+
+  private static long parseIpv4(String rawAddress) {
+    String[] parts = rawAddress.split("\\.", -1);
+    if (parts.length != 4) {
+      throw new IllegalArgumentException("expected four decimal octets");
+    }
+
+    long address = 0;
+    for (String part : parts) {
+      if (part.isEmpty()) {
+        throw new IllegalArgumentException("empty octet");
+      }
+
+      int octet = parseOctet(part);
+      address = (address << 8) | octet;
+    }
+
+    return address;
+  }
+
+  private static int parseOctet(String rawOctet) {
+    for (int i = 0; i < rawOctet.length(); i++) {
+      if (!Character.isDigit(rawOctet.charAt(i))) {
+        throw new IllegalArgumentException("octet contains a non-digit character");
+      }
+    }
+
+    try {
+      int octet = Integer.parseInt(rawOctet);
+      if (octet < 0 || octet > 255) {
+        throw new IllegalArgumentException("octet must be between 0 and 255");
+      }
+      return octet;
+    } catch (NumberFormatException error) {
+      throw new IllegalArgumentException("octet is not a number");
+    }
+  }
+
+  private record ProcessResult(int exitCode, String output) {
+  }
+}

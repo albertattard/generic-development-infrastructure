@@ -97,6 +97,18 @@ tools.
      want a much larger network range. If you do use a broader range, the IP
      portion must be the network address for that range, not your laptop's host
      address.
+
+     To check whether your current public IPv4 address is covered by the
+     configured CIDR blocks, run:
+
+     ```shell
+     ./check_ssh_access
+     ```
+
+     The script compares your current public IPv4 address with the local
+     `ssh_ingress_cidr_blocks` value in `./terraform/terraform.tfvars`. If the
+     local value has not been deployed yet, run `./deploy.sh` to update the OCI
+     security list.
    - `ssh_private_key_file`: This setup configures the OCI compute instance by
      installing several versions of Java amongst other things. The SSH private
      key is used to upload the
