@@ -24,15 +24,27 @@ and deploy the resources on OCI.
 
 ## Run Wrapper
 
-You can add run wrappers that allows you to run commands remotely without having
-to ssh to the remove OCI instance.
+You can add run wrappers that allow you to run commands remotely without having
+to ssh to the remote OCI instance.
+
+The following example assumes this repository is added as `infrastructure` next
+to an `examples` directory, and that the `runw` script is placed in a specific
+example directory:
+
+```text
+examples
+  example-1
+    runw
+infrastructure
+  oci
+    terraform
+```
 
 File: `runw`
 
 ```bash
-#!/bin/bash
-
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
 # Get the IP address of the OCI instance where the code will be synced and
 # command executed
@@ -54,7 +66,7 @@ rsync \
   --verbose \
   --update \
   --delete \
-  --exclude-from='../.rsync-exclude' \
+  --exclude-from='.rsync-exclude' \
   . \
   "opc@${IP_ADDRESS}:${WORKDIR}"
 
